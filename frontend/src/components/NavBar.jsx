@@ -26,7 +26,7 @@ const navItems = [
 ];
 
 function NavBar(props) {
-  const window = props;
+  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
