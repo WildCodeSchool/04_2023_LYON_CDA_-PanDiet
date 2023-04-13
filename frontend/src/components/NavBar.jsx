@@ -15,6 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import "../App.css";
+import PropTypes from "prop-types";
 
 const drawerWidth = 240;
 const navItems = [
@@ -26,7 +27,7 @@ const navItems = [
 ];
 
 function NavBar(props) {
-  const window = props;
+  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -120,5 +121,13 @@ function NavBar(props) {
     </Box>
   );
 }
+
+NavBar.propTypes = {
+  window: PropTypes.func,
+};
+
+NavBar.defaultProps = {
+  window: undefined,
+};
 
 export default NavBar;
