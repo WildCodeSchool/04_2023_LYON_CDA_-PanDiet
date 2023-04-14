@@ -7,20 +7,23 @@ import Favourites from "./pages/Favourites";
 import Team from "./pages/Team";
 import HomeDescription from "./pages/HomeDescription";
 import Home from "./pages/Home";
+import { FilterContextProvider } from "./Context/FilterContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home-description" element={<HomeDescription />} />
-        <Route path="/choose-your-diet" element={<ChooseDiet />} />
-        <Route path="/my-fridge" element={<Fridge />} />
-        <Route path="/favourites" element={<Favourites />} />
-        <Route path="/the-team" element={<Team />} />
-      </Routes>
-    </BrowserRouter>
+    <FilterContextProvider>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home-description" element={<HomeDescription />} />
+          <Route path="/choose-your-diet" element={<ChooseDiet />} />
+          <Route path="/my-fridge" element={<Fridge />} />
+          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/the-team" element={<Team />} />
+        </Routes>
+      </BrowserRouter>
+    </FilterContextProvider>
   );
 }
 
