@@ -46,7 +46,7 @@ function MediaCard({ recette }) {
           gutterBottom
           variant="h5"
           component="div"
-          class="bg-slate-200 flex justify-center"
+          className="bg-slate-200 flex justify-center"
         >
           <h3 className="text-2xl">{recette.recipe.label}</h3>
         </Typography>
@@ -72,8 +72,8 @@ function MediaCard({ recette }) {
             </AccordionDetails>
           </Accordion>
         </CardContent>
-        <CardActions class="flex justify-end">
-          <Button size="small" class="bg-sky-400 rounded-md p-2 mr-3">
+        <CardActions className="flex justify-end">
+          <Button size="small" className="bg-sky-400 rounded-md p-2 mr-3">
             Voir la recette
           </Button>
         </CardActions>

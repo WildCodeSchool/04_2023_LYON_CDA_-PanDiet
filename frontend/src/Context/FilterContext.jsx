@@ -78,6 +78,31 @@ const dishTypes = {
   sweets: "Sweets",
 };
 
+const cuisinesTypes = {
+  american: "American",
+  asian: "Asian",
+  british: "British",
+  caribbean: "Caribbean",
+  "central europe": "Central Europe",
+  chinese: "Chinese",
+  "eastern Europe": "Eastern Europe",
+  french: "French",
+  greek: "Greek",
+  indian: "Indian",
+  italian: "Italian",
+  japanese: "Japanese",
+  korean: "Korean",
+  kosher: "Kosher",
+  mediterranean: "Mediterranean",
+  mexican: "Mexican",
+  "middle eastern": "Middle Eastern",
+  nordic: "Nordic",
+  "south american": "South American",
+  "south east asian": "South East Asian",
+  spanish: "Spanish",
+  world: "World",
+};
+
 function FilterContextProvider({ children }) {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
 
@@ -88,6 +113,7 @@ function FilterContextProvider({ children }) {
       healthLabels,
       mealTypes,
       dishTypes,
+      cuisinesTypes,
     };
   }, [selectedLabels]);
 

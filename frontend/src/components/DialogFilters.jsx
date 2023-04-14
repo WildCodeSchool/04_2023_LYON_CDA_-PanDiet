@@ -8,9 +8,11 @@ function DialogFilters({ onSelectedLabelsChange }) {
     allergies: false,
     mealTypes: false,
     dishTypes: false,
+    cuisinesTypes: false,
   });
   const [checked, setChecked] = useState(new Set());
-  const { healthLabels, mealTypes, dishTypes } = useContext(FilterContext);
+  const { healthLabels, mealTypes, dishTypes, cuisinesTypes } =
+    useContext(FilterContext);
 
   const handleClickOpen = (dialogType) => () => {
     setOpen({ ...open, [dialogType]: true });
@@ -74,6 +76,19 @@ function DialogFilters({ onSelectedLabelsChange }) {
         title="Dish Types"
         filterLabels={createFilterLabels(dishTypes, Object.keys(dishTypes))}
         handleClose={handleClose("dishTypes")}
+        handleToggle={handleToggle}
+      />
+      <Button variant="outlined" onClick={handleClickOpen("cuisinesTypes")}>
+        Cuisines Types
+      </Button>
+      <FilterDialog
+        open={open.cuisinesTypes}
+        title="Cuisines Types"
+        filterLabels={createFilterLabels(
+          cuisinesTypes,
+          Object.keys(cuisinesTypes)
+        )}
+        handleClose={handleClose("cuisinesTypes")}
         handleToggle={handleToggle}
       />
     </div>
