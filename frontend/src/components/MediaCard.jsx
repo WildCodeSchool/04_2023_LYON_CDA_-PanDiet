@@ -63,6 +63,7 @@ function MediaCard({ recette }) {
               <Typography variant="body2" color="text.secondary">
                 <div className="flex justify-center flex-col">
                   {recette.recipe.ingredientLines.map((ingredient, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <li key={index} className="text-red-500 mb-1">
                       {ingredient}
                     </li>

@@ -8,7 +8,7 @@ function ChooseDiet() {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [recipes, setRecipes] = useState([]);
-  const { healthLabels, mealTypes, dishTypes, cuisinesTypes } =
+  const { healthLabels, mealTypes, dishTypes, cuisinesTypes, dietTypes } =
     useContext(FilterContext);
 
   const handleSelectedLabelsChange = (updatedSelectedLabels) => {
@@ -48,6 +48,9 @@ function ChooseDiet() {
           case Object.prototype.hasOwnProperty.call(cuisinesTypes, label):
             url.searchParams.append("cuisineType", label);
             break;
+          case Object.prototype.hasOwnProperty.call(dietTypes, label):
+            url.searchParams.append("diet", label);
+            break;
           default:
             break;
         }
@@ -80,7 +83,7 @@ function ChooseDiet() {
               <MediaCard recette={recette} />
               <button
                 type="button"
-                onClick={() => console.log(recette.recipe.uri)}
+                onClick={() => console.warn(recette.recipe.uri)}
               >
                 SHOW MY URI
               </button>

@@ -45,7 +45,7 @@ const mealTypes = {
   breakfast: "Breakfast",
   lunch: "Lunch",
   brunch: "Brunch",
-  dinner: "Dinner",
+  "lunch/dinner": "Dinner",
   snack: "Snack",
   teatime: "Teatime",
 };
@@ -103,6 +103,15 @@ const cuisinesTypes = {
   world: "World",
 };
 
+const dietTypes = {
+  balanced: "Balanced",
+  "high-fiber": "High-Fiber",
+  "high-protein": "High-Protein",
+  "low-carb": "Low-Carb",
+  "low-fat": "Low-Fat",
+  "low-sodium": "Low-Sodium",
+};
+
 function FilterContextProvider({ children }) {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
 
@@ -114,6 +123,7 @@ function FilterContextProvider({ children }) {
       mealTypes,
       dishTypes,
       cuisinesTypes,
+      dietTypes,
     };
   }, [selectedLabels]);
 

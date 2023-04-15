@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import Button from "@mui/material/Button";
+
 import FilterDialog from "./FiltersDialog";
 import { FilterContext } from "../Context/FilterContext";
 
@@ -9,9 +10,10 @@ function DialogFilters({ onSelectedLabelsChange }) {
     mealTypes: false,
     dishTypes: false,
     cuisinesTypes: false,
+    dietTypes: false,
   });
   const [checked, setChecked] = useState(new Set());
-  const { healthLabels, mealTypes, dishTypes, cuisinesTypes } =
+  const { healthLabels, mealTypes, dishTypes, cuisinesTypes, dietTypes } =
     useContext(FilterContext);
 
   const handleClickOpen = (dialogType) => () => {
@@ -48,6 +50,7 @@ function DialogFilters({ onSelectedLabelsChange }) {
       <Button variant="outlined" onClick={handleClickOpen("allergies")}>
         Allergies
       </Button>
+
       <FilterDialog
         open={open.allergies}
         title="Allergies"
@@ -58,6 +61,7 @@ function DialogFilters({ onSelectedLabelsChange }) {
         handleClose={handleClose("allergies")}
         handleToggle={handleToggle}
       />
+
       <Button variant="outlined" onClick={handleClickOpen("mealTypes")}>
         Meal Types
       </Button>
@@ -89,6 +93,16 @@ function DialogFilters({ onSelectedLabelsChange }) {
           Object.keys(cuisinesTypes)
         )}
         handleClose={handleClose("cuisinesTypes")}
+        handleToggle={handleToggle}
+      />
+      <Button variant="outlined" onClick={handleClickOpen("dietTypes")}>
+        Diets
+      </Button>
+      <FilterDialog
+        open={open.dietTypes}
+        title="Diet"
+        filterLabels={createFilterLabels(dietTypes, Object.keys(dietTypes))}
+        handleClose={handleClose("dietTypes")}
         handleToggle={handleToggle}
       />
     </div>

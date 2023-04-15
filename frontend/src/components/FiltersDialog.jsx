@@ -14,6 +14,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   // eslint-disable-next-line react/jsx-props-no-spreading
@@ -52,7 +53,7 @@ function FilterDialog({
           </Button>
         </Toolbar>
       </AppBar>
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      <List sx={{ width: "100%", maxWidth: 360 }}>
         {filterLabels.map(({ id, label, isChecked }) => {
           const labelId = `checkbox-list-label-${id}`;
 
@@ -61,8 +62,17 @@ function FilterDialog({
               <ListItemButton role={undefined} onClick={handleToggle(id)} dense>
                 <ListItemIcon>
                   <Checkbox
+                    sx={{
+                      color: "black",
+                      borderRadius: "50%",
+                      "&.Mui-checked": {
+                        color: "green",
+                      },
+                    }}
+                    label="CheckCircleIcon"
                     edge="start"
                     checked={isChecked}
+                    checkedIcon={<CheckCircleIcon />}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ "aria-labelledby": labelId }}
