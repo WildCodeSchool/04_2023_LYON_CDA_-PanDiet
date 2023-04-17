@@ -140,11 +140,11 @@ function ChooseDiet() {
               <div style={{ display: "flex" }}>
                 <button
                   type="button"
-                  onClick={() => console.log(recette.recipe.uri)}
+                  onClick={() => console.warn(recette.recipe.uri)}
                 >
                   SHOW MY URI
                 </button>
-                <button type="button" onClick={() => console.log(recipes)}>
+                <button type="button" onClick={() => console.warn(recipes)}>
                   SHOW RECIPES
                 </button>
               </div>
