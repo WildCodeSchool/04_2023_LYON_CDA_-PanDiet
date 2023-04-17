@@ -7,7 +7,6 @@ import Favourites from "./pages/Favourites";
 import Team from "./pages/Team";
 import HomeDescription from "./pages/HomeDescription";
 import Home from "./pages/Home";
-import Results from "./pages/Results";
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
         <Route path="/my-fridge" element={<Fridge />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/the-team" element={<Team />} />
-        <Route path="/results" element={<Results />} />
       </Routes>
     </BrowserRouter>
   );
