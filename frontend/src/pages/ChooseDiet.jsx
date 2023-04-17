@@ -1,7 +1,8 @@
 import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
 import Chip from "@mui/material/Chip";
-import MediaCard from "../components/MediaCard";
+import CardRecipe from "@components/CardRecipe";
+import { Button } from "@mui/material";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
 
@@ -10,6 +11,7 @@ function ChooseDiet() {
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
   const [recipes, setRecipes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const ingredientInput = useRef(null);
   const { healthLabels, mealTypes, dishTypes, cuisinesTypes, dietTypes } =
     useContext(FilterContext);
@@ -95,6 +97,22 @@ function ChooseDiet() {
     }
   };
 
+  const articlesPerPage = 6;
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  const currentArticles = recipes.slice(
+    indexOfFirstArticle,
+    indexOfLastArticle
+  );
+  const nextPage = () => {
+    const totalPages = Math.ceil(recipes.length / articlesPerPage);
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -119,8 +137,10 @@ function ChooseDiet() {
         Ajouter
       </button>
       <div>
-        {queryExclued.map((ingredient) => (
+        {queryExclued.map((ingredient, index) => (
           <Chip
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
             label={ingredient}
             onDelete={() => removeExcludedIngredient(ingredient)}
             sx={{ width: "auto", margin: "0.5rem" }}
@@ -133,24 +153,27 @@ function ChooseDiet() {
         Rechercher
       </button>
 
-      {recipes
-        ? recipes.map((recette) => (
-            <div key={recette.recipe.uri}>
-              <MediaCard recette={recette} />
-              <div style={{ display: "flex" }}>
-                <button
-                  type="button"
-                  onClick={() => console.warn(recette.recipe.uri)}
-                >
-                  SHOW MY URI
-                </button>
-                <button type="button" onClick={() => console.warn(recipes)}>
-                  SHOW RECIPES
-                </button>
-              </div>
-            </div>
-          ))
-        : null}
+      {currentArticles.map((item) => (
+        <div key={item.recipe.uri}>
+          <CardRecipe item={item} />
+        </div>
+      ))}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          variant="outlined"
+        >
+          Précédent
+        </Button>
+        <Button
+          onClick={nextPage}
+          disabled={currentArticles.length < articlesPerPage}
+          variant="outlined"
+        >
+          Suivant
+        </Button>
+      </div>
     </div>
   );
 }
