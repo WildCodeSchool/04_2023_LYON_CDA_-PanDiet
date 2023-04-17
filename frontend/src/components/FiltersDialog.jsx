@@ -62,8 +62,8 @@ function FilterDialog({
               <ListItemButton role={undefined} onClick={handleToggle(id)} dense>
                 <ListItemIcon>
                   <Checkbox
+                    color="success"
                     sx={{
-                      color: "black",
                       borderRadius: "50%",
                       "&.Mui-checked": {
                         color: "green",

@@ -45,7 +45,7 @@ const mealTypes = {
   breakfast: "Breakfast",
   lunch: "Lunch",
   brunch: "Brunch",
-  "lunch/dinner": "Dinner",
+  dinner: "Dinner",
   snack: "Snack",
   teatime: "Teatime",
 };

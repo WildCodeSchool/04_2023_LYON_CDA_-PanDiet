@@ -46,9 +46,12 @@ function MediaCard({ recette }) {
           gutterBottom
           variant="h5"
           component="div"
-          className="bg-slate-200 flex justify-center"
+          style={{ backgroundColor: "lightgray" }}
         >
           <h3 className="text-2xl">{recette.recipe.label}</h3>
+        </Typography>
+        <Typography gutterBottom variant="p" component="div">
+          Calories : {recette.recipe.calories}
         </Typography>
         <CardContent>
           <Accordion>
