@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import Button from "@mui/material/Button";
-
-import FilterDialog from "./FiltersDialog";
+import FilterDialog from "./ChooseDiet/FiltersDialog";
 import { FilterContext } from "../Context/FilterContext";
 
 function DialogFilters({ onSelectedLabelsChange }) {
@@ -45,66 +44,68 @@ function DialogFilters({ onSelectedLabelsChange }) {
     }));
   };
 
+  const buttons = [
+    {
+      label: "Allergies",
+      dialogType: "allergies",
+      filterLabels: createFilterLabels(
+        healthLabels,
+        Object.keys(healthLabels).filter((label) => label.includes("free"))
+      ),
+    },
+    {
+      label: "Meal Types",
+      dialogType: "mealTypes",
+      filterLabels: createFilterLabels(mealTypes, Object.keys(mealTypes)),
+    },
+    {
+      label: "Diets",
+      dialogType: "dietTypes",
+      filterLabels: createFilterLabels(dietTypes, Object.keys(dietTypes)),
+    },
+    {
+      label: "Dish Types",
+      dialogType: "dishTypes",
+      filterLabels: createFilterLabels(dishTypes, Object.keys(dishTypes)),
+    },
+    {
+      label: "Cuisines Types",
+      dialogType: "cuisinesTypes",
+      filterLabels: createFilterLabels(
+        cuisinesTypes,
+        Object.keys(cuisinesTypes)
+      ),
+    },
+  ];
+
+  const style = {
+    button: {
+      backgroundColor: "white",
+      color: "black",
+      margin: "2% 2%",
+    },
+  };
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen("allergies")}>
-        Allergies
-      </Button>
-
-      <FilterDialog
-        open={open.allergies}
-        title="Allergies"
-        filterLabels={createFilterLabels(
-          healthLabels,
-          Object.keys(healthLabels).filter((label) => label.includes("free"))
-        )}
-        handleClose={handleClose("allergies")}
-        handleToggle={handleToggle}
-      />
-
-      <Button variant="outlined" onClick={handleClickOpen("mealTypes")}>
-        Meal Types
-      </Button>
-      <FilterDialog
-        open={open.mealTypes}
-        title="Meal Types"
-        filterLabels={createFilterLabels(mealTypes, Object.keys(mealTypes))}
-        handleClose={handleClose("mealTypes")}
-        handleToggle={handleToggle}
-      />
-      <Button variant="outlined" onClick={handleClickOpen("dishTypes")}>
-        Dish Types
-      </Button>
-      <FilterDialog
-        open={open.dishTypes}
-        title="Dish Types"
-        filterLabels={createFilterLabels(dishTypes, Object.keys(dishTypes))}
-        handleClose={handleClose("dishTypes")}
-        handleToggle={handleToggle}
-      />
-      <Button variant="outlined" onClick={handleClickOpen("cuisinesTypes")}>
-        Cuisines Types
-      </Button>
-      <FilterDialog
-        open={open.cuisinesTypes}
-        title="Cuisines Types"
-        filterLabels={createFilterLabels(
-          cuisinesTypes,
-          Object.keys(cuisinesTypes)
-        )}
-        handleClose={handleClose("cuisinesTypes")}
-        handleToggle={handleToggle}
-      />
-      <Button variant="outlined" onClick={handleClickOpen("dietTypes")}>
-        Diets
-      </Button>
-      <FilterDialog
-        open={open.dietTypes}
-        title="Diet"
-        filterLabels={createFilterLabels(dietTypes, Object.keys(dietTypes))}
-        handleClose={handleClose("dietTypes")}
-        handleToggle={handleToggle}
-      />
+      {buttons.map(({ label, dialogType, filterLabels }) => (
+        <React.Fragment key={label}>
+          <Button
+            sx={style.button}
+            variant="outlined"
+            onClick={handleClickOpen(dialogType)}
+          >
+            {label}
+          </Button>
+          <FilterDialog
+            open={open[dialogType]}
+            title={label}
+            filterLabels={filterLabels}
+            handleClose={handleClose(dialogType)}
+            handleToggle={handleToggle}
+          />
+        </React.Fragment>
+      ))}
     </div>
   );
 }

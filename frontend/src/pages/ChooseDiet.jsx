@@ -1,10 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
-import Chip from "@mui/material/Chip";
-import CardRecipe from "@components/CardRecipe";
 import { Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import ContainerFilterChoose from "../components/ChooseDiet/ContainerFilterChoose";
+import Buttons from "../components/ChooseDiet/Buttons";
+import CardRecipe from "../components/ChooseDiet/CardRecipe";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
+import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
 
 function ChooseDiet() {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
@@ -23,12 +26,6 @@ function ChooseDiet() {
   const handleQueryTextChange = (event) => {
     setQueryText(event.target.value);
   };
-  /*   const handleQueryEcluedChange = (event) => {
-    setQueryExclued(event.target.value);
-  };
-  const getExcludedIngredientsArray = (excludedString) => {
-    return excludedString.split(/\s+/);
-  }; */
 
   const addExcludedIngredient = () => {
     // la fonction trim() permet de supprimer les espaces en début et fin de chaîne de caractères
@@ -41,12 +38,6 @@ function ChooseDiet() {
   const removeExcludedIngredient = (ingredient) => {
     setQueryExclued(queryExclued.filter((item) => item !== ingredient));
   };
-
-  /*   const newQueryEcluded = queryExclued.replace(/\s/g, "&excluded=");
-   */
-  /*   excluded = chicken & excluded=beef
-       excluded = vinegar & excluded=pretzel
-   */
 
   const fetchData = async () => {
     try {
@@ -113,67 +104,64 @@ function ChooseDiet() {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
+  const style = {
+    hrGreen: {
+      height: "1px",
+      backgroundColor: "#7CB342",
+      margin: "5% auto",
+      width: "70%",
+    },
+    button: {
+      backgroundColor: "#7CB342",
+      display: "flex",
+      margin: "0 auto",
+    },
+    p: { color: "white", textAlign: "center", margin: "2%" },
+    textField: {
+      backgroundColor: "white",
+      borderRadius: "10px",
+    },
+  };
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <h2>Hungry and healthy ?</h2>
-      </div>
-      <div>
-        <h3>Choose your Diet !</h3>
-      </div>
-      <input
-        type="text"
+    <div
+      style={{
+        backgroundColor: "#242325",
+      }}
+    >
+      <HeaderChoose />
+      <TextField
+        sx={style.textField}
+        variant="filled"
+        size="small"
+        label="Enter search query"
         value={queryText}
         onChange={handleQueryTextChange}
-        placeholder="Enter search query"
       />
       <br />
-      <input
-        type="text"
-        ref={ingredientInput}
-        placeholder="Enter excluded ingredients"
-      />
-      <button type="button" onClick={addExcludedIngredient}>
-        Ajouter
-      </button>
-      <div>
-        {queryExclued.map((ingredient, index) => (
-          <Chip
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            label={ingredient}
-            onDelete={() => removeExcludedIngredient(ingredient)}
-            sx={{ width: "auto", margin: "0.5rem" }}
-          />
-        ))}
-      </div>
-      <p>Affiner ma recherche :</p>
+      <p style={style.p}>Refine my search :</p>
       <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
-      <button type="button" onClick={fetchData}>
-        Rechercher
-      </button>
-
+      <hr style={style.hrGreen} />
+      <ContainerFilterChoose
+        ingredientInput={ingredientInput}
+        addExcludedIngredient={addExcludedIngredient}
+        queryExclued={queryExclued}
+        removeExcludedIngredient={removeExcludedIngredient}
+      />
+      <Button sx={style.button} onClick={fetchData} variant="contained">
+        Search
+      </Button>
       {currentArticles.map((item) => (
         <div key={item.recipe.uri}>
           <CardRecipe item={item} />
         </div>
       ))}
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          onClick={prevPage}
-          disabled={currentPage === 1}
-          variant="outlined"
-        >
-          Précédent
-        </Button>
-        <Button
-          onClick={nextPage}
-          disabled={currentArticles.length < articlesPerPage}
-          variant="outlined"
-        >
-          Suivant
-        </Button>
-      </div>
+      <Buttons
+        prevPage={prevPage}
+        currentPage={currentPage}
+        nextPage={nextPage}
+        currentArticles={currentArticles}
+        articlesPerPage={articlesPerPage}
+      />
     </div>
   );
 }

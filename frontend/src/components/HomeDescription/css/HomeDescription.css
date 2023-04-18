@@ -1,0 +1,27 @@
+.containerHomeDescription {
+  background-color: #242325;
+  height: 93vh;
+}
+.footerHomeDescription {
+  display: flex;
+  align-items: center;
+}
+h2 {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+}
+@media screen and (min-width: 750px) {
+  .containerHomeDescription {
+    display: flex;
+    flex-direction: column;
+  }
+  .container_Header_body {
+    display: flex;
+  }
+  .footerHomeDescription {
+    display: flex;
+    flex-direction: column;
+  }
+}
