@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+
 import "../App.css";
 
-import desserts from "../assets/desserts.jpg";
-import meals from "../assets/repas.jpeg";
-import aperitifs from "../assets/apero.jpg";
+import TeaTime from "../assets/TeaTime.jpg";
+import Dinner from "../assets/Dinner.jpg";
+import Breakfast from "../assets/Breakfast.jpg";
+import Snack from "../assets/Snack.jpg";
 
 const style = {
   global: {
@@ -36,6 +40,7 @@ const style = {
   cardMedia: {
     opacity: 0.3,
     borderRadius: 2.5,
+    position: "relative",
   },
   cards: {
     minWidth: 275,
@@ -46,6 +51,30 @@ const style = {
 };
 
 function Fridge() {
+  const categories = [
+    { id: 1, name: "breakfast", img: Breakfast },
+    { id: 2, name: "snack", img: Snack },
+    { id: 3, name: "teaTime", img: TeaTime },
+    { id: 4, name: "dinner", img: Dinner },
+  ];
+  // eslint-disable-next-line no-unused-vars
+  const [recipes, setRecipes] = useState([]);
+  const [reciepeType, setReciepeType] = useState("");
+  const url = "https://api.edamam.com/api/recipes/v2";
+  const appId = "app_id=f4034abb";
+  const appKey = "app_key=44fe06272cb8fed56c9622f7031624c7";
+  const type = "type=public";
+
+  const getReciepe = (e) => {
+    setReciepeType(e);
+    axios
+      .get(`${url}?${appId}&${appKey}&${type}&mealType=${reciepeType}`)
+      .then((response) => {
+        setRecipes(response.data.hits);
+        // console.warn(response.data.hits);
+      });
+  };
+
   return (
     <div style={style.global}>
       <Typography variant="h3" sx={style.title}>
@@ -53,50 +82,23 @@ function Fridge() {
       </Typography>
 
       <Card sx={style.cards}>
-        <CardActionArea>
-          <CardContent>
-            <div style={{ position: "relative" }}>
+        {categories.map((categorie) => (
+          <CardActionArea
+            key={categorie.id}
+            onClick={() => getReciepe(categorie.name)}
+          >
+            <CardContent>
               <CardMedia
                 sx={style.cardMedia}
                 component="img"
                 height="140"
-                image={aperitifs}
-                alt="aperitifs"
+                image={categorie.img}
+                alt={categorie.name}
               />
-              <div style={style.cardText}>Aperitifs</div>
-            </div>
-          </CardContent>
-        </CardActionArea>
-
-        <CardActionArea>
-          <CardContent>
-            <div style={{ position: "relative" }}>
-              <CardMedia
-                sx={style.cardMedia}
-                component="img"
-                height="140"
-                image={meals}
-                alt="meals"
-              />
-              <div style={style.cardText}>Meals</div>
-            </div>
-          </CardContent>
-        </CardActionArea>
-
-        <CardActionArea>
-          <CardContent>
-            <div style={{ position: "relative" }}>
-              <CardMedia
-                sx={style.cardMedia}
-                component="img"
-                height="140"
-                image={desserts}
-                alt="desserts"
-              />
-              <div style={style.cardText}>Desserts</div>
-            </div>
-          </CardContent>
-        </CardActionArea>
+              <div style={style.cardText}>{categorie.name}</div>
+            </CardContent>
+          </CardActionArea>
+        ))}
       </Card>
     </div>
   );
