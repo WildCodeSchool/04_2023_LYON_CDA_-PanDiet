@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -124,6 +125,14 @@ function NavBar(props) {
 }
 NavBar.propTypes = {
   window: PropTypes.func.isRequired,
+};
+
+NavBar.propTypes = {
+  window: PropTypes.func,
+};
+
+NavBar.defaultProps = {
+  window: undefined,
 };
 
 export default NavBar;
