@@ -82,7 +82,7 @@ function DialogFilters({ onSelectedLabelsChange }) {
     button: {
       backgroundColor: "white",
       color: "black",
-      margin: "2% 2%",
+      margin: "3vh 2%",
     },
   };
 
