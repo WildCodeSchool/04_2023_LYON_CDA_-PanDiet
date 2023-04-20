@@ -1,28 +1,28 @@
 .imgPandaBamboo {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+.containerTitle {
+  display: flex;
+  padding: 6% 0 8% 0;
+}
+.title {
+  color: #f3f3f3;
+  font-size: 36px;
+  text-align: center;
+  margin: 0 auto;
+}
+@media screen and (min-width: 750px) {
+  .imgPandaBamboo {
+    margin: 0;
+    height: 30vh;
   }
   .containerTitle {
-    display: flex;
-    padding: 6% 0 8% 0;
+    padding: 2% 0 5% 0;
+    display: block;
   }
   .title {
     color: #f3f3f3;
-    font-size: 36px;
     text-align: center;
-    margin: 0 auto;
+    font-size: 28px;
   }
-  @media screen and (min-width: 750px) {
-    .imgPandaBamboo {
-      margin: 0 ;
-      height: 30vh;
-    }
-    .containerTitle {
-      padding: 2% 0 5% 0;
-      display: block;
-    }
-    .title {
-      color: #f3f3f3;
-      text-align: center;
-      font-size: 28px;
-    }
-  }
+}

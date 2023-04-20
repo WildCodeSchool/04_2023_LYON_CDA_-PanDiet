@@ -1,6 +1,6 @@
-import BackButton from "@components/backbutton/BackButton";
-import DetailRecipeCard from "@components/DetailRecipeCards";
 import React from "react";
+import DetailRecipeCard from "../components/DetailRecipeCards";
+import BackButton from "../components/backbutton/BackButton";
 
 function RandomRecipe() {
   const style = {
