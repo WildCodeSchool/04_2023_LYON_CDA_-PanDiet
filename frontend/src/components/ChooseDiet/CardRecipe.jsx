@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import ModalRecipeDetails from "../ModalRecipeDetail";
 
 function CardRecipe({ item }) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <div>
       <div
@@ -15,7 +26,11 @@ function CardRecipe({ item }) {
           width: "70%",
         }}
       />
-      <Card sx={{ maxWidth: 345, margin: "0 auto" }}>
+      <Card
+        sx={{ maxWidth: 345, margin: "0 auto" }}
+        onClick={openModal}
+        style={{ cursor: "pointer" }}
+      >
         <CardMedia
           sx={{ height: 140 }}
           image={item.recipe.image}
@@ -27,6 +42,11 @@ function CardRecipe({ item }) {
           </Typography>
         </CardContent>
       </Card>
+      <ModalRecipeDetails
+        isOpen={modalOpen}
+        onClose={closeModal}
+        recipe={item.recipe}
+      />
     </div>
   );
 }

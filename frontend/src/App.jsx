@@ -8,6 +8,7 @@ import Favourites from "./pages/Favourites";
 import Team from "./pages/Team";
 import HomeDescription from "./pages/HomeDescription";
 import Home from "./pages/Home";
+import RandomRecipe from "./pages/RandomRecipe";
 import { FilterContextProvider } from "./Context/FilterContext";
 
 const theme = createTheme({
@@ -35,6 +36,7 @@ function App() {
             <Route path="/my-fridge" element={<Fridge />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/the-team" element={<Team />} />
+            <Route path="/recipe-random" element={<RandomRecipe />} />
           </Routes>
         </BrowserRouter>
       </FilterContextProvider>
