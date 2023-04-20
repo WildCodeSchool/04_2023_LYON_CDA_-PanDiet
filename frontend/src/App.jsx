@@ -1,15 +1,16 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import NavBar from "./components/NavBar";
+import WelcomePage from "./pages/WelcomePage";
 import ChooseDiet from "./pages/ChooseDiet";
 import Fridge from "./pages/Fridge";
 import Favourites from "./pages/Favourites";
-import Team from "./pages/Team";
-import HomeDescription from "./pages/HomeDescription";
 import Home from "./pages/Home";
-import RandomRecipe from "./pages/RandomRecipe";
+import Team from "./pages/Team";
 import { FilterContextProvider } from "./Context/FilterContext";
+import Category from "./pages/Category";
+import useLocalStorage from "./components/UseLocalStorage";
 
 const theme = createTheme({
   components: {
@@ -24,21 +25,35 @@ const theme = createTheme({
 });
 
 function App() {
+  const navigate = useNavigate();
+  const [categorySelected, setCategorySelected] = useLocalStorage(
+    "categorySelected",
+    ""
+  );
+
+  const handleClickCategory = (valueName) => {
+    setCategorySelected(valueName);
+    navigate("/category");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <FilterContextProvider>
-        <BrowserRouter>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home-description" element={<HomeDescription />} />
-            <Route path="/choose-your-diet" element={<ChooseDiet />} />
-            <Route path="/my-fridge" element={<Fridge />} />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/the-team" element={<Team />} />
-            <Route path="/recipe-random" element={<RandomRecipe />} />
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route
+            path="/home"
+            element={<Home handleClickCategory={handleClickCategory} />}
+          />
+          <Route path="/choose-your-diet" element={<ChooseDiet />} />
+          <Route path="/my-fridge" element={<Fridge />} />
+          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/the-team" element={<Team />} />
+          <Route
+            path="/category"
+            element={<Category categorySelected={categorySelected} />}
+          />
+        </Routes>
       </FilterContextProvider>
     </ThemeProvider>
   );

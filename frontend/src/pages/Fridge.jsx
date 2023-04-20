@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
@@ -58,19 +58,22 @@ function Fridge() {
   const app_key = "app_key=44fe06272cb8fed56c9622f7031624c7";
   const type = "type=public";
 
+  const navigate = useNavigate();
+
   const getReciepe = (e) => {
-    const URL_Final = `${url}?${app_id}&${app_key}&${type}&mealType=${reciepeType}`;
     setReciepeType(e);
+    const URL_Final = `${url}?${app_id}&${app_key}&${type}&mealType=${reciepeType}`;
     axios.get({ URL_Final }).then((response) => {
       setRecipes(response);
-      console.warn(recipes);
     });
+    navigate("/choose-your-diet");
+    console.warn(recipes);
   };
 
   return (
     <div style={style.global}>
       <Typography variant="h3" sx={style.title}>
-        My Fridge
+        My Fridge! breakfast, snack, teatime, dinner
       </Typography>
 
       <Card sx={style.cards}>

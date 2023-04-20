@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import NavBar from "../components/NavBar";
 import ContainerFilterChoose from "../components/ChooseDiet/ContainerFilterChoose";
 import Buttons from "../components/ChooseDiet/Buttons";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";
@@ -71,7 +72,6 @@ function ChooseDiet() {
           case Object.prototype.hasOwnProperty.call(dietTypes, label):
             url.searchParams.append("diet", label);
             break;
-
           default:
             break;
         }
@@ -108,35 +108,35 @@ function ChooseDiet() {
     hrGreen: {
       height: "1px",
       backgroundColor: "#7CB342",
-      margin: "5% auto",
+      margin: "5vh auto",
       width: "70%",
     },
     button: {
       backgroundColor: "#7CB342",
       display: "flex",
-      margin: "0 auto",
+      margin: "5vh auto",
     },
-    p: { color: "white", textAlign: "center", margin: "2%" },
+    p: { textAlign: "center", margin: "2%" },
     textField: {
       backgroundColor: "white",
       borderRadius: "10px",
     },
   };
   return (
-    <div
-      style={{
-        backgroundColor: "#242325",
-      }}
-    >
+    <div className="text-black">
+      <NavBar />
       <HeaderChoose />
-      <TextField
-        sx={style.textField}
-        variant="filled"
-        size="small"
-        label="Enter search query"
-        value={queryText}
-        onChange={handleQueryTextChange}
-      />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <TextField
+          sx={style.textField}
+          variant="filled"
+          size="small"
+          label="Enter search query"
+          value={queryText}
+          onChange={handleQueryTextChange}
+        />
+      </div>
+
       <br />
       <p style={style.p}>Refine my search :</p>
       <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
