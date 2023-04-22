@@ -2,29 +2,29 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
-// import breakFast from "../../assets/breakfast.jpeg";
-// import snack from "../../assets/snack.jpg";
-// import dinner from "../../assets/dinner.jpeg";
-// import tea from "../../assets/teaTime.jpg";
+import breakFast from "../../assets/breakfast.jpeg";
+import snack from "../../assets/snack.jpg";
+import dinner from "../../assets/dinner.jpeg";
+import tea from "../../assets/teaTime.jpg";
 
 const images = [
   {
-    url: "https://urlz.fr/lxqy",
+    url: breakFast,
     title: "breakfast",
     width: "30%",
   },
   {
-    url: "https://urlz.fr/lxqk",
+    url: snack,
     title: "snack",
     width: "30%",
   },
   {
-    url: "https://urlz.fr/lxqt",
+    url: dinner,
     title: "dinner",
     width: "30%",
   },
   {
-    url: "https://urlz.fr/lxqp",
+    url: tea,
     title: "teaTime",
     width: "30%",
   },
@@ -32,10 +32,13 @@ const images = [
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: "relative",
-  height: 200,
+  borderRadius: 20,
+  marginRight: 10,
+  height: 100,
   [theme.breakpoints.down("sm")]: {
+    borderRadius: 20,
     width: "30vw !important", // Overrides inline-style
-    height: 100,
+    height: 60,
   },
   "&:hover, &.Mui-focusVisible": {
     zIndex: 1,
@@ -53,6 +56,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
 
 const ImageSrc = styled("span")({
   position: "absolute",
+  borderRadius: 20,
   left: 0,
   right: 0,
   top: 0,
@@ -63,6 +67,7 @@ const ImageSrc = styled("span")({
 
 const Image = styled("span")(({ theme }) => ({
   position: "absolute",
+  borderRadius: 20,
   left: 0,
   right: 0,
   top: 0,
@@ -79,6 +84,7 @@ const ImageBackdrop = styled("span")(({ theme }) => ({
   right: 0,
   top: 0,
   bottom: 0,
+  borderRadius: 20,
   backgroundColor: theme.palette.common.black,
   opacity: 0.4,
   transition: theme.transitions.create("opacity"),
@@ -87,18 +93,24 @@ const ImageBackdrop = styled("span")(({ theme }) => ({
 const ImageMarked = styled("span")(({ theme }) => ({
   height: 3,
   width: 18,
+  borderRadius: 20,
   backgroundColor: theme.palette.common.white,
   position: "absolute",
   bottom: -2,
   left: "calc(50% - 9px)",
   transition: theme.transitions.create("opacity"),
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
 }));
 
 function Categories({ handleClickCategory }) {
   return (
-    <div>
-      <h2 className="font-bold pl-3 pb-5 text-xl shadow-sm">Catégories</h2>
-      <div className="flex md:justify-around overflow-auto">
+    <div className="mb-6">
+      <h2 className="inline-block bg-green-500 rounded-[10rem] text-white py-2 px-4 mb-6 text-xl shadow-sm">
+        Catégories
+      </h2>
+      <div className="flex md:justify-around">
         {images.map((image) => (
           <ImageButton
             onClick={() => handleClickCategory(image.title)}

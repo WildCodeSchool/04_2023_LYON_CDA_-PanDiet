@@ -80,16 +80,18 @@ function DialogFilters({ onSelectedLabelsChange }) {
 
   const style = {
     button: {
-      backgroundColor: "white",
-      color: "black",
-      margin: "3vh 2%",
+      backgroundColor: "green",
+      borderRadius: 20,
+      color: "WHITE",
+      margin: "1vh 2vw",
+      minWidth: 175,
     },
   };
 
   return (
-    <div>
+    <div className="flex flex-wrap justify-center">
       {buttons.map(({ label, dialogType, filterLabels }) => (
-        <React.Fragment key={label}>
+        <div key={label}>
           <Button
             sx={style.button}
             variant="outlined"
@@ -104,7 +106,7 @@ function DialogFilters({ onSelectedLabelsChange }) {
             handleClose={handleClose(dialogType)}
             handleToggle={handleToggle}
           />
-        </React.Fragment>
+        </div>
       ))}
     </div>
   );
