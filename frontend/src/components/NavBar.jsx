@@ -1,40 +1,54 @@
-/* eslint-disable react/no-array-index-key */
-import React from "react";
-import { NavLink } from "react-router-dom";
-import iconMenuNav from "../assets/navbar/iconMenuNav.png";
-import iconHomeNav from "../assets/navbar/iconHomeNav.png";
-import iconFridgeNav from "../assets/navbar/iconFridgeNav.png";
-import iconFavouritesNav from "../assets/navbar/iconFavouritesNav.png";
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import homeNav from "../assets/navbar/home-1.png";
+import Fridge from "../assets/navbar/refrigerateur-1.png";
+import Favourite from "../assets/navbar/star.png";
+import Foods from "../assets/navbar/nourriture-saine.png";
 
 function Nav() {
-  const Links = [
-    { name: "Home", link: "/home", imgSrc: iconHomeNav },
-    { name: "MyDiet", link: "/choose-your-diet", imgSrc: iconFridgeNav },
-    { name: "MyFridge", link: "/", imgSrc: iconMenuNav },
-    { name: "Likes", link: "/", imgSrc: iconFavouritesNav },
-  ];
-  return (
-    <div
-      className="shadow-md w-full fixed bg-white bottom-0 border border-t-black rounded-2xl
-     md:relative md:border-b-black"
-    >
-      <ul className="flex items-center justify-around">
-        {Links.map((item, index) => (
-          <li key={index} className="text-sm my-2">
-            <NavLink to={item.link} className="text-black font-bold">
-              {item.imgSrc && (
-                <img
-                  src={item.imgSrc}
-                  alt={item.name}
-                  className="w-10 h-10 mx-auto"
-                />
-              )}
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState("");
 
-              {item.name}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+  const Links = [
+    { name: "Home", link: "/home", imgSrc: homeNav },
+    { name: "MyDiet", link: "/choose-your-diet", imgSrc: Foods },
+    { name: "MyFridge", link: "/", imgSrc: Fridge },
+    { name: "Favourites", link: "/favourites", imgSrc: Favourite },
+  ];
+
+  useEffect(() => {
+    const path = location.pathname;
+    setActiveLink(path);
+  }, [location]);
+
+  return (
+    <div className="flex justify-center">
+      <div className="shadow-md w-[95vw] fixed bottom-0 border border-[#65a30d]  rounded-full md:relative mb-2 md:border-b-black">
+        <ul className="flex items-center justify-around rounded-md">
+          {Links.map((item) => (
+            <li key={item.link} className="text-sm my-2">
+              <NavLink
+                to={item.link}
+                className="text-black font-bold"
+                onClick={() => setActiveLink(item.link)}
+              >
+                {item.imgSrc && (
+                  <img
+                    src={item.imgSrc}
+                    alt={item.name}
+                    className={`w-10 h-10 mx-auto ${
+                      activeLink === item.link ? "opacity-100" : "opacity-50"
+                    } transition-opacity duration-200 ease-in-out cursor-pointer`}
+                  />
+                )}
+                {activeLink === item.link && (
+                  <div className="w-full  border-b-4 mt-1 border-[#65a30d]" />
+                )}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
