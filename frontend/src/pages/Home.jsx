@@ -6,6 +6,7 @@ import RandomRecipes from "../components/Home/RandomRecipes";
 import useLocalStorage from "../components/UseLocalStorage";
 import Search from "../components/Search";
 import NutriDiet from "../components/NutriDiet";
+import arrowDown from "../assets/arrowDown.png";
 
 function Home({ handleClickCategory, namePage }) {
   const [dataRandom, setDataRandom] = useLocalStorage("randomFood", []);
@@ -27,19 +28,24 @@ function Home({ handleClickCategory, namePage }) {
   return (
     <div>
       <NutriDiet namePage={namePage} />
-      <div className="px-6">
-        <h3>
-          Hello, <br />{" "}
-          <span className="text-xl font-bold">
-            What would you like <br />
-            to cook today ?
-          </span>
-        </h3>
-        <Search />
-        <div className="md:mx-14 shadow-sm">
-          <Categories handleClickCategory={handleClickCategory} />
-          <RandomRecipes handleRandom={handleRandom} dataRandom={dataRandom} />
+      <div className="md:h-[93vh] md:bg-black opacity-90 md:bg-homePage  md:bg-cover md:mb-3">
+        <div className="my-auto md:h-full md:flex md:flex-col">
+          <h2 className="md:text-center md:text-white md:m-auto md:p-10 md:bg-black md:w-max md:bg-opacity-70 md:inline-block">
+            Hello, <br />{" "}
+            <span className="text-2xl font-bold">
+              What would you like <br />
+              to cook today ?
+            </span>
+            <Search />
+          </h2>
+          <div className="hidden md:block md:mx-auto md:pb-1 bounce">
+            <img className=" md:block md:w-32" src={arrowDown} alt="" />
+          </div>
         </div>
+      </div>
+      <div className="shadow-sm">
+        <Categories handleClickCategory={handleClickCategory} />
+        <RandomRecipes handleRandom={handleRandom} dataRandom={dataRandom} />
       </div>
     </div>
   );

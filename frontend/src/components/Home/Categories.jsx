@@ -107,7 +107,7 @@ const ImageMarked = styled("span")(({ theme }) => ({
 function Categories({ handleClickCategory }) {
   return (
     <div className="mb-6">
-      <h2 className="inline-block bg-green-500 rounded-[10rem] text-white py-2 px-4 mb-6 text-xl shadow-sm">
+      <h2 className="inline-block bg-customGreen rounded-[10rem] text-white py-2 px-4 mb-6 text-xl shadow-sm">
         Catégories
       </h2>
       <div className="flex md:justify-around">

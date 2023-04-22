@@ -7,7 +7,7 @@ function RandomRecipes({ dataRandom, handleRandom }) {
   return (
     <div>
       <div className="flex items-center mb-3">
-        <h2 className="inline-block bg-green-500 rounded-[10rem] text-white py-2 px-4  text-xl shadow-sm">
+        <h2 className="inline-block bg-customGreen rounded-[10rem] text-white py-2 px-4  text-xl shadow-sm">
           Random Food
         </h2>
         <button onClick={handleRandom} type="button" className="py-2 px-4">

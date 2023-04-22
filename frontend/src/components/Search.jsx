@@ -13,7 +13,7 @@ function Search({ setFilterSearch, axiosData }) {
         <button
           type="button"
           onClick={axiosData}
-          className="px-4 text-white bg-green-500 rounded-full "
+          className="px-4 text-white bg-[#f7c5a8] rounded-full "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,31 @@
 import React from "react";
+import FavouriteCard from "../components/FavouriteCard";
+import useLocalStorage from "../components/UseLocalStorage";
 
 function Favourites() {
-  return <div />;
+  const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
+    "favouriteRecipes",
+    []
+  );
+
+  const handleClick = (recipe) => {
+    setFavouriteRecipes(
+      favouriteRecipes.filter((item) => item.uri !== recipe.uri)
+    );
+  };
+
+  return (
+    <>
+      <h1 className=" text-3xl">Favourites</h1>
+      {favouriteRecipes.map((item) => (
+        <FavouriteCard
+          key={item.uri}
+          item={item}
+          handleClick={() => handleClick(item)}
+        />
+      ))}
+    </>
+  );
 }
 
 export default Favourites;

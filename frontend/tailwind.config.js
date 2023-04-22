@@ -4,6 +4,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         welcomePage: 'url("./src/assets/homePage.jpg")',
+        homePage: 'url("./src/assets/backgroundHome.jpg")',
+      },
+      backgroundColor: {
+        customGreen: "#678a74",
       },
     },
   },

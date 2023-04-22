@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ChooseDiet from "./ChooseDiet";
 import Fridge from "./Fridge";
@@ -20,10 +20,21 @@ function Outlet() {
     setCategorySelected(valueName);
     navigate("/category");
   };
-  const [namePage, setNamePage] = useLocalStorage("NamePage", "Home");
+  const [activeLink, setActiveLink] = useState("");
+  const [namePage, setNamePage] = useState("Home");
+
+  const handleClickNavigate = (valueName, valueLink) => {
+    setNamePage(valueName);
+    setActiveLink(valueLink);
+  };
   return (
     <div>
-      <NavBar setNamePage={setNamePage} />
+      <NavBar
+        handleClickNavigate={handleClickNavigate}
+        activeLink={activeLink}
+        setActiveLink={setActiveLink}
+        setNamePage={setNamePage}
+      />
       <Routes>
         <Route
           path="/home"

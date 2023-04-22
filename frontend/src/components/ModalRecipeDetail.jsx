@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useLocalStorage from "./UseLocalStorage";
 
 const style = {
   title: {
@@ -41,9 +42,21 @@ function ModalRecipeDetails({ isOpen, onClose, recipe }) {
   const [expanded, setExpanded] = React.useState(false);
   const [expanded1, setExpanded1] = React.useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
+    "favouriteRecipes",
+    []
+  );
 
   const handleClick = () => {
     setIsFilled(!isFilled);
+
+    if (!isFilled) {
+      setFavouriteRecipes([...favouriteRecipes, recipe]);
+    } else {
+      setFavouriteRecipes(
+        favouriteRecipes.filter((item) => item.uri !== recipe.uri)
+      );
+    }
   };
 
   const handleExpandClick = () => {

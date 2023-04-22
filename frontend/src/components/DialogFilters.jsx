@@ -80,7 +80,7 @@ function DialogFilters({ onSelectedLabelsChange }) {
 
   const style = {
     button: {
-      backgroundColor: "green",
+      backgroundColor: "#394a6d",
       borderRadius: 20,
       color: "WHITE",
       margin: "1vh 2vw",
