@@ -23,10 +23,10 @@ function Nav() {
 
   return (
     <div className="flex justify-center">
-      <div className="shadow-md w-[95vw] fixed bottom-0 border border-[#65a30d]  rounded-full md:relative mb-2 md:border-b-black">
+      <div className="shadow-md w-[95vw] fixed bottom-0 border bg-gray-900 border-[#65a30d]  rounded-full md:relative mb-2 md:border-b-black">
         <ul className="flex items-center justify-around rounded-md">
           {Links.map((item) => (
-            <li key={item.link} className="text-sm my-2">
+            <li key={item.name} className="text-sm my-2">
               <NavLink
                 to={item.link}
                 className="text-black font-bold"

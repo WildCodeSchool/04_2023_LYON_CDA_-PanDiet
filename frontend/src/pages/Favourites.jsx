@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FavouriteCard from "../components/FavouriteCard";
 import NavBar from "../components/NavBar";
 import useLocalStorage from "../components/UseLocalStorage";
@@ -8,11 +8,8 @@ function Favourites() {
     "favouriteRecipes",
     []
   );
-  const [isFilled, setIsFilled] = useState(false);
 
   const handleClick = (recipe) => {
-    setIsFilled(!isFilled);
-
     setFavouriteRecipes(
       favouriteRecipes.filter((item) => item.uri !== recipe.uri)
     );
