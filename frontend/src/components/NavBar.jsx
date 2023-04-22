@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import homeNav from "../assets/navbar/home-1.png";
 import Fridge from "../assets/navbar/refrigerateur-1.png";
 import Favourite from "../assets/navbar/star.png";
 import Foods from "../assets/navbar/nourriture-saine.png";
 
-function Nav() {
+function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState("");
 
   const Links = [
     { name: "Home", link: "/home", imgSrc: homeNav },
@@ -22,7 +21,7 @@ function Nav() {
   }, [location]);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center md:none">
       <div className="shadow-md w-[95vw] fixed bottom-0 border bg-gray-900 border-[#65a30d]  rounded-full md:relative mb-2 md:border-b-black">
         <ul className="flex items-center justify-around rounded-md">
           {Links.map((item) => (
@@ -30,7 +29,7 @@ function Nav() {
               <NavLink
                 to={item.link}
                 className="text-black font-bold"
-                onClick={() => setActiveLink(item.link)}
+                onClick={() => handleClickNavigate(item.name, item.link)}
               >
                 {item.imgSrc && (
                   <img

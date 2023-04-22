@@ -6,14 +6,14 @@ function Search({ setFilterSearch, axiosData }) {
       <div className="flex space-x-1 py-4 mx-auto">
         <input
           type="text"
-          className="block w-full px-4 py-2  bg-white border border-black rounded-full focus:border-[#FF9A62] focus:ring-[#FFB084] focus:outline-none focus:ring focus:ring-opacity-40"
+          className="block w-full px-4 py-2 mr-2  bg-white border border-black rounded-full focus:border-[#FF9A62] focus:ring-[#FFB084] focus:outline-none focus:ring focus:ring-opacity-40"
           placeholder="Search your food..."
           onChange={(e) => setFilterSearch(e.target.value)}
         />
         <button
           type="button"
           onClick={axiosData}
-          className="px-4 text-white bg-[#61D539] rounded-full "
+          className="px-4 text-white bg-[#f7c5a8] rounded-full "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

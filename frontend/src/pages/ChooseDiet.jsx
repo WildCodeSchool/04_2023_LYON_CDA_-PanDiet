@@ -1,16 +1,16 @@
 import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import NavBar from "../components/NavBar";
 import ContainerFilterChoose from "../components/ChooseDiet/ContainerFilterChoose";
 import Buttons from "../components/ChooseDiet/Buttons";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
 import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
+import NutriDiet from "../components/NutriDiet";
+import BodyChoose from "../components/ChooseDiet/BodyChoose";
 
-function ChooseDiet() {
+function ChooseDiet({ namePage }) {
+  const [showFilters, setShowFilters] = useState(false);
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
@@ -86,6 +86,7 @@ function ChooseDiet() {
     } catch (error) {
       console.error("Erreur lors de la récupération des données:", error);
     }
+    setShowFilters(false);
   };
 
   const articlesPerPage = 6;
@@ -104,64 +105,47 @@ function ChooseDiet() {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
-  const style = {
-    hrGreen: {
-      height: "1px",
-      backgroundColor: "#7CB342",
-      margin: "5vh auto",
-      width: "70%",
-    },
-    button: {
-      backgroundColor: "#7CB342",
-      display: "flex",
-      margin: "5vh auto",
-    },
-    p: { textAlign: "center", margin: "2%" },
-    textField: {
-      backgroundColor: "white",
-      borderRadius: "10px",
-    },
-  };
   return (
     <div className="text-black">
-      <NavBar />
-      <HeaderChoose />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <TextField
-          sx={style.textField}
-          variant="filled"
-          size="small"
-          label="Enter search query"
-          value={queryText}
-          onChange={handleQueryTextChange}
-        />
+      <NutriDiet namePage={namePage} />
+      <div className="text-center">
+        <HeaderChoose />
       </div>
-
-      <br />
-      <p style={style.p}>Refine my search :</p>
-      <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
-      <hr style={style.hrGreen} />
-      <ContainerFilterChoose
-        ingredientInput={ingredientInput}
-        addExcludedIngredient={addExcludedIngredient}
-        queryExclued={queryExclued}
-        removeExcludedIngredient={removeExcludedIngredient}
+      <BodyChoose
+        setShowFilters={setShowFilters}
+        queryText={queryText}
+        showFilters={showFilters}
+        handleQueryTextChange={handleQueryTextChange}
+        fetchData={fetchData}
       />
-      <Button sx={style.button} onClick={fetchData} variant="contained">
-        Search
-      </Button>
+      <br />
+      {showFilters ? (
+        <div>
+          <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
+          <ContainerFilterChoose
+            ingredientInput={ingredientInput}
+            addExcludedIngredient={addExcludedIngredient}
+            queryExclued={queryExclued}
+            removeExcludedIngredient={removeExcludedIngredient}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       {currentArticles.map((item) => (
         <div key={item.recipe.uri}>
           <CardRecipe item={item} />
         </div>
       ))}
-      <Buttons
-        prevPage={prevPage}
-        currentPage={currentPage}
-        nextPage={nextPage}
-        currentArticles={currentArticles}
-        articlesPerPage={articlesPerPage}
-      />
+      {currentArticles.length && (
+        <Buttons
+          prevPage={prevPage}
+          currentPage={currentPage}
+          nextPage={nextPage}
+          currentArticles={currentArticles}
+          articlesPerPage={articlesPerPage}
+        />
+      )}
     </div>
   );
 }
