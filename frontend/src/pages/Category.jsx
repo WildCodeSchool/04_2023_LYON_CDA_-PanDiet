@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/* import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import ButtonBack from "../components/ButtonBack";
@@ -80,3 +80,4 @@ function Category({ categorySelected }) {
 }
 
 export default Category;
+ */
