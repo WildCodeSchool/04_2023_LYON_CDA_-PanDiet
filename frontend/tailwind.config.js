@@ -7,7 +7,8 @@ module.exports = {
         homePage: 'url("./src/assets/backgroundHome.jpg")',
       },
       backgroundColor: {
-        customGreen: "#678a74",
+        customGreen: "#15803d",
+        customOrange: "#f7c5a8",
       },
     },
   },

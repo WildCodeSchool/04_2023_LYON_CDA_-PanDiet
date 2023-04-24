@@ -1,8 +1,9 @@
 import React from "react";
 import FavouriteCard from "../components/FavouriteCard";
 import useLocalStorage from "../components/UseLocalStorage";
+import NutriDiet from "../components/NutriDiet";
 
-function Favourites() {
+function Favourites({ namePage }) {
   const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
     "favouriteRecipes",
     []
@@ -16,6 +17,7 @@ function Favourites() {
 
   return (
     <>
+      <NutriDiet namePage={namePage} />
       <h1 className=" text-3xl">Favourites</h1>
       {favouriteRecipes.map((item) => (
         <FavouriteCard

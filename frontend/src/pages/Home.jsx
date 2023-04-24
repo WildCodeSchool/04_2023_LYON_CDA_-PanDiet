@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
-import Categories from "../components/Home/Categories";
+import Categories from "../components/Categories";
 import RandomRecipes from "../components/Home/RandomRecipes";
 import useLocalStorage from "../components/UseLocalStorage";
-import Search from "../components/Search";
 import NutriDiet from "../components/NutriDiet";
-import arrowDown from "../assets/arrowDown.png";
+import Header from "../components/Home/Header";
+import CardRecipe from "../components/ChooseDiet/CardRecipe";
+
+const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
 function Home({ handleClickCategory, namePage }) {
+  const [filterSearch, setFilterSearch] = useState("");
+  const [showCategoryAndRandom, setShowCategoryAndRandom] = useState(true);
+  const [dataFoodSearch, setDataFoodSearch] = useState([]);
+
   const [dataRandom, setDataRandom] = useLocalStorage("randomFood", []);
   useEffect(() => {
     axios
       .get(
-        "https://api.edamam.com/api/recipes/v2?type=public&app_id=5f89fe95&app_key=6ad057a2b3ba66c9cd5aae24f720dcf1&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true"
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
       .then((response) => setDataRandom(response.data.hits));
   }, []);
@@ -25,27 +31,37 @@ function Home({ handleClickCategory, namePage }) {
       )
       .then((response) => setDataRandom(response.data.hits));
   };
+
+  const axiosData = () => {
+    axios
+      .get(
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&q=${filterSearch}`
+      )
+      .then((response) => setDataFoodSearch(response.data.hits));
+    setShowCategoryAndRandom(!showCategoryAndRandom);
+  };
   return (
     <div>
       <NutriDiet namePage={namePage} />
-      <div className="md:h-[93vh] md:bg-black opacity-90 md:bg-homePage  md:bg-cover md:mb-3">
-        <div className="my-auto md:h-full md:flex md:flex-col">
-          <h2 className="md:text-center md:text-white md:m-auto md:p-10 md:bg-black md:w-max md:bg-opacity-70 md:inline-block">
-            Hello, <br />{" "}
-            <span className="text-2xl font-bold">
-              What would you like <br />
-              to cook today ?
-            </span>
-            <Search />
-          </h2>
-          <div className="hidden md:block md:mx-auto md:pb-1 bounce">
-            <img className=" md:block md:w-32" src={arrowDown} alt="" />
+      <Header setFilterSearch={setFilterSearch} axiosData={axiosData} />
+      <div className="px-3 md:px-10">
+        {showCategoryAndRandom ? (
+          <div>
+            <Categories handleClickCategory={handleClickCategory} />
+            <RandomRecipes
+              handleRandom={handleRandom}
+              dataRandom={dataRandom}
+            />
           </div>
-        </div>
-      </div>
-      <div className="shadow-sm">
-        <Categories handleClickCategory={handleClickCategory} />
-        <RandomRecipes handleRandom={handleRandom} dataRandom={dataRandom} />
+        ) : (
+          <div>
+            {dataFoodSearch.map((item) => (
+              <div key={item.name}>
+                <CardRecipe item={item} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
