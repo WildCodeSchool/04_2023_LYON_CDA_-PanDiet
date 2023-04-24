@@ -9,6 +9,8 @@ import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
 import NutriDiet from "../components/NutriDiet";
 import BodyChoose from "../components/ChooseDiet/BodyChoose";
 
+const { VITE_API_ID, VITE_API_KEY } = import.meta.env;
+
 function ChooseDiet({ namePage }) {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedLabels, setSelectedLabels] = useState(new Set());
@@ -46,8 +48,8 @@ function ChooseDiet({ namePage }) {
 
       const params = {
         q: queryText,
-        app_id: "f4034abb",
-        app_key: "44fe06272cb8fed56c9622f7031624c7",
+        app_id: `${VITE_API_ID}`,
+        app_key: `${VITE_API_KEY}`,
         type: "public",
       };
 
@@ -111,6 +113,7 @@ function ChooseDiet({ namePage }) {
       <div className="text-center">
         <HeaderChoose />
       </div>
+
       <BodyChoose
         setShowFilters={setShowFilters}
         queryText={queryText}

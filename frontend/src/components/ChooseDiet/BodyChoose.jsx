@@ -46,7 +46,7 @@ function BodyChoose({
         <button
           onClick={fetchData}
           type="button"
-          className="px-4 py-2 text-white bg-['#3c9d9b] rounded-full "
+          className="px-4 py-2 text-white bg-[#3c9d9b] rounded-full "
         >
           <SearchIcon />
         </button>

@@ -50,7 +50,10 @@ function Outlet() {
           element={<ChooseDiet namePage={namePage} />}
         />
         <Route path="/my-fridge" element={<Fridge />} />
-        <Route path="/favourites" element={<Favourites />} />
+        <Route
+          path="/favourites"
+          element={<Favourites namePage={namePage} />}
+        />
         <Route path="/the-team" element={<Team />} />
         <Route
           path="/category"

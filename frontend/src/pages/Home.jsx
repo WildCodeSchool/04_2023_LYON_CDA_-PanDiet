@@ -8,12 +8,14 @@ import Search from "../components/Search";
 import NutriDiet from "../components/NutriDiet";
 import arrowDown from "../assets/arrowDown.png";
 
+const { VITE_API_ID, VITE_API_KEY } = import.meta.env;
+
 function Home({ handleClickCategory, namePage }) {
   const [dataRandom, setDataRandom] = useLocalStorage("randomFood", []);
   useEffect(() => {
     axios
       .get(
-        "https://api.edamam.com/api/recipes/v2?type=public&app_id=5f89fe95&app_key=6ad057a2b3ba66c9cd5aae24f720dcf1&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true"
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_API_ID}&app_key=${VITE_API_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
       .then((response) => setDataRandom(response.data.hits));
   }, []);
