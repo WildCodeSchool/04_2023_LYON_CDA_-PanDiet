@@ -1,19 +1,19 @@
 import React from "react";
 
-function Search({ setSearchQuery, searchFood }) {
+function Search({ setFilterSearch, axiosData }) {
   return (
     <div className="flex items-center">
       <div className="flex space-x-1 py-4 mx-auto">
         <input
           type="text"
-          className="block w-full px-4 py-2 mr-2 text-black bg-white border border-black rounded-full focus:border-[#FF9A62] focus:ring-[#FFB084] focus:outline-none focus:ring focus:ring-opacity-40"
-          placeholder="Search your fooooood..."
-          onChange={(e) => setSearchQuery(e.target.value)}
+          className="block w-full px-4 py-2 mr-2  bg-white border border-black rounded-full focus:border-[#FF9A62] focus:ring-[#FFB084] focus:outline-none focus:ring focus:ring-opacity-40"
+          placeholder="Search your food..."
+          onChange={(e) => setFilterSearch(e.target.value)}
         />
         <button
           type="button"
-          onClick={searchFood}
-          className="px-4 text-white bg-[#f7c5a8] rounded-full "
+          onClick={axiosData}
+          className="px-4 text-white bg-customOrange rounded-full "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

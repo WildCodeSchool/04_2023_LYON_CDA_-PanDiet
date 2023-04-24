@@ -110,7 +110,7 @@ function ChooseDiet({ namePage }) {
   return (
     <div className="text-black">
       <NutriDiet namePage={namePage} />
-      <div className="text-center">
+      <div className="text-center mr-4 mt-4">
         <HeaderChoose />
       </div>
 
@@ -140,7 +140,7 @@ function ChooseDiet({ namePage }) {
           <CardRecipe item={item} />
         </div>
       ))}
-      {currentArticles.length && (
+      {currentArticles.length > 0 && (
         <Buttons
           prevPage={prevPage}
           currentPage={currentPage}

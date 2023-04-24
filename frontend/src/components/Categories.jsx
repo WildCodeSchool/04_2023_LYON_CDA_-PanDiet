@@ -2,10 +2,10 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
-import breakFast from "../../assets/breakfast.jpeg";
-import snack from "../../assets/snack.jpg";
-import dinner from "../../assets/dinner.jpeg";
-import tea from "../../assets/teaTime.jpg";
+import breakFast from "../assets/breakfast.jpeg";
+import snack from "../assets/snack.jpg";
+import dinner from "../assets/dinner.jpeg";
+import tea from "../assets/teaTime.jpg";
 
 const images = [
   {

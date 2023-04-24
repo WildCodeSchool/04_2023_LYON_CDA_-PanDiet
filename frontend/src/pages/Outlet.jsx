@@ -6,11 +6,11 @@ import Favourites from "./Favourites";
 import Home from "./Home";
 import Team from "./Team";
 import NavBar from "../components/NavBar";
+import Category from "./Category";
 import useLocalStorage from "../components/UseLocalStorage";
 
 function Outlet() {
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
   const [categorySelected, setCategorySelected] = useLocalStorage(
     "categorySelected",
     ""
@@ -55,6 +55,10 @@ function Outlet() {
           element={<Favourites namePage={namePage} />}
         />
         <Route path="/the-team" element={<Team />} />
+        <Route
+          path="/category"
+          element={<Category categorySelected={categorySelected} />}
+        />
       </Routes>
     </div>
   );

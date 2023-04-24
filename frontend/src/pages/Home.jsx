@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
-import Categories from "../components/Home/Categories";
+import Categories from "../components/Categories";
 import RandomRecipes from "../components/Home/RandomRecipes";
 import useLocalStorage from "../components/UseLocalStorage";
-import Search from "../components/Search";
 import NutriDiet from "../components/NutriDiet";
-import arrowDown from "../assets/arrowDown.png";
+import Header from "../components/Home/Header";
+import CardRecipe from "../components/ChooseDiet/CardRecipe";
 
-const { VITE_API_ID, VITE_API_KEY } = import.meta.env;
+const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
 function Home({ handleClickCategory, namePage }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [userSearch, setUserSearch] = useState([]);
+  const [filterSearch, setFilterSearch] = useState("");
+  const [showCategoryAndRandom, setShowCategoryAndRandom] = useState(true);
+  const [dataFoodSearch, setDataFoodSearch] = useState([]);
+
   const [dataRandom, setDataRandom] = useLocalStorage("randomFood", []);
   useEffect(() => {
     axios
       .get(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_API_ID}&app_key=${VITE_API_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
       .then((response) => setDataRandom(response.data.hits));
   }, []);
@@ -30,51 +32,34 @@ function Home({ handleClickCategory, namePage }) {
       .then((response) => setDataRandom(response.data.hits));
   };
 
-  const searchFood = () => {
+  const axiosData = () => {
     axios
       .get(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_API_ID}&app_key=${VITE_API_KEY}&q=${searchQuery}`
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&q=${filterSearch}`
       )
-      .then((response) => setUserSearch(response.data.hits));
+      .then((response) => setDataFoodSearch(response.data.hits));
+    setShowCategoryAndRandom(!showCategoryAndRandom);
   };
   return (
     <div>
       <NutriDiet namePage={namePage} />
-      <div className="md:h-[93vh] md:bg-black opacity-90 md:bg-homePage  md:bg-cover md:mb-3">
-        <div className="my-auto md:h-full md:flex md:flex-col">
-          <h2 className="md:text-center md:text-white md:m-auto md:p-10 md:bg-black md:w-max md:bg-opacity-70 md:inline-block">
-            Hello, <br />{" "}
-            <span className="text-2xl font-bold">
-              What would you like <br />
-              to cook today ?
-            </span>
-            <Search setSearchQuery={setSearchQuery} searchFood={searchFood} />
-          </h2>
-          <div className="hidden md:block md:mx-auto md:pb-1 bounce">
-            <img className=" md:block md:w-32" src={arrowDown} alt="" />
+      <Header setFilterSearch={setFilterSearch} axiosData={axiosData} />
+      <div className="px-3 md:px-10">
+        {showCategoryAndRandom ? (
+          <div>
+            <Categories handleClickCategory={handleClickCategory} />
+            <RandomRecipes
+              handleRandom={handleRandom}
+              dataRandom={dataRandom}
+            />
           </div>
-        </div>
-      </div>
-      <div className="shadow-sm">
-        <Categories handleClickCategory={handleClickCategory} />
-        <RandomRecipes handleRandom={handleRandom} dataRandom={dataRandom} />
-        {userSearch.length > 0 && (
-          <div className="flex flex-col items-center">
-            <h2 className="inline-block bg-customGreen rounded-[10rem] text-white py-2 px-4  text-xl shadow-sm">
-              Search
-            </h2>
-            <div className="flex overflow-scroll min-h-[165px] md:overflow-y-hidden">
-              {userSearch.map((item) => (
-                <div className="flex flex-col items-center">
-                  <img
-                    className="w-32 h-32 rounded-full"
-                    src={item.recipe.image}
-                    alt=""
-                  />
-                  <h3 className="text-center">{item.recipe.label}</h3>
-                </div>
-              ))}
-            </div>
+        ) : (
+          <div>
+            {dataFoodSearch.map((item) => (
+              <div key={item.name}>
+                <CardRecipe item={item} />
+              </div>
+            ))}
           </div>
         )}
       </div>
