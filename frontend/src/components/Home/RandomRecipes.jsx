@@ -1,6 +1,5 @@
 import React from "react";
 import CachedIcon from "@mui/icons-material/Cached";
-
 import CardRandom from "./CardRandom";
 
 function RandomRecipes({ dataRandom, handleRandom }) {
@@ -14,10 +13,11 @@ function RandomRecipes({ dataRandom, handleRandom }) {
           <CachedIcon fontSize="large" />
         </button>
       </div>
-
       <div className="flex overflow-scroll min-h-[165px] md:overflow-y-hidden">
         {dataRandom.map((item) => (
-          <CardRandom item={item} />
+          <div className="my-10" type="button">
+            <CardRandom item={item} />
+          </div>
         ))}
       </div>
     </div>

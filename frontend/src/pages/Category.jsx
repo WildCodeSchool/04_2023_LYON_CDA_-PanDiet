@@ -48,10 +48,10 @@ function Category({ categorySelected }) {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
   return (
-    <div>
+    <div className="md:px-8">
       <Search axiosData={axiosData} setFilterSearch={setFilterSearch} />
       <ButtonBack />
-      <h2 className="text-center text-2xl font-bold">{categorySelected}</h2>
+      <h2 className="text-center text-3xl font-bold">{categorySelected}</h2>
       <div>
         {currentArticles.map((item) => (
           <div>

@@ -1,14 +1,15 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import ModalRecipeDetails from "../ModalRecipeDetail";
+import ModalRecipeDetail from "./ModalRecipeDetail";
 
-function CardRecipe({ item }) {
+function NewCardRecipe({ item }) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   return (
     <div>
@@ -27,23 +28,33 @@ function CardRecipe({ item }) {
       >
         <CardMedia
           sx={{ height: 140 }}
-          image={item.recipe.image}
+          image={item.image}
           title="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {item.recipe.label}
+            {item.title}
+          </Typography>
+          <Typography>
+            <p>Temps : {item.time}min</p>
+            <p>{item.mealType}</p>
+          </Typography>
+          <Typography variant="h5" component="div">
+            <ul>
+              {item.ingredients.map((ingredient) => (
+                <li>{ingredient}</li>
+              ))}
+            </ul>
           </Typography>
         </CardContent>
       </Card>
-      <ModalRecipeDetails
-        handleOpen={handleOpen}
-        recipe={item.recipe}
-        open={open}
+      <ModalRecipeDetail
         handleClose={handleClose}
+        handleOpen={handleOpen}
+        recipe={item}
       />
     </div>
   );
 }
 
-export default CardRecipe;
+export default NewCardRecipe;

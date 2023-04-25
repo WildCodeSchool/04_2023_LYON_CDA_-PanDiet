@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
@@ -7,10 +8,12 @@ import useLocalStorage from "../components/UseLocalStorage";
 import NutriDiet from "../components/NutriDiet";
 import Header from "../components/Home/Header";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";
+import NewCardRecipe from "../components/NewCardRecipe";
+import Navou from "../components/Navou";
 
 const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
-function Home({ handleClickCategory, namePage }) {
+function Home({ handleClickCategory, namePage, recipes }) {
   const [filterSearch, setFilterSearch] = useState("");
   const [showCategoryAndRandom, setShowCategoryAndRandom] = useState(true);
   const [dataFoodSearch, setDataFoodSearch] = useState([]);
@@ -42,7 +45,9 @@ function Home({ handleClickCategory, namePage }) {
   };
   return (
     <div>
-      <NutriDiet namePage={namePage} />
+      <div>
+        <NutriDiet namePage={namePage} />
+      </div>
       <Header setFilterSearch={setFilterSearch} axiosData={axiosData} />
       <div className="px-3 md:px-10">
         {showCategoryAndRandom ? (
@@ -63,6 +68,12 @@ function Home({ handleClickCategory, namePage }) {
           </div>
         )}
       </div>
+      {recipes.map((item, index) => (
+        <div key={index}>
+          <NewCardRecipe item={item} />
+        </div>
+      ))}
+      <Navou />
     </div>
   );
 }

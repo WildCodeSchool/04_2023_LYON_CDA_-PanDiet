@@ -4,7 +4,7 @@ import arrowDown from "../../assets/arrowDown.png";
 
 function Header({ setFilterSearch, axiosData }) {
   return (
-    <div className="md:h-[93vh] md:bg-black opacity-90 md:bg-homePage  md:bg-cover md:mb-3">
+    <div className="md:h-[90vh] md:bg-black opacity-90 md:bg-homePage  md:bg-cover md:mb-3">
       <div className="my-auto md:h-full px-4 md:px-0 md:flex md:flex-col">
         <h2 className="md:text-center md:text-white md:m-auto md:p-10 md:bg-black md:rounded-xl md:w-max md:bg-opacity-70 md:inline-block">
           Hello, <br />{" "}

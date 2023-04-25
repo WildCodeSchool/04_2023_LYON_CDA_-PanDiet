@@ -5,7 +5,7 @@ import next from "../assets/next.png";
 function WelcomePage() {
   return (
     <div className="bg-welcomePage h-[100vh] bg-cover">
-      <div className="mx-auto">
+      <div className="mx-auto ">
         <h1 className="text-center text-white text-4xl font-bold">
           <span className="text-[#FF9A62]">N</span>utri
           <span className="text-[#FF9A62]">D</span>iet

@@ -21,8 +21,8 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
   }, [location]);
 
   return (
-    <div className="flex justify-center md:none">
-      <div className="shadow-md w-[95vw] fixed bottom-0 border bg-gray-900 border-[#65a30d]  rounded-full md:relative mb-2 md:border-b-black">
+    <div className="flex justify-center">
+      <div className="w-[95vw] fixed bottom-0 bg-gray-900 rounded-full md:w-full md:rounded-none md:relative mb-2 md:mb-0">
         <ul className="flex items-center justify-around rounded-md">
           {Links.map((item) => (
             <li key={item.name} className="text-sm my-2">
