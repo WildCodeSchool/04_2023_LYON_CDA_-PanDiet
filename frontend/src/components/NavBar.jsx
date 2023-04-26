@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import homeNav from "../assets/navbar/home-1.png";
 import Fridge from "../assets/navbar/refrigerateur-1.png";
 import Favourite from "../assets/navbar/star.png";
 import Foods from "../assets/navbar/nourriture-saine.png";
 
-function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
+function Nav({ setActiveLink, activeLink, handleClickNavigate, handleOpen }) {
   const location = useLocation();
 
   const Links = [
@@ -47,6 +48,13 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
             </li>
           ))}
         </ul>
+        <button
+          onClick={handleOpen}
+          type="button"
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-12 w-12 bg-white rounded-full border-2 border-transparent "
+        >
+          <AddCircleIcon />
+        </button>
       </div>
     </div>
   );

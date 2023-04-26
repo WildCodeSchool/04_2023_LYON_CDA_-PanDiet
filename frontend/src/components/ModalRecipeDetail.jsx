@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { IconButton } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import useLocalStorage from "./UseLocalStorage";
 
 function ModalRecipeDetails({ recipe, open, handleClose }) {
   let enercKcal = recipe.totalNutrients.ENERC_KCAL.quantity.toString();
@@ -11,6 +15,23 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
   if (fat.length > 6) {
     fat = fat.substring(0, 6);
   }
+  const [isFilled, setIsFilled] = useState(false);
+  const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
+    "favouriteRecipes",
+    []
+  );
+
+  const handleClick = () => {
+    setIsFilled(!isFilled);
+
+    if (!isFilled) {
+      setFavouriteRecipes([...favouriteRecipes, recipe]);
+    } else {
+      setFavouriteRecipes(
+        favouriteRecipes.filter((item) => item.uri !== recipe.uri)
+      );
+    }
+  };
   return (
     <div>
       <Modal
@@ -19,10 +40,14 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box class="absolute top-1/2 left-1/2 w-[90vw] transform -translate-x-1/2 -translate-y-1/2 md:w-[1000px] md:h-[500px] bg-white border-2  shadow-md block md:flex">
-          <img className="md:h-[496px]" src={recipe.image} alt="" />
-          <div className="md:flex mx-auto p-10 flex-col">
-            <h3 className="text-xl w-full md:text-3xl pb-4 text-center">
+        <Box
+          class="absolute top-1/2 left-1/2 w-[90vw] transform
+         -translate-x-1/2 -translate-y-1/2 md:w-[1000px] md:h-[500px]
+          bg-white border-2  shadow-md block md:flex"
+        >
+          <img className=" w-full md:h-[496px]" src={recipe.image} alt="" />
+          <div className=" p-7 md:flex mx-auto md:p-10 flex-col">
+            <h3 className="text-xl w-full font-bold md:text-3xl pb-4 text-center">
               {recipe.label}
             </h3>
             <hr />
@@ -48,11 +73,11 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
             </div>
             <h3 className="w-full text-2xl pb-4 text-center">Ingredients</h3>
             <hr className=" pb-2 w-1/2 mx-auto" />
-            <ul className=" overflow-auto">
+            <ul className="h-32  md:h-auto overflow-auto">
               {recipe.ingredients.map((item) => (
                 <li className="flex my-1 ">
                   <img
-                    className="h-6 rounded-md mr-2"
+                    className="h-6 rounded-md mr-2 "
                     src={item.image}
                     alt=""
                   />
@@ -61,6 +86,13 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
               ))}
             </ul>
             <hr className="w-1/2 pb-2 mx-auto" />
+            <IconButton
+              onClick={handleClick}
+              color={isFilled ? "error" : "inherit"}
+              disableRipple
+            >
+              {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </IconButton>
           </div>
         </Box>
       </Modal>

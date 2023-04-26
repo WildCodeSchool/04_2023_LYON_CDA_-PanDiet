@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
 import ChooseDiet from "./ChooseDiet";
 import Fridge from "./Fridge";
 import Favourites from "./Favourites";
@@ -57,6 +56,7 @@ function Outlet() {
         activeLink={activeLink}
         setActiveLink={setActiveLink}
         setNamePage={setNamePage}
+        handleOpen={handleOpen}
       />
       <Routes>
         <Route
@@ -84,7 +84,6 @@ function Outlet() {
           element={<Category categorySelected={categorySelected} />}
         />
       </Routes>{" "}
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

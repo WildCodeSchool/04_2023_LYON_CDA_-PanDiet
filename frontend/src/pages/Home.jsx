@@ -9,7 +9,6 @@ import NutriDiet from "../components/NutriDiet";
 import Header from "../components/Home/Header";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";
 import NewCardRecipe from "../components/NewCardRecipe";
-import Navou from "../components/Navou";
 
 const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
@@ -73,7 +72,6 @@ function Home({ handleClickCategory, namePage, recipes }) {
           <NewCardRecipe item={item} />
         </div>
       ))}
-      <Navou />
     </div>
   );
 }
