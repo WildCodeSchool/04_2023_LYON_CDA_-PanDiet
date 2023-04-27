@@ -80,7 +80,7 @@ function CardMyRecipe({ recipe }) {
       >
         <ImageButton onClick={handleOpen} focusRipple>
           <img
-            className="max-h-[250px] min-h-[200px] max-w-[250px] min-w-[200px] rounded-xl "
+            className="max-h-[200px] min-h-[200px] max-w-[250px] min-w-[260px] rounded-xl "
             src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
             alt=""
           />

@@ -8,10 +8,11 @@ import useLocalStorage from "../components/UseLocalStorage";
 import NutriDiet from "../components/NutriDiet";
 import Header from "../components/Home/Header";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";
+import NewCardRecipe from "../components/NewCardRecipe";
 
 const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
-function Home({ handleClickCategory, namePage }) {
+function Home({ handleClickCategory, namePage, recipes }) {
   const [filterSearch, setFilterSearch] = useState("");
   const [showCategoryAndRandom, setShowCategoryAndRandom] = useState(true);
   const [dataFoodSearch, setDataFoodSearch] = useState([]);
@@ -64,6 +65,11 @@ function Home({ handleClickCategory, namePage }) {
           </div>
         )}
       </div>
+      {recipes.map((item, index) => (
+        <div key={index}>
+          <NewCardRecipe item={item} />
+        </div>
+      ))}
     </div>
   );
 }

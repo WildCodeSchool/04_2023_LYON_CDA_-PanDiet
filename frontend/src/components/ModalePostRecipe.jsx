@@ -100,7 +100,7 @@ export default function ModalePostRecipe({
 
       <div className="p-7 md:flex mx-auto md:p-10 flex-col">
         <h2 className="text-center text-2xl font-bold underline mb-3">
-          Add a new recipe
+          Create a new recipe
         </h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -198,7 +198,7 @@ export default function ModalePostRecipe({
               type="submit"
               onClick={() => console.warn(recipes)}
             >
-              Envoyer
+              Create
             </button>
           </div>
         </form>

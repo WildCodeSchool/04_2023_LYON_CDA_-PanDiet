@@ -25,7 +25,7 @@ function ChooseDiet({ namePage }) {
   const handleSelectedLabelsChange = (updatedSelectedLabels) => {
     setSelectedLabels(updatedSelectedLabels);
   };
-
+  console.warn(VITE_API_ID);
   const handleQueryTextChange = (event) => {
     setQueryText(event.target.value);
   };
