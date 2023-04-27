@@ -5,7 +5,7 @@ function getStorageValue(key, defaultValue) {
   const saved = localStorage.getItem(key);
   // on la convertis
   const initial = JSON.parse(saved);
-  // on renvoit soit la valeur convertis, soir la valeur donnée par defaut.
+  // on renvoit soit la valeur convertis, soit la valeur donnée par defaut.
   return initial || defaultValue;
 }
 
@@ -18,9 +18,8 @@ const useLocalStorage = (key, defaultValue) => {
 
   useEffect(() => {
     // Au lancement, soit on a récupéré une valeur et on l'enregistre
-    // soit on stocke une valeur par defaut
+    // soit on stock une valeur par defaut
     localStorage.setItem(key, JSON.stringify(value));
-    // si la valeur, on met à jour le local storage
   }, [value, key]);
 
   return [value, setValue];

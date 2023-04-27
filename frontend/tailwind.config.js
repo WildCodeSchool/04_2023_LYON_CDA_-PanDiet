@@ -5,6 +5,7 @@ module.exports = {
       backgroundImage: {
         welcomePage: 'url("./src/assets/homePage.jpg")',
         homePage: 'url("./src/assets/backgroundHome.jpg")',
+        uplaod: 'url("./src/assets/breakfast.jpeg")',
       },
       backgroundColor: {
         customGreen: "#15803d",

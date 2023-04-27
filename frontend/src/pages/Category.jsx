@@ -52,7 +52,7 @@ function Category({ categorySelected }) {
       <Search axiosData={axiosData} setFilterSearch={setFilterSearch} />
       <ButtonBack />
       <h2 className="text-center text-3xl font-bold">{categorySelected}</h2>
-      <div>
+      <div className="flex flex-wrap">
         {currentArticles.map((item) => (
           <div>
             <CardRecipe item={item} />

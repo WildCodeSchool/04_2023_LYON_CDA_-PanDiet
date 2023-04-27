@@ -5,7 +5,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import ChooseDiet from "./ChooseDiet";
-import Fridge from "./Fridge";
 import Favourites from "./Favourites";
 import Home from "./Home";
 import Team from "./Team";
@@ -13,22 +12,12 @@ import NavBar from "../components/NavBar";
 import Category from "./Category";
 import useLocalStorage from "../components/UseLocalStorage";
 import ModalePostRecipe from "../components/ModalePostRecipe";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import MyRicipes from "./MyRecipes";
+import iconAdd from "../assets/iconAdd.png";
 
 function Outlet() {
   const [recipes, setRecipes] = useState([]);
-
+  const [reaload, setReload] = useState(true);
   const navigate = useNavigate();
   const [categorySelected, setCategorySelected] = useLocalStorage(
     "categorySelected",
@@ -63,7 +52,6 @@ function Outlet() {
           path="/home"
           element={
             <Home
-              recipes={recipes}
               namePage={namePage}
               handleClickCategory={handleClickCategory}
             />
@@ -73,7 +61,7 @@ function Outlet() {
           path="/choose-your-diet"
           element={<ChooseDiet namePage={namePage} />}
         />
-        <Route path="/my-fridge" element={<Fridge />} />
+        <Route path="/my-fridge" element={<MyRicipes reaload={reaload} />} />
         <Route
           path="/favourites"
           element={<Favourites namePage={namePage} />}
@@ -83,7 +71,7 @@ function Outlet() {
           path="/category"
           element={<Category categorySelected={categorySelected} />}
         />
-      </Routes>{" "}
+      </Routes>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -98,15 +86,25 @@ function Outlet() {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
+          <Box>
             <ModalePostRecipe
+              reaload={reaload}
               recipes={recipes}
+              handleClose={handleClose}
               setRecipes={setRecipes}
               setOpen={setOpen}
+              setReload={setReload}
             />
           </Box>
         </Fade>
       </Modal>
+      <button
+        onClick={handleOpen}
+        type="button"
+        className="fixed right-10 bottom-10  h-20 w-20 bg-white rounded-full "
+      >
+        <img src={iconAdd} alt="" />
+      </button>
     </div>
   );
 }

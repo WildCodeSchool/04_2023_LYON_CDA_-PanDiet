@@ -41,13 +41,17 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box
-          class="absolute top-1/2 left-1/2 w-[90vw] transform
-         -translate-x-1/2 -translate-y-1/2 md:w-[1000px] md:h-[500px]
+          class="absolute top-1/2 left-1/2 w-[90vw] transform -translate-x-1/2
+           -translate-y-1/2 md:w-[1000px] md:h-[600px]
           bg-white border-2  shadow-md block md:flex"
         >
-          <img className=" w-full md:h-[496px]" src={recipe.image} alt="" />
+          <img
+            className=" w-full md:w-[496px] md:h-[596px]"
+            src={recipe.image}
+            alt=""
+          />
           <div className=" p-7 md:flex mx-auto md:p-10 flex-col">
-            <h3 className="text-xl w-full font-bold md:text-3xl pb-4 text-center">
+            <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
               {recipe.label}
             </h3>
             <hr />
