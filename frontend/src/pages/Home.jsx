@@ -2,17 +2,17 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
+import Footer from "../components/Footer";
 import Categories from "../components/Categories";
 import RandomRecipes from "../components/Home/RandomRecipes";
 import useLocalStorage from "../components/UseLocalStorage";
 import NutriDiet from "../components/NutriDiet";
 import Header from "../components/Home/Header";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";
-import NewCardRecipe from "../components/NewCardRecipe";
 
 const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
-function Home({ handleClickCategory, namePage, recipes }) {
+function Home({ handleClickCategory, namePage }) {
   const [filterSearch, setFilterSearch] = useState("");
   const [showCategoryAndRandom, setShowCategoryAndRandom] = useState(true);
   const [dataFoodSearch, setDataFoodSearch] = useState([]);
@@ -65,11 +65,7 @@ function Home({ handleClickCategory, namePage, recipes }) {
           </div>
         )}
       </div>
-      {recipes.map((item, index) => (
-        <div key={index}>
-          <NewCardRecipe item={item} />
-        </div>
-      ))}
+      <Footer />
     </div>
   );
 }

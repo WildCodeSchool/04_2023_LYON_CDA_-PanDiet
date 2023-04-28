@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import logoRecette from "../../assets/logoRecette.png";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -24,11 +25,12 @@ function ModalMyRecipeDetails({ recipe, open, handleClose }) {
             src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
             alt=""
           />
-          <div className=" p-7 md:flex mx-auto md:p-10 flex-col">
+          <div className="md:flex mx-auto flex-col">
+            <img className="h-40 w-40" src={logoRecette} alt="" />
             <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
               {recipe.name}
             </h3>
-            <h3>{recipe.description}</h3>
+            <h3 className="text-center mb-2">{recipe.description}</h3>
             <hr />
             <div className="flex py-2 justify-around md:py-5">
               <p>🍴 {recipe.mealType}</p>
@@ -51,7 +53,9 @@ function ModalMyRecipeDetails({ recipe, open, handleClose }) {
               ))}
             </ul> */}
             <h3 className="w-full text-2xl pb-4 text-center">Instructions</h3>
-            <p>{recipe.instructions}</p>
+            <div className="px-10 overflow-auto">
+              <p>{recipe.instructions}</p>
+            </div>
           </div>
         </Box>
       </Modal>

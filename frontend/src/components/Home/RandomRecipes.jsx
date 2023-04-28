@@ -5,7 +5,7 @@ import CardRandom from "./CardRandom";
 function RandomRecipes({ dataRandom, handleRandom }) {
   return (
     <div>
-      <div className="flex items-center mb-3">
+      <div className="flex items-center ">
         <h2 className="inline-block bg-customGreen rounded-[10rem] text-white py-2 px-4  text-xl shadow-sm">
           Random Food
         </h2>
@@ -13,9 +13,9 @@ function RandomRecipes({ dataRandom, handleRandom }) {
           <CachedIcon fontSize="large" />
         </button>
       </div>
-      <div className="flex overflow-scroll min-h-[165px] md:overflow-y-hidden">
+      <div className="flex overflow-scroll min-h-[200px] md:overflow-y-hidden">
         {dataRandom.map((item) => (
-          <div className="my-10" type="button">
+          <div className="my-4" type="button">
             <CardRandom item={item} />
           </div>
         ))}

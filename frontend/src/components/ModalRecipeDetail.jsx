@@ -50,7 +50,7 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
             src={recipe.image}
             alt=""
           />
-          <div className=" p-7 md:flex mx-auto md:p-10 flex-col">
+          <div className=" p-7 md:flex mx-auto md:p-10 flex-col min-w-[500px]">
             <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
               {recipe.label}
             </h3>
@@ -77,7 +77,7 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
             </div>
             <h3 className="w-full text-2xl pb-4 text-center">Ingredients</h3>
             <hr className=" pb-2 w-1/2 mx-auto" />
-            <ul className="h-32  md:h-auto overflow-auto">
+            <ul className="h-32  md:h-auto overflow-auto ">
               {recipe.ingredients.map((item) => (
                 <li className="flex my-1 ">
                   <img
