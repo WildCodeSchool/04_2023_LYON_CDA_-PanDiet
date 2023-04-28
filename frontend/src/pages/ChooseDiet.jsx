@@ -8,9 +8,9 @@ import { FilterContext } from "../Context/FilterContext";
 import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
 import NutriDiet from "../components/NutriDiet";
 import BodyChoose from "../components/ChooseDiet/BodyChoose";
+import snack from "../assets/snack.jpg";
 
 function ChooseDiet({ namePage }) {
-  const [showFilters, setShowFilters] = useState(false);
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
@@ -86,7 +86,6 @@ function ChooseDiet({ namePage }) {
     } catch (error) {
       console.error("Erreur lors de la récupération des données:", error);
     }
-    setShowFilters(false);
   };
 
   const articlesPerPage = 6;
@@ -106,22 +105,18 @@ function ChooseDiet({ namePage }) {
   };
 
   return (
-    <div className="text-black">
+    <div>
       <NutriDiet namePage={namePage} />
-      <div className="text-center mr-4 mt-4">
+      <div className="mt-4">
         <HeaderChoose />
       </div>
-
       <BodyChoose
-        setShowFilters={setShowFilters}
         queryText={queryText}
-        showFilters={showFilters}
         handleQueryTextChange={handleQueryTextChange}
         fetchData={fetchData}
       />
-      <br />
-      {showFilters ? (
-        <div>
+      <div className="flex">
+        <div className="w-1/5">
           <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
           <ContainerFilterChoose
             ingredientInput={ingredientInput}
@@ -130,9 +125,33 @@ function ChooseDiet({ namePage }) {
             removeExcludedIngredient={removeExcludedIngredient}
           />
         </div>
-      ) : (
-        ""
-      )}
+        <div className="w-4/5 flex flex-wrap gap-10">
+          <div>
+            <img className="w-[20vw] h-[20vh] rounded-xl" src={snack} alt="" />
+            <h4 className="pt-2">Cassoulet de campagne</h4>
+          </div>
+          <div>
+            <img className="w-[20vw] h-[20vh] rounded-xl" src={snack} alt="" />
+            <h4 className="pt-2">Cassoulet de campagne</h4>
+          </div>
+          <div>
+            <img className="w-[20vw] h-[20vh] rounded-xl" src={snack} alt="" />
+            <h4 className="pt-2">Cassoulet de campagne</h4>
+          </div>
+          <div>
+            <img className="w-[20vw] h-[20vh] rounded-xl" src={snack} alt="" />
+            <h4 className="pt-2">Cassoulet de campagne</h4>
+          </div>
+          <div>
+            <img className="w-[20vw] h-[20vh] rounded-xl" src={snack} alt="" />
+            <h4 className="pt-2">Cassoulet de campagne</h4>
+          </div>
+          <div>
+            <img className="w-[20vw] h-[20vh] rounded-xl" src={snack} alt="" />
+            <h4 className="pt-2">Cassoulet de campagne</h4>
+          </div>
+        </div>
+      </div>
       {currentArticles.map((item) => (
         <div key={item.recipe.uri}>
           <CardRecipe item={item} />

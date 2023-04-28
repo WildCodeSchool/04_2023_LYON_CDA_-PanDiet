@@ -76,7 +76,7 @@ export default function ModalePostRecipe({
       <div className="w-full bg-uplaod bg-center ">
         <div className="backdrop-blur-sm bg-white/30 flex w-1/2 h-1/2 mx-auto my-[25%] text-center items-center ">
           <div className="mx-auto">
-            <h3 className="text-xl ">Telechargez votre photo</h3>
+            <h3 className="text-xl ">Download The Picture</h3>
             <IconButton
               size="large"
               color="primary"

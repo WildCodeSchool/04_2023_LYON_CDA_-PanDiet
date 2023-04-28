@@ -12,8 +12,8 @@ import NavBar from "../components/NavBar";
 import Category from "./Category";
 import useLocalStorage from "../components/UseLocalStorage";
 import ModalePostRecipe from "../components/ModalePostRecipe";
-import MyRicipes from "./MyRecipes";
 import iconAdd from "../assets/iconAdd.png";
+import MyRecipes from "./MyRecipes";
 
 function Outlet() {
   const [recipes, setRecipes] = useState([]);
@@ -39,7 +39,7 @@ function Outlet() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
+    <div className="md:px-20">
       <NavBar
         handleClickNavigate={handleClickNavigate}
         activeLink={activeLink}
@@ -61,7 +61,7 @@ function Outlet() {
           path="/choose-your-diet"
           element={<ChooseDiet namePage={namePage} />}
         />
-        <Route path="/my-fridge" element={<MyRicipes reaload={reaload} />} />
+        <Route path="/my-fridge" element={<MyRecipes reaload={reaload} />} />
         <Route
           path="/favourites"
           element={<Favourites namePage={namePage} />}
@@ -72,6 +72,7 @@ function Outlet() {
           element={<Category categorySelected={categorySelected} />}
         />
       </Routes>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

@@ -22,8 +22,9 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
 
   return (
     <div className="flex justify-center">
-      <div className="w-[95vw] fixed bottom-0 bg-gray-900 rounded-full md:w-full md:rounded-none md:relative mb-2 md:mb-0">
-        <ul className="flex items-center justify-around rounded-md">
+      <div className="w-[95vw] items-center fixed bottom-0 rounded-full md:w-full md:rounded-none md:relative mb-2 md:mb-0">
+        <ul className="flex items-center justify-between rounded-md pr-20">
+          <h2 className="text-3xl font-bold text-[#E58A2F]">NUTRIDIET</h2>
           {Links.map((item) => (
             <li key={item.name} className="text-sm my-2">
               <NavLink
@@ -31,17 +32,9 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
                 className="text-black font-bold"
                 onClick={() => handleClickNavigate(item.name, item.link)}
               >
-                {item.imgSrc && (
-                  <img
-                    src={item.imgSrc}
-                    alt={item.name}
-                    className={`w-10 h-10 mx-auto ${
-                      activeLink === item.link ? "opacity-100" : "opacity-50"
-                    } transition-opacity duration-200 ease-in-out cursor-pointer`}
-                  />
-                )}
+                {item.name && <p>{item.name}</p>}
                 {activeLink === item.link && (
-                  <div className="w-full  border-b-4 mt-1 border-[#65a30d]" />
+                  <div className="w-full  border-b-2 mt-1 border-[#E58A2F]" />
                 )}
               </NavLink>
             </li>
