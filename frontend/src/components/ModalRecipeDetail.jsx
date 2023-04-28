@@ -1,37 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { IconButton } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import useLocalStorage from "./UseLocalStorage";
+// import { IconButton } from "@mui/material";
+// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+// import FavoriteIcon from "@mui/icons-material/Favorite";
+// import useLocalStorage from "./UseLocalStorage";
 
-function ModalRecipeDetails({ recipe, open, handleClose }) {
-  let enercKcal = recipe.totalNutrients.ENERC_KCAL.quantity.toString();
+function ModalRecipeDetails({ item, open, handleClose }) {
+  let enercKcal = item.totalNutrients.ENERC_KCAL.quantity.toString();
   if (enercKcal.length > 6) {
     enercKcal = enercKcal.substring(0, 6);
   }
-  let fat = recipe.totalNutrients.FAT.quantity.toString();
+  let fat = item.totalNutrients.FAT.quantity.toString();
   if (fat.length > 6) {
     fat = fat.substring(0, 6);
   }
-  const [isFilled, setIsFilled] = useState(false);
-  const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
-    "favouriteRecipes",
-    []
-  );
+  // const [isFilled, setIsFilled] = useState(false);
+  // const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
+  //   "favouriteRecipes",
+  //   []
+  // );
 
-  const handleClick = () => {
-    setIsFilled(!isFilled);
+  // const handleClick = () => {
+  //   setIsFilled(!isFilled);
 
-    if (!isFilled) {
-      setFavouriteRecipes([...favouriteRecipes, recipe]);
-    } else {
-      setFavouriteRecipes(
-        favouriteRecipes.filter((item) => item.uri !== recipe.uri)
-      );
-    }
-  };
+  //   if (!isFilled) {
+  //     setFavouriteRecipes([...favouriteRecipes, item]);
+  //   } else {
+  //     setFavouriteRecipes(
+  //       favouriteRecipes.filter((item) => item.uri !== item.uri)
+  //     );
+  //   }
+  // };
   return (
     <div>
       <Modal
@@ -47,56 +47,56 @@ function ModalRecipeDetails({ recipe, open, handleClose }) {
         >
           <img
             className=" w-full md:w-[496px] md:h-[596px]"
-            src={recipe.image}
+            src={item.image}
             alt=""
           />
           <div className=" p-7 md:flex mx-auto md:p-10 flex-col min-w-[500px]">
             <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
-              {recipe.label}
+              {item.label}
             </h3>
             <hr />
             <div className="flex py-2 justify-around md:py-5">
-              <p>{recipe.mealType}</p>
-              <p>{recipe.cuisineType}</p>
-              <p>{recipe.dishType}</p>
+              <p>{item.mealType}</p>
+              <p>{item.cuisineType}</p>
+              <p>{item.dishType}</p>
             </div>
             <hr />
             <div className="flex py-2 justify-around md:py-5">
               <div className="flex items-center">
-                <p className="text-2xl">{enercKcal}</p>
+                {/* <p className="text-2xl">{enercKcal}</p> */}
                 <p className="font-bold pl-2 text-center">
-                  {recipe.totalNutrients.ENERC_KCAL.unit}
+                  {/* {item.totalNutrients.ENERC_KCAL.unit} */}
                 </p>
               </div>
               <div className="flex items-center">
-                <p className="text-2xl">{fat}</p>
+                {/* <p className="text-2xl">{fat}</p> */}
                 <p className="font-bold pl-2 text-center">
-                  {recipe.totalNutrients.FAT.unit}
+                  {/* {item.totalNutrients.FAT.unit} */}
                 </p>
               </div>
             </div>
             <h3 className="w-full text-2xl pb-4 text-center">Ingredients</h3>
             <hr className=" pb-2 w-1/2 mx-auto" />
             <ul className="h-32  md:h-auto overflow-auto ">
-              {recipe.ingredients.map((item) => (
+              {item.ingredients.map((itemIngredient) => (
                 <li className="flex my-1 ">
                   <img
                     className="h-6 rounded-md mr-2 "
-                    src={item.image}
+                    src={itemIngredient.image}
                     alt=""
                   />
-                  <p>{item.text}</p>
+                  <p>{itemIngredient.text}</p>
                 </li>
               ))}
             </ul>
             <hr className="w-1/2 pb-2 mx-auto" />
-            <IconButton
+            {/* <IconButton
               onClick={handleClick}
               color={isFilled ? "error" : "inherit"}
               disableRipple
             >
               {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            </IconButton>
+            </IconButton> */}
           </div>
         </Box>
       </Modal>

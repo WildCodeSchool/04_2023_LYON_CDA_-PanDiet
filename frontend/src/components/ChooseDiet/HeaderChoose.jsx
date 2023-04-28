@@ -1,7 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import headerChoose from "../../assets/headerChoose.jpg";
+import headerChoose from "../../assets/home/headerChoose.jpg";
 
 function HeaderChoose() {
   return (
