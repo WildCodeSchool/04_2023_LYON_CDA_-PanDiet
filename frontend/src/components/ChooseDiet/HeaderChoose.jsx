@@ -5,7 +5,7 @@ import headerChoose from "../../assets/home/headerChoose.jpg";
 
 function HeaderChoose() {
   return (
-    <div>
+    <div className="mt-4">
       <div className="relative">
         <img
           src={headerChoose}

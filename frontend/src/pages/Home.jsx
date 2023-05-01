@@ -117,16 +117,14 @@ function Home({ namePage }) {
   return (
     <div>
       <NutriDiet namePage={namePage} />
-      <div className="mt-4">
-        <HeaderChoose />
-      </div>
+      <HeaderChoose />
       <BodyChoose
         queryText={queryText}
         handleQueryTextChange={handleQueryTextChange}
         fetchData={fetchData}
       />
       <div className="flex">
-        <div className="w-1/5 hidden md:block">
+        <div className="w-1/5 hidden md:block border border-right">
           <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
           <ContainerFilterChoose
             ingredientInput={ingredientInput}
@@ -135,12 +133,18 @@ function Home({ namePage }) {
             removeExcludedIngredient={removeExcludedIngredient}
           />
         </div>
-        <div className="w-4/5 md:flex md:flex-wrap gap-10">
-          {dataRandom.splice(0, 9).map((item, index) => (
-            <div key={index.id}>
-              <CardRecipe item={item} />
-            </div>
-          ))}
+        <div className="w-4/5 md:flex md:flex-wrap md:justify-between">
+          {recipes.length === 0
+            ? dataRandom.splice(0, 9).map((item, index) => (
+                <div key={index.id}>
+                  <CardRecipe item={item} />
+                </div>
+              ))
+            : recipes.map((item, index) => (
+                <div key={index.id}>
+                  <CardRecipe item={item} />
+                </div>
+              ))}
         </div>
       </div>
       {currentArticles.map((item) => (

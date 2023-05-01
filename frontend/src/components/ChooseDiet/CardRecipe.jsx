@@ -9,14 +9,11 @@ function CardRecipe({ item }) {
     <div>
       <button type="button" onClick={handleOpen}>
         <img
-          className="md:w-[20vw] md:h-[20vh] rounded-xl"
+          className="md:w-[18vw] md:h-[20vh] rounded-xl"
           src={item.recipe.image}
           alt=""
         />
-        <button type="button" onClick={() => console.warn(item)}>
-          item
-        </button>
-        <h4 className="pt-2 max-w-[20vw]">{item.recipe.label}</h4>
+        <h4 className="pt-2 max-w-[18vw]">{item.recipe.label}</h4>
       </button>
       <ModalRecipeDetails
         handleOpen={handleOpen}
