@@ -15,9 +15,7 @@ function Home({ namePage }) {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
-  const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const ingredientInput = useRef(null);
   const { healthLabels, mealTypes, dishTypes, cuisinesTypes, dietTypes } =
     useContext(FilterContext);
 
@@ -28,7 +26,7 @@ function Home({ namePage }) {
         `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
       .then((response) => setDataRandom(response.data.hits));
-  }, [queryText]);
+  }, []);
 
   const handleSelectedLabelsChange = (updatedSelectedLabels) => {
     setSelectedLabels(updatedSelectedLabels);
@@ -38,6 +36,7 @@ function Home({ namePage }) {
     setQueryText(event.target.value);
   };
 
+  const ingredientInput = useRef(null);
   const addExcludedIngredient = () => {
     // la fonction trim() permet de supprimer les espaces en début et fin de chaîne de caractères
     const newIngredient = ingredientInput.current.value.trim();
@@ -50,6 +49,7 @@ function Home({ namePage }) {
     setQueryExclued(queryExclued.filter((item) => item !== ingredient));
   };
 
+  const [recipes, setRecipes] = useState([]);
   const fetchData = async () => {
     try {
       const url = new URL("https://api.edamam.com/api/recipes/v2");
