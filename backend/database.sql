@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS user, recipe, myrecipe;
+DROP TABLE IF EXISTS user, recipe, personnal_recipe;
 SET FOREIGN_KEY_CHECKS=1;
 
 
@@ -33,12 +33,14 @@ CREATE TABLE recipe (
 
 
 
-CREATE TABLE myrecipe (
+CREATE TABLE personnal_recipe (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   name varchar(255)  NULL,
+  mealType varchar(255) NULL,
   description varchar(255)  NULL,
+  cuisineType varchar(255) NULL,
   ingredients varchar(255)  NULL,
-  instructions varchar(255)  NULL,
+  instructions TEXT  NULL,
   image varchar(255)  NULL,
   cook_time varchar(255)  NULL,
   colories int(11)  NULL,
@@ -46,8 +48,6 @@ CREATE TABLE myrecipe (
   labels varchar(255)  NULL, 
   user_id int(11) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id)
-
-
 ); 
-INSERT INTO myrecipe (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) VALUES ("Poulet au curry", "Un poulet au curry", "poulet, curry, sel, poivre", "Faire cuire le poulet", "https://shorturl.at/egHU5", "30 min", 500, "https://www.seriouseats.com/chicken-vesuvio-recipe", "poulet, curry", 1);
+
 
