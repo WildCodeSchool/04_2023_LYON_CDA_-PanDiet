@@ -1,4 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require("express");
+
+const multer = require("multer");
 
 const router = express.Router();
 
@@ -8,6 +11,9 @@ const personnalRecipeControllers = require("./controllers/personnal_recipeContro
 const authControllers = require("./controllers/authControllers");
 const { hashPassword, verifyPassword } = require("./services/auth");
 
+const fileControllers = require("./controllers/fileControllers");
+
+const upload = multer({ dest: process.env.UPLOADS_FOLDER });
 /// / login ////
 
 router.post(
@@ -35,7 +41,12 @@ router.delete("/api/users/:id", userControllers.destroy);
 router.get("/api/my-recipes", personnalRecipeControllers.browse);
 router.get("/api/my-recipes/:id", personnalRecipeControllers.read);
 router.put("/api/my-recipes/:id", personnalRecipeControllers.edit);
-router.post("/api/my-recipes", personnalRecipeControllers.add);
+router.post(
+  "/api/my-recipes",
+  upload.single("image"),
+  fileControllers.fileRename,
+  personnalRecipeControllers.add
+);
 router.delete("/api/my-recipes/:id", personnalRecipeControllers.destroy);
 
 module.exports = router;

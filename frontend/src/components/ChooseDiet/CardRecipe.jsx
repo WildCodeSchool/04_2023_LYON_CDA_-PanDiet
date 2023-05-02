@@ -1,51 +1,25 @@
-import React, { useState } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import React from "react";
 import ModalRecipeDetails from "../ModalRecipeDetail";
 
 function CardRecipe({ item }) {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div>
-      <div
-        style={{
-          height: "1px",
-          backgroundColor: "#7CB342",
-          margin: "5% auto",
-          width: "70%",
-        }}
-      />
-      <Card
-        sx={{ maxWidth: 345, margin: "0 auto" }}
-        onClick={openModal}
-        style={{ cursor: "pointer" }}
-      >
-        <CardMedia
-          sx={{ height: 140 }}
-          image={item.recipe.image}
-          title="green iguana"
+      <button type="button" onClick={handleOpen}>
+        <img
+          className="md:w-[18vw] md:h-[20vh] rounded-xl"
+          src={item.recipe.image}
+          alt=""
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {item.recipe.label}
-          </Typography>
-        </CardContent>
-      </Card>
+        <h4 className="pt-2 max-w-[18vw]">{item.recipe.label}</h4>
+      </button>
       <ModalRecipeDetails
-        isOpen={modalOpen}
-        onClose={closeModal}
-        recipe={item.recipe}
+        handleOpen={handleOpen}
+        item={item.recipe}
+        open={open}
+        handleClose={handleClose}
       />
     </div>
   );

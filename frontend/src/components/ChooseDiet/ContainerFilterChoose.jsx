@@ -13,7 +13,7 @@ function ContainerFilterChoose({
     <div>
       <div
         style={{
-          display: "flex",
+          display: "none",
           alignItems: "center",
           justifyContent: "space-around",
           margin: "5% 0",

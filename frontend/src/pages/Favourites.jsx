@@ -19,11 +19,11 @@ function Favourites({ namePage }) {
     <>
       <NutriDiet namePage={namePage} />
       <h1 className=" text-3xl">Favourites</h1>
-      {favouriteRecipes.map((item) => (
+      {favouriteRecipes.map((itemFavourites) => (
         <FavouriteCard
-          key={item.uri}
-          item={item}
-          handleClick={() => handleClick(item)}
+          key={itemFavourites.uri}
+          itemFavourites={itemFavourites}
+          handleClick={() => handleClick(itemFavourites)}
         />
       ))}
     </>

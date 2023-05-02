@@ -28,8 +28,8 @@ const read = (req, res) => {
 };
 
 const add = (req, res) => {
-  const recipe = req.body;
-
+  const recipe = JSON.parse(req.body.recipe);
+  recipe.image = req.renamedFile;
   // on verifie les données
 
   models.personnal_recipe

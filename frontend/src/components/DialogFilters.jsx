@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import Button from "@mui/material/Button";
 import FilterDialog from "./ChooseDiet/FiltersDialog";
 import { FilterContext } from "../Context/FilterContext";
 
@@ -78,27 +77,18 @@ function DialogFilters({ onSelectedLabelsChange }) {
     },
   ];
 
-  const style = {
-    button: {
-      backgroundColor: "#394a6d",
-      borderRadius: 20,
-      color: "WHITE",
-      margin: "1vh 2vw",
-      minWidth: 175,
-    },
-  };
-
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="flex flex-col  ">
       {buttons.map(({ label, dialogType, filterLabels }) => (
-        <div key={label}>
-          <Button
-            sx={style.button}
-            variant="outlined"
+        <div className="py-1 text-left" key={label}>
+          <button
+            type="button"
+            className="text-[#E58A2F]  "
             onClick={handleClickOpen(dialogType)}
           >
             {label}
-          </Button>
+            <hr className="w-full" />
+          </button>
           <FilterDialog
             open={open[dialogType]}
             title={label}

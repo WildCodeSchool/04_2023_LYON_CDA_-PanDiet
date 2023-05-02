@@ -28,7 +28,6 @@ CREATE TABLE recipe (
   user_id int(11) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id)
 
-
 );
 
 INSERT INTO recipe (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) VALUES ("Tacos", "Galette qui comporte de la viande, des frites, des crudités et différentes sauces", "viandes, frite,sauce, sel, poivre", "Faire cuire le poulet", "https://shorturl.at/egHU5", "30 min", 500, "https://www.seriouseats.com/chicken-vesuvio-recipe", "poulet, curry", 1);
@@ -40,9 +39,11 @@ INSERT INTO recipe (name, description, ingredients, instructions, image, cook_ti
 CREATE TABLE personnal_recipe (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   name varchar(255)  NULL,
+  mealType varchar(255) NULL,
   description varchar(255)  NULL,
+  cuisineType varchar(255) NULL,
   ingredients varchar(255)  NULL,
-  instructions varchar(255)  NULL,
+  instructions TEXT  NULL,
   image varchar(255)  NULL,
   cook_time varchar(255)  NULL,
   colories int(11)  NULL,
@@ -50,8 +51,6 @@ CREATE TABLE personnal_recipe (
   labels varchar(255)  NULL, 
   user_id int(11) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id)
-
-
 ); 
 INSERT INTO personnal_recipe (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) VALUES ("Poulet au curry", "Un poulet au curry", "poulet, curry, sel, poivre", "Faire cuire le poulet", "https://shorturl.at/egHU5", "30 min", 500, "https://www.seriouseats.com/chicken-vesuvio-recipe", "poulet, curry", 1);
 
