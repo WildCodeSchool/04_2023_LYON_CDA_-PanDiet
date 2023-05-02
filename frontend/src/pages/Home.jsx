@@ -98,7 +98,7 @@ function Home({ namePage }) {
     }
   };
 
-  const articlesPerPage = 6;
+  const articlesPerPage = 9;
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   const currentArticles = recipes.slice(
@@ -124,7 +124,7 @@ function Home({ namePage }) {
         fetchData={fetchData}
       />
       <div className="flex">
-        <div className="w-1/5 hidden md:block border border-right">
+        <div className="w-1/5 hidden md:block ">
           <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
           <ContainerFilterChoose
             ingredientInput={ingredientInput}
@@ -140,18 +140,13 @@ function Home({ namePage }) {
                   <CardRecipe item={item} />
                 </div>
               ))
-            : recipes.map((item, index) => (
+            : currentArticles.map((item, index) => (
                 <div key={index.id}>
                   <CardRecipe item={item} />
                 </div>
               ))}
         </div>
       </div>
-      {currentArticles.map((item) => (
-        <div key={item.recipe.uri}>
-          <CardRecipe item={item} />
-        </div>
-      ))}
       {currentArticles.length > 0 && (
         <Buttons
           prevPage={prevPage}

@@ -1,10 +1,11 @@
-import React from "react";
+/* eslint-disable no-self-compare */
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-// import { IconButton } from "@mui/material";
-// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-// import useLocalStorage from "./UseLocalStorage";
+import { IconButton } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import useLocalStorage from "./UseLocalStorage";
 
 function ModalRecipeDetails({ item, open, handleClose }) {
   let enercKcal = item.totalNutrients.ENERC_KCAL.quantity.toString();
@@ -15,23 +16,25 @@ function ModalRecipeDetails({ item, open, handleClose }) {
   if (fat.length > 6) {
     fat = fat.substring(0, 6);
   }
-  // const [isFilled, setIsFilled] = useState(false);
-  // const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
-  //   "favouriteRecipes",
-  //   []
-  // );
+  // console.warn("coucou item Modal", item);
+  // console.warn("coucou itemIngredient", item.recipe.ingredients);
+  const [isFilled, setIsFilled] = useState(false);
+  const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
+    "favouriteRecipes",
+    []
+  );
 
-  // const handleClick = () => {
-  //   setIsFilled(!isFilled);
+  const handleClick = () => {
+    setIsFilled(!isFilled);
 
-  //   if (!isFilled) {
-  //     setFavouriteRecipes([...favouriteRecipes, item]);
-  //   } else {
-  //     setFavouriteRecipes(
-  //       favouriteRecipes.filter((item) => item.uri !== item.uri)
-  //     );
-  //   }
-  // };
+    if (!isFilled) {
+      setFavouriteRecipes([...favouriteRecipes, item]);
+    } else {
+      setFavouriteRecipes(
+        favouriteRecipes.filter((recipes) => recipes.uri !== recipes.uri)
+      );
+    }
+  };
   return (
     <div>
       <Modal
@@ -63,15 +66,15 @@ function ModalRecipeDetails({ item, open, handleClose }) {
             <hr />
             <div className="flex py-2 justify-around md:py-5">
               <div className="flex items-center">
-                {/* <p className="text-2xl">{enercKcal}</p> */}
+                <p className="text-2xl">{enercKcal}</p>
                 <p className="font-bold pl-2 text-center">
-                  {/* {item.totalNutrients.ENERC_KCAL.unit} */}
+                  {item.totalNutrients.ENERC_KCAL.unit}
                 </p>
               </div>
               <div className="flex items-center">
-                {/* <p className="text-2xl">{fat}</p> */}
+                <p className="text-2xl">{fat}</p>
                 <p className="font-bold pl-2 text-center">
-                  {/* {item.totalNutrients.FAT.unit} */}
+                  {item.totalNutrients.FAT.unit}
                 </p>
               </div>
             </div>
@@ -90,13 +93,13 @@ function ModalRecipeDetails({ item, open, handleClose }) {
               ))}
             </ul>
             <hr className="w-1/2 pb-2 mx-auto" />
-            {/* <IconButton
+            <IconButton
               onClick={handleClick}
               color={isFilled ? "error" : "inherit"}
               disableRipple
             >
               {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            </IconButton> */}
+            </IconButton>
           </div>
         </Box>
       </Modal>
