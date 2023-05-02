@@ -3,7 +3,7 @@ import "../App.css";
 import axios from "axios";
 import Categories from "../components/Categories";
 import RandomRecipes from "../components/Home/RandomRecipes";
-import useLocalStorage from "../components/UseLocalStorage";
+import useLocalStorage from "../components/useLocalStorage";
 import NutriDiet from "../components/NutriDiet";
 import Header from "../components/Home/Header";
 import CardRecipe from "../components/ChooseDiet/CardRecipe";

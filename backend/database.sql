@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS user, recipe, myrecipe;
+DROP TABLE IF EXISTS user, recipe, personnal_recipe;
 SET FOREIGN_KEY_CHECKS=1;
 
 
@@ -31,9 +31,13 @@ CREATE TABLE recipe (
 
 );
 
+INSERT INTO recipe (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) VALUES ("Tacos", "Galette qui comporte de la viande, des frites, des crudités et différentes sauces", "viandes, frite,sauce, sel, poivre", "Faire cuire le poulet", "https://shorturl.at/egHU5", "30 min", 500, "https://www.seriouseats.com/chicken-vesuvio-recipe", "poulet, curry", 1);
 
 
-CREATE TABLE myrecipe (
+
+
+
+CREATE TABLE personnal_recipe (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   name varchar(255)  NULL,
   description varchar(255)  NULL,
@@ -49,5 +53,5 @@ CREATE TABLE myrecipe (
 
 
 ); 
-INSERT INTO myrecipe (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) VALUES ("Poulet au curry", "Un poulet au curry", "poulet, curry, sel, poivre", "Faire cuire le poulet", "https://shorturl.at/egHU5", "30 min", 500, "https://www.seriouseats.com/chicken-vesuvio-recipe", "poulet, curry", 1);
+INSERT INTO personnal_recipe (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) VALUES ("Poulet au curry", "Un poulet au curry", "poulet, curry, sel, poivre", "Faire cuire le poulet", "https://shorturl.at/egHU5", "30 min", 500, "https://www.seriouseats.com/chicken-vesuvio-recipe", "poulet, curry", 1);
 

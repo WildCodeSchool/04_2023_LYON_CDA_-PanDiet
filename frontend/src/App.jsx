@@ -7,6 +7,7 @@ import WelcomePage from "./pages/WelcomePage";
 
 import { FilterContextProvider } from "./Context/FilterContext";
 import Outlet from "./pages/Outlet";
+import { CurrentUserContextProvider } from "./Context/userContext";
 
 const theme = createTheme({
   components: {
@@ -23,12 +24,14 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <FilterContextProvider>
-        <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/*" element={<Outlet />} />
-        </Routes>
-      </FilterContextProvider>
+      <CurrentUserContextProvider>
+        <FilterContextProvider>
+          <Routes>
+            <Route path="/" element={<WelcomePage />} />
+            <Route path="/*" element={<Outlet />} />
+          </Routes>
+        </FilterContextProvider>
+      </CurrentUserContextProvider>
     </ThemeProvider>
   );
 }

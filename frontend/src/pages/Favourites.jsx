@@ -1,6 +1,6 @@
 import React from "react";
 import FavouriteCard from "../components/FavouriteCard";
-import useLocalStorage from "../components/UseLocalStorage";
+import useLocalStorage from "../components/useLocalStorage";
 import NutriDiet from "../components/NutriDiet";
 
 function Favourites({ namePage }) {

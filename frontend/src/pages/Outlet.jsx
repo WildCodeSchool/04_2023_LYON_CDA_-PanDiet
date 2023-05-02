@@ -7,7 +7,9 @@ import Home from "./Home";
 import Team from "./Team";
 import NavBar from "../components/NavBar";
 import Category from "./Category";
-import useLocalStorage from "../components/UseLocalStorage";
+import useLocalStorage from "../components/useLocalStorage";
+import Planning from "./Planning";
+import LoginPage from "./LoginPage";
 
 function Outlet() {
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ function Outlet() {
         setNamePage={setNamePage}
       />
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/home"
           element={
@@ -59,6 +62,7 @@ function Outlet() {
           path="/category"
           element={<Category categorySelected={categorySelected} />}
         />
+        <Route path="my-planning" element={<Planning />} />
       </Routes>
     </div>
   );

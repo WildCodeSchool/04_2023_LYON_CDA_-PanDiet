@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import useLocalStorage from "./UseLocalStorage";
+import useLocalStorage from "./useLocalStorage";
 
 const style = {
   title: {
