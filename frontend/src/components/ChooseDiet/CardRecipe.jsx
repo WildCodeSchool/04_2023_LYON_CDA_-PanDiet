@@ -6,14 +6,14 @@ function CardRecipe({ item }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <div>
+    <div className="mb-5">
       <button type="button" onClick={handleOpen}>
         <img
-          className="md:w-[18vw] md:h-[20vh] rounded-xl"
+          className=" h-[26vh] w-[80vw] md:w-[18vw]  md:h-[20vh] rounded-xl"
           src={item.recipe.image}
           alt=""
         />
-        <h4 className="pt-2 max-w-[18vw]">{item.recipe.label}</h4>
+        <h4 className="pt-2 md:max-w-[18vw] ">{item.recipe.label}</h4>
       </button>
       <ModalRecipeDetails
         handleOpen={handleOpen}

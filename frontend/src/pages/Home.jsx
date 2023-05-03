@@ -11,7 +11,7 @@ import BodyChoose from "../components/ChooseDiet/BodyChoose";
 
 const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
 
-function Home({ namePage }) {
+function Home() {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
@@ -98,7 +98,11 @@ function Home({ namePage }) {
     }
   };
 
-  const articlesPerPage = 9;
+  const [numberPerPage, setNumberPerPage] = useState(6);
+  const handleNumberPerPage = (e) => {
+    setNumberPerPage(e);
+  };
+  const articlesPerPage = numberPerPage;
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   const currentArticles = recipes.slice(
@@ -113,12 +117,14 @@ function Home({ namePage }) {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-
+  console.warn("Coucou cest numberPerPage", numberPerPage);
   return (
     <div>
-      <NutriDiet namePage={namePage} />
+      <NutriDiet />
       <HeaderChoose />
       <BodyChoose
+        recipes={recipes}
+        handleNumberPerPage={handleNumberPerPage}
         queryText={queryText}
         handleQueryTextChange={handleQueryTextChange}
         fetchData={fetchData}
@@ -133,7 +139,7 @@ function Home({ namePage }) {
             removeExcludedIngredient={removeExcludedIngredient}
           />
         </div>
-        <div className="w-4/5 md:flex md:flex-wrap md:justify-between">
+        <div className="w-4/5 flex flex-col mx-auto md:grid md:grid-cols-3 ">
           {recipes.length === 0
             ? dataRandom.splice(0, 9).map((item, index) => (
                 <div key={index.id}>

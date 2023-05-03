@@ -1,13 +1,10 @@
 import { PhotoCamera } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React, { useState, useRef } from "react";
 
-export default function ModalePostRecipe({
-  recipes,
-  handleClose,
-  setReload,
-  reaload,
-}) {
+export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
   const [ingredients, setIngredients] = useState("");
   const [ingredientsList, setIngredientsList] = useState([]);
   const [dataPostRecipe, setDataPostRecipe] = useState({
@@ -60,9 +57,18 @@ export default function ModalePostRecipe({
         body: formData,
       };
       // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
-      fetch(`http://localhost:5000/api/my-recipes`, requestOptions)
-        .then((response) => response.text())
-        .then(() => console.warn("bravo", ingredientsList));
+      fetch(`http://localhost:5000/api/my-recipes`, requestOptions).then(
+        (response) => {
+          if (response.ok) {
+            toast.success(`Recette ${dataPostRecipe.name} a bien été créée`);
+          } else {
+            toast.error(
+              "Une erreur est survenue lors de la création de votre recette."
+            );
+          }
+          return response.text();
+        }
+      );
       handleClose(false);
       setReload(!reaload).catch(console.error);
     }
@@ -73,7 +79,7 @@ export default function ModalePostRecipe({
     -translate-y-1/2 md:w-[1000px] md:h-[600px]
    bg-white border-2  shadow-md block md:flex"
     >
-      <div className="w-full bg-uplaod bg-center ">
+      <div className="w-full bg-upload bg-center bg-cover ">
         <div className="backdrop-blur-sm bg-white/30 flex w-1/2 h-1/2 mx-auto my-[25%] text-center items-center ">
           <div className="mx-auto">
             <h3 className="text-xl ">Download The Picture</h3>
@@ -97,7 +103,6 @@ export default function ModalePostRecipe({
           </div>
         </div>
       </div>
-
       <div className="p-7 md:flex mx-auto md:p-10 flex-col">
         <h2 className="text-center text-2xl font-bold underline mb-3">
           Create a new recipe
@@ -196,7 +201,6 @@ export default function ModalePostRecipe({
             <button
               className="border border-black px-4 py-2 hover:bg-gray-100 rounded-md "
               type="submit"
-              onClick={() => console.warn(recipes)}
             >
               Create
             </button>
