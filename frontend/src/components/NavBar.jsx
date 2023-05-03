@@ -8,6 +8,7 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
     { name: "Home", link: "/" },
     { name: "MyFridge", link: "/my-fridge" },
     { name: "Favourites", link: "/favourites" },
+    { name: "", link: "/login" },
   ];
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
   return (
     <div className="flex justify-center">
       <div className="w-[95vw] items-center fixed bottom-0 rounded-full bg-white md:w-full md:rounded-none md:relative ">
-        <ul className="flex items-center justify-between rounded-md pr-20">
+        <ul className="flex items-center justify-between rounded-md mx-auto ">
           <h2 className="text-3xl hidden font-bold text-[#E58A2F] md:block">
             NUTRIDIET
           </h2>

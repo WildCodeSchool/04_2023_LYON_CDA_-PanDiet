@@ -10,9 +10,9 @@ function HeaderChoose() {
         <img
           src={headerChoose}
           alt="Votre photo"
-          className=" rounded-2xl w-full h-[40vh]"
+          className=" rounded-2xl h-[20vh] mx-auto w-4/5 md:w-full md:h-[40vh]"
         />
-        <div className="absolute rounded-2xl  inset-0 bg-gradient-to-r from-transparent to-orange-400"></div>
+        <div className="absolute rounded-2xl w-[90%] md:w-full inset-0 bg-gradient-to-r from-transparent to-orange-400"></div>
       </div>
     </div>
   );

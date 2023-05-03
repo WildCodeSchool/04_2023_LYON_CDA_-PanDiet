@@ -9,9 +9,10 @@ import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
 import NutriDiet from "../components/NutriDiet";
 import BodyChoose from "../components/ChooseDiet/BodyChoose";
 
-const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
+const apiId = import.meta.env.VITE_API_ID;
+const apiKey = import.meta.env.VITE_API_KEY;
 
-function Home({ namePage }) {
+function Home() {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
@@ -23,7 +24,7 @@ function Home({ namePage }) {
   useEffect(() => {
     axios
       .get(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${apiId}&app_key=${apiKey}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
       .then((response) => setDataRandom(response.data.hits));
   }, []);
@@ -98,6 +99,8 @@ function Home({ namePage }) {
     }
   };
 
+  console.warn("les recettes :", recipes);
+
   const articlesPerPage = 9;
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
@@ -116,7 +119,7 @@ function Home({ namePage }) {
 
   return (
     <div>
-      <NutriDiet namePage={namePage} />
+      <NutriDiet />
       <HeaderChoose />
       <BodyChoose
         queryText={queryText}
@@ -133,7 +136,7 @@ function Home({ namePage }) {
             removeExcludedIngredient={removeExcludedIngredient}
           />
         </div>
-        <div className="w-4/5 md:flex md:flex-wrap md:justify-between">
+        <div className="w-4/5 flex flex-col mx-auto md:grid md:grid-cols-3 ">
           {recipes.length === 0
             ? dataRandom.splice(0, 9).map((item, index) => (
                 <div key={index.id}>
