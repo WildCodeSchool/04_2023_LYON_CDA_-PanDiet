@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
+function Nav({ handleClickNavigate }) {
+  const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
 
   const Links = [
     { name: "Home", link: "/" },
-    { name: "MyFridge", link: "/my-fridge" },
+    { name: "MyRecipes", link: "/my-Recipes" },
     { name: "Favourites", link: "/favourites" },
   ];
 
@@ -17,8 +18,8 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
 
   return (
     <div className="flex justify-center">
-      <div className="w-[95vw] items-center fixed bottom-0 rounded-full bg-white md:w-full md:rounded-none md:relative ">
-        <ul className="flex items-center justify-between rounded-md pr-20">
+      <div className="w-[95vw] items-center fixed bottom-0 mb-5 rounded-full border border-black shadow-md bg-white md:w-full md:rounded-none md:border-none md:shadow-none md:relative ">
+        <ul className="flex items-center px-10 justify-between rounded-md md:pr-20">
           <h2 className="text-3xl hidden font-bold text-[#E58A2F] md:block">
             NUTRIDIET
           </h2>
@@ -29,7 +30,7 @@ function Nav({ setActiveLink, activeLink, handleClickNavigate }) {
                 className="text-black font-bold"
                 onClick={() => handleClickNavigate(item.link)}
               >
-                {item.name && <p>{item.name}</p>}
+                <p>{item.name}</p>
                 {activeLink === item.link && (
                   <div className="w-full  border-b-2 mt-1 border-[#E58A2F]" />
                 )}

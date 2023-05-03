@@ -45,11 +45,11 @@ function ModalRecipeDetails({ item, open, handleClose }) {
       >
         <Box
           class="absolute top-1/2 left-1/2 w-[90vw] transform -translate-x-1/2
-           -translate-y-1/2 md:w-[1000px] md:h-[600px]
+           -translate-y-1/2 md:w-[1200px] md:h-[600px]
           bg-white border-2  shadow-md block md:flex"
         >
           <img
-            className=" w-full md:w-[496px] md:h-[596px]"
+            className=" my-auto mx-auto md:h-3/5 md:w-[300px] "
             src={item.image}
             alt=""
           />
@@ -100,6 +100,9 @@ function ModalRecipeDetails({ item, open, handleClose }) {
             >
               {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             </IconButton>
+            <button type="button" onClick={() => console.warn("coucou")}>
+              Supprimer
+            </button>
           </div>
         </Box>
       </Modal>
