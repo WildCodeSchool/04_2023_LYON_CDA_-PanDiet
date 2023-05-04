@@ -7,17 +7,15 @@
   padding: 0;
   margin: 0;
   font-family: "Carlito", sans-serif;
-}
-.bounce {
-  animation: bounce 1s infinite;
+  transition: all 0.1s ease;
 }
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.light {
+  background-color: white;
+  color: black;
 }

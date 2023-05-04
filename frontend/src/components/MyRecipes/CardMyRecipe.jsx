@@ -11,11 +11,9 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
   marginRight: 10,
   [theme.breakpoints.down("sm")]: {
     borderRadius: 20,
-    width: "30vw !important", // Overrides inline-style
-    height: 60,
+    zIndex: 0,
   },
   "&:hover, &.Mui-focusVisible": {
-    zIndex: 1,
     "& .MuiImageBackdrop-root": {
       opacity: 0.15,
     },

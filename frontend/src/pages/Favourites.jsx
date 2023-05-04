@@ -1,7 +1,8 @@
 import React from "react";
-import FavouriteCard from "../components/FavouriteCard";
-import useLocalStorage from "../components/UseLocalStorage";
-import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
+import NavBar from "../components/NavBar";
+import FavouriteCard from "../components/Favourites/FavouriteCard";
+import useLocalStorage from "../components/LocalStorage/UseLocalStorage";
+import HeaderChoose from "../components/Home/HeaderChoose";
 
 function Favourites() {
   const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
@@ -16,7 +17,8 @@ function Favourites() {
   };
 
   return (
-    <>
+    <div className="mx-20 ">
+      <NavBar />
       <HeaderChoose />
       <div className="flex justify-between w-full mt-4 mb-10">
         <div className="w-1/5 font-bold text-2xl">
@@ -30,7 +32,7 @@ function Favourites() {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

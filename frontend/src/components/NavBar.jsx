@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { DarkModeContext } from "../Context/DarkModeContext";
 
 function Nav({ handleClickNavigate }) {
   const [activeLink, setActiveLink] = useState("");
@@ -15,11 +19,16 @@ function Nav({ handleClickNavigate }) {
     const path = location.pathname;
     setActiveLink(path);
   }, [location]);
+  const { toggleDarkMode, darkMode } = useContext(DarkModeContext);
 
   return (
     <div className="flex justify-center">
-      <div className="w-[95vw] items-center fixed bottom-0 mb-5 rounded-full border border-black shadow-md bg-white md:w-full md:rounded-none md:border-none md:shadow-none md:relative ">
-        <ul className="flex items-center px-10 justify-between rounded-md md:pr-20">
+      <div
+        className={`px-5 items-center mt-2 md:mt-none z-10 fixed top-0 
+        shadow-md  w-full 
+      md:shadow-none md:relative`}
+      >
+        <ul className="flex items-center justify-between rounded-md md:pr-20">
           <h2 className="text-3xl hidden font-bold text-[#E58A2F] md:block">
             NUTRIDIET
           </h2>
@@ -27,16 +36,23 @@ function Nav({ handleClickNavigate }) {
             <li key={item.name} className="text-sm my-2">
               <NavLink
                 to={item.link}
-                className="text-black font-bold"
+                className=" font-bold"
                 onClick={() => handleClickNavigate(item.link)}
               >
                 <p>{item.name}</p>
                 {activeLink === item.link && (
-                  <div className="w-full  border-b-2 mt-1 border-[#E58A2F]" />
+                  <div className="w-full  border-b-2  border-[#E58A2F]" />
                 )}
               </NavLink>
             </li>
           ))}
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={() => toggleDarkMode()}
+            color="inherit"
+          >
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
         </ul>
       </div>
     </div>

@@ -7,9 +7,9 @@ function CardRecipe({ item }) {
   const handleClose = () => setOpen(false);
   return (
     <div className="mb-5">
-      <button type="button" onClick={handleOpen}>
+      <button className="w-[30vw]" type="button" onClick={handleOpen}>
         <img
-          className=" h-[26vh] w-[80vw] md:w-[18vw]  md:h-[20vh] rounded-xl"
+          className=" h-[15vh] md:h-[20vh] md:w-[18vw]   rounded-xl"
           src={item.recipe.image}
           alt=""
         />

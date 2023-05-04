@@ -3,10 +3,10 @@ import "../App.css";
 import axios from "axios";
 import { Box, Fade, Modal } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
-import iconAdd from "../assets/iconAdd.png";
+import NavBar from "../components/NavBar";
 import ModalePostRecipe from "../components/MyRecipes/ModalePostRecipe";
 import CardMyRecipe from "../components/MyRecipes/CardMyRecipe";
-import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
+import HeaderChoose from "../components/Home/HeaderChoose";
 
 function MyRecipes() {
   const [reaload, setReload] = useState(true);
@@ -14,6 +14,7 @@ function MyRecipes() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [dataMyRecipes, setDetaMyRecipes] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/my-recipes")
@@ -21,15 +22,23 @@ function MyRecipes() {
   }, [reaload]);
 
   return (
-    <div>
+    <div className=" mx-10 md:mx-20 ">
+      <NavBar />
       <HeaderChoose />
       <div className=" w-full mt-4 mb-10">
-        <div className="w-1/5 font-bold mb-3 text-2xl">
-          <h2>My Recipes</h2>
+        <div className=" flex justify-between  w-full mb-3">
+          <h2 className="font-bold text-2xl">My Recipes</h2>
+          <button
+            className="border border-black p-1 md:ml-3 rounded-md "
+            onClick={handleOpen}
+            type="button"
+          >
+            <p className="text-[#FF9A62]">Add a new Recipe</p>
+          </button>
         </div>
-        <div className="grid grid-cols-3 ">
+        <div className=" flex flex-col  md:grid md:grid-cols-3 ">
           {dataMyRecipes.reverse().map((recipe) => (
-            <div className="mb-5">
+            <div className="mb-5 flex justify-center md:justify-between ">
               <CardMyRecipe recipe={recipe} />
             </div>
           ))}
@@ -58,9 +67,6 @@ function MyRecipes() {
           </Box>
         </Fade>
       </Modal>
-      <button onClick={handleOpen} type="button">
-        <img src={iconAdd} alt="" />
-      </button>
     </div>
   );
 }
