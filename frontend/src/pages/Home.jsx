@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import ContainerFilterChoose from "../components/ChooseDiet/ContainerFilterChoose";
-import Buttons from "../components/ChooseDiet/Buttons";
-import CardRecipe from "../components/ChooseDiet/CardRecipe";
+import ContainerFilterChoose from "../components/Home/ContainerFilterChoose";
+import Buttons from "../components/Home/Buttons";
+import CardRecipe from "../components/Home/CardRecipe";
+import NavBar from "../components/NavBar";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
-import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
-import NutriDiet from "../components/NutriDiet";
-import BodyChoose from "../components/ChooseDiet/BodyChoose";
+import HeaderChoose from "../components/Home/HeaderChoose";
+import BodyChoose from "../components/Home/BodyChoose";
 
-const { VITE_APP_ID, VITE_APP_KEY } = import.meta.env;
+const appId = import.meta.env.VITE_APP_ID;
+const appKey = import.meta.env.VITE_APP_KEY;
 
 function Home() {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
@@ -23,17 +24,13 @@ function Home() {
   useEffect(() => {
     axios
       .get(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${VITE_APP_ID}&app_key=${VITE_APP_KEY}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${appId}&app_key=${appKey}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
-      .then((response) => setDataRandom(response.data.hits));
+      .then((response) => setDataRandom(response.data.hits.splice(0, 9)));
   }, []);
 
   const handleSelectedLabelsChange = (updatedSelectedLabels) => {
     setSelectedLabels(updatedSelectedLabels);
-  };
-
-  const handleQueryTextChange = (event) => {
-    setQueryText(event.target.value);
   };
 
   const ingredientInput = useRef(null);
@@ -50,21 +47,19 @@ function Home() {
   };
 
   const [recipes, setRecipes] = useState([]);
+
   const fetchData = async () => {
     try {
       const url = new URL("https://api.edamam.com/api/recipes/v2");
-
       const params = {
         q: queryText,
         app_id: `5f89fe95`,
         app_key: `6ad057a2b3ba66c9cd5aae24f720dcf1`,
         type: "public",
       };
-
       Object.keys(params).forEach(
         (key) => params[key] && url.searchParams.append(key, params[key])
       );
-
       Array.from(selectedLabels).forEach((label) => {
         switch (true) {
           case Object.prototype.hasOwnProperty.call(healthLabels, label):
@@ -86,11 +81,9 @@ function Home() {
             break;
         }
       });
-
       queryExclued.forEach((ingredient) => {
         url.searchParams.append("excluded", ingredient);
       });
-
       const response = await axios.get(url.toString());
       setRecipes(response.data.hits);
     } catch (error) {
@@ -117,16 +110,14 @@ function Home() {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  console.warn("Coucou cest numberPerPage", numberPerPage);
   return (
-    <div>
-      <NutriDiet />
+    <div className=" mx-5 md:mx-20 ">
+      <NavBar />
       <HeaderChoose />
       <BodyChoose
         recipes={recipes}
         handleNumberPerPage={handleNumberPerPage}
-        queryText={queryText}
-        handleQueryTextChange={handleQueryTextChange}
+        setQueryText={setQueryText}
         fetchData={fetchData}
       />
       <div className="flex">
@@ -139,10 +130,10 @@ function Home() {
             removeExcludedIngredient={removeExcludedIngredient}
           />
         </div>
-        <div className="w-4/5 flex flex-col mx-auto md:grid md:grid-cols-3 ">
+        <div className="w-4/5 flex flex-row flex-wrap justify-between mx-auto md:grid md:grid-cols-3 ">
           {recipes.length === 0
-            ? dataRandom.splice(0, 9).map((item, index) => (
-                <div key={index.id}>
+            ? dataRandom.map((item) => (
+                <div key={item.uri}>
                   <CardRecipe item={item} />
                 </div>
               ))

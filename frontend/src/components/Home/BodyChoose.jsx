@@ -1,28 +1,21 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
-function BodyChoose({
-  recipes,
-  handleQueryTextChange,
-  fetchData,
-  queryText,
-  handleNumberPerPage,
-}) {
+function BodyChoose({ recipes, setQueryText, fetchData, handleNumberPerPage }) {
   return (
     <div className="flex justify-center md:justify-start w-full mt-4 mb-10">
       <div className="hidden w-1/5 font-bold text-2xl md:block">
         <h2>Filters</h2>
       </div>
       <div className="flex justify-between w-full">
-        <div className="flex w-full">
+        <div className="flex w-full justify-center h-10 md:h-15 md:justify-start">
           <input
             type="text"
             className="block px-4 py-2 mr-2  inset-0 bg-gradient-to-l from-transparent to-orange-200
-         border border-black  rounded-full focus:border-[#FF9A62] focus:ring-[#FFB084] 
-         focus:outline-none focus:ring focus:ring-opacity-40 md:w-2/5"
+            border border-black  rounded-full focus:border-[#FF9A62] focus:ring-[#FFB084] 
+            focus:outline-none focus:ring focus:ring-opacity-40 md:w-2/5"
             placeholder="Search your food..."
-            value={queryText}
-            onChange={handleQueryTextChange}
+            onChange={(event) => setQueryText(event.target.value)}
           />
           <button
             onClick={fetchData}
