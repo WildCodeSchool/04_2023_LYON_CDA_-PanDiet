@@ -3,7 +3,6 @@ import axios from "axios";
 import ContainerFilterChoose from "../components/Home/ContainerFilterChoose";
 import Buttons from "../components/Home/Buttons";
 import CardRecipe from "../components/Home/CardRecipe";
-import NavBar from "../components/NavBar";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
 import HeaderChoose from "../components/Home/HeaderChoose";
@@ -110,9 +109,9 @@ function Home() {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
+  console.warn(dataRandom);
   return (
     <div className=" mx-5 md:mx-20 ">
-      <NavBar />
       <HeaderChoose />
       <BodyChoose
         recipes={recipes}
@@ -137,8 +136,8 @@ function Home() {
                   <CardRecipe item={item} />
                 </div>
               ))
-            : currentArticles.map((item, index) => (
-                <div key={index.id}>
+            : currentArticles.map((item) => (
+                <div key={item.uri}>
                   <CardRecipe item={item} />
                 </div>
               ))}
