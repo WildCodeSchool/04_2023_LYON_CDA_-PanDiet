@@ -7,13 +7,13 @@ class PersonnalRecipeManager extends AbstractManager {
 
   insert(recipe) {
     return this.connection.query(
-      `insert into ${this.table} (name, mealType, description, cuisineType, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (name, mealType, description, cuisineType, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) values (?, ?, ?, ?, JSON_ARRAY(?), ?, ?, ?, ?, ?, ?, ?)`,
       [
         recipe.name,
         recipe.mealType,
         recipe.description,
         recipe.cuisineType,
-        recipe.ingredients,
+        JSON.stringify(recipe.ingredients),
         recipe.instructions,
         recipe.image,
         recipe.cook_time,

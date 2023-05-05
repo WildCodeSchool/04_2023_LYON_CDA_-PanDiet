@@ -1,24 +1,18 @@
 import React from "react";
 import HeartFilled from "../assets/Favourite/heart-1.png";
-// import ModalRecipeDetails from "./ModalRecipeDetail";
+import ModalRecipeDetails from "./ModalRecipeDetail";
 
 function FavouriteCard({ itemFavourites, handleClick }) {
-  // const [modalOpen, setModalOpen] = useState(false);
-
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div className="border-2 border-solid border-green-500 rounded-md m-4">
       <div className="flex items-center">
         <div className="relative">
           <div className="cursor-pointer">
-            <button type="button">
+            <button type="button" onClick={() => handleOpen()}>
               <img
                 src={itemFavourites.image}
                 alt={itemFavourites.label}
@@ -38,11 +32,12 @@ function FavouriteCard({ itemFavourites, handleClick }) {
           </button>
         </div>
       </div>
-      {/* <ModalRecipeDetails
-        isOpen={modalOpen}
-        onClose={closeModal}
+      <ModalRecipeDetails
+        handleOpen={handleOpen}
+        open={open}
+        handleClose={handleClose}
         item={itemFavourites}
-      /> */}
+      />
     </div>
   );
 }

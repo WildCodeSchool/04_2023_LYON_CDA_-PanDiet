@@ -2,8 +2,9 @@ import React from "react";
 import FavouriteCard from "../components/FavouriteCard";
 import useLocalStorage from "../components/useLocalStorage";
 import NutriDiet from "../components/NutriDiet";
+import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
 
-function Favourites({ namePage }) {
+function Favourites() {
   const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
     "favouriteRecipes",
     []
@@ -17,15 +18,20 @@ function Favourites({ namePage }) {
 
   return (
     <>
-      <NutriDiet namePage={namePage} />
-      <h1 className=" text-3xl">Favourites</h1>
-      {favouriteRecipes.map((itemFavourites) => (
-        <FavouriteCard
-          key={itemFavourites.uri}
-          itemFavourites={itemFavourites}
-          handleClick={() => handleClick(itemFavourites)}
-        />
-      ))}
+      <NutriDiet />
+      <HeaderChoose />
+      <div className="flex justify-between w-full mt-4 mb-10">
+        <div className="w-1/5 font-bold text-2xl">
+          <h2>Favourites</h2>
+        </div>
+        {favouriteRecipes.map((itemFavourites) => (
+          <FavouriteCard
+            key={itemFavourites.uri}
+            itemFavourites={itemFavourites}
+            handleClick={() => handleClick(itemFavourites)}
+          />
+        ))}
+      </div>
     </>
   );
 }
