@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { ToastContainer } from "react-toastify";
+import { Outlet } from "react-router-dom";
 import "./App.css";
 import { FilterContextProvider } from "./Context/FilterContext";
 import { DarkModeContext } from "./Context/DarkModeContext";
-import NavigateWebSite from "./pages/NavigateWebSite";
+import NavBar from "./components/NavBar";
 
 const theme = createTheme({
   components: {
@@ -19,13 +20,13 @@ const theme = createTheme({
 });
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-
   return (
     <ThemeProvider theme={theme}>
       <FilterContextProvider>
-        <div className={`${darkMode ? "dark" : "light"}`}>
-          <NavigateWebSite />
-        </div>
+        <NavBar />
+        <main className={`${darkMode ? "dark" : "light"}`}>
+          <Outlet />
+        </main>
         <ToastContainer />
       </FilterContextProvider>
     </ThemeProvider>

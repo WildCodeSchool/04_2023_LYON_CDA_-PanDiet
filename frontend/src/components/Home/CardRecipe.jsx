@@ -7,15 +7,13 @@ function CardRecipe({ item }) {
   const handleClose = () => setOpen(false);
   return (
     <div className="mb-5">
-      <button className="w-[25vw]" type="button" onClick={handleOpen}>
+      <button className="md:max-w-[13vw]" type="button" onClick={handleOpen}>
         <img
-          className="h-[15vh] md:w-[12vw] rounded-xl"
+          className="rounded-xl h-[24vh] w-[70vw] md:w-[13vw]"
           src={item.recipe.image}
           alt=""
         />
-        <h4 className="pt-2 max-w-[30vw] md:max-w-[13vw] ">
-          {item.recipe.label}
-        </h4>
+        <h4 className="pt-2 text-center ">{item.recipe.label}</h4>
       </button>
       <ModalRecipeDetails
         handleOpen={handleOpen}
