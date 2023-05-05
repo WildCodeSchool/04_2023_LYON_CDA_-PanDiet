@@ -109,7 +109,6 @@ function Home() {
   const prevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
-  console.warn(dataRandom);
   return (
     <div className=" mx-5 md:mx-20 ">
       <HeaderChoose />

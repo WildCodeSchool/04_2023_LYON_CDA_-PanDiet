@@ -15,18 +15,15 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
     mealType: "",
     cook_time: "",
     user_id: "",
-    instructions: "",
   });
 
   const inputRef = useRef(null);
-
   // met à jour une partie de l'objet (DataPostRecipe)
   // avec les données saisies par l'utilisateur dans un champ de saisie.
   const onChange = (e) => {
     const { name, value } = e.target;
     setDataPostRecipe((prevData) => ({ ...prevData, [name]: value }));
   };
-
   //  met à jour l'état de l'application avec une nouvelle valeur pour la propriété "mealType".
   const handleMealTypeChange = (e) => {
     setDataPostRecipe((newDataPostRecipe) => ({
@@ -42,11 +39,13 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
     setIngredientsList([...ingredientsList, ingredients]);
     setIngredients("");
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (dataPostRecipe.name && dataPostRecipe.mealType) {
-      const recipe = JSON.stringify(dataPostRecipe);
+    if (dataPostRecipe.name) {
+      const recipe = JSON.stringify({
+        ...dataPostRecipe,
+        ingredients: ingredientsList,
+      });
       const myHeaders = new Headers();
       const formData = new FormData();
       formData.append("recipe", recipe);
@@ -107,7 +106,7 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
         <h2 className="text-center text-2xl font-bold underline mb-3">
           Create a new recipe
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form className=" max-w-[45vw]" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
@@ -115,14 +114,6 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
             onChange={onChange}
             placeholder="Name"
             className="w-80  my-2 flex flex-col justify-center rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
-          />
-          <input
-            type="text"
-            name="description"
-            value={dataPostRecipe.description}
-            onChange={onChange}
-            placeholder="Description"
-            className="w-80 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
           />
           <div className="flex items-center">
             <select
@@ -174,15 +165,14 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
             <button
               className="mx-5 border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 px-3 "
               type="button"
-              value={dataPostRecipe.ingredients}
-              onClick={handleAddIngredient}
+              onClick={() => handleAddIngredient()}
             >
               Add
             </button>
           </div>
-          <ul className="flex flex-wrap">
+          <ul className="flex flex-wrap w-4/5">
             {ingredientsList.map((ingredient) => (
-              <li className=" bg-gray-300 px-2 rounded-md" key={ingredient}>
+              <li className=" bg-gray-100 px-1 m-2 rounded-md" key={ingredient}>
                 {ingredient}
               </li>
             ))}
@@ -199,6 +189,7 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
           <br />
           <div className="flex justify-center">
             <button
+              onClick={() => console.warn(dataPostRecipe.ingredients)}
               className="border border-black px-4 py-2 hover:bg-gray-100 rounded-md "
               type="submit"
             >

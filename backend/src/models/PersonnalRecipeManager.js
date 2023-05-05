@@ -7,18 +7,15 @@ class PersonnalRecipeManager extends AbstractManager {
 
   insert(recipe) {
     return this.connection.query(
-      `insert into ${this.table} (name, mealType, description, cuisineType, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (name, description, ingredients, image, mealType, cook_time, cuisineType, labels, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         recipe.name,
-        recipe.mealType,
         recipe.description,
-        recipe.cuisineType,
-        recipe.ingredients,
-        recipe.instructions,
+        JSON.stringify(recipe.ingredients),
         recipe.image,
+        recipe.mealType,
         recipe.cook_time,
-        recipe.colories,
-        recipe.recipe_link,
+        recipe.cuisineType,
         recipe.labels,
         recipe.user_id,
       ]
@@ -27,20 +24,17 @@ class PersonnalRecipeManager extends AbstractManager {
 
   update(recipe) {
     return this.connection.query(
-      `update ${this.table} set name = ?, mealType = ?, description = ?, cuisineType = ?, ingredients = ?, instructions = ?, image = ?, cook_time = ?, colories = ?, recipe_link = ?, labels = ? where id = ?`,
+      `update ${this.table} set name = ?, description = ?, ingredients = ?, image = ?, mealType = ?, cook_time = ?, cuisineType = ?, labels = ? where id = ?`,
       [
         recipe.name,
-        recipe.mealType,
         recipe.description,
-        recipe.cuisineType,
         recipe.ingredients,
-        recipe.instructions,
         recipe.image,
+        recipe.mealType,
         recipe.cook_time,
-        recipe.colories,
-        recipe.recipe_link,
+        recipe.cuisineType,
         recipe.labels,
-        recipe.id,
+        recipe.user_id,
       ]
     );
   }

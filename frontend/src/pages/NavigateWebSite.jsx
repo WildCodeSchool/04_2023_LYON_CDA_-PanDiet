@@ -23,7 +23,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box>
+        <Box sx={{ marginTop: "11vh", zIndex: 0 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -46,12 +46,18 @@ function NavigateWebSite() {
   };
   const { toggleDarkMode, darkMode } = useContext(DarkModeContext);
   return (
-    <div>
+    <div className=" overflow-x-hidden h-screen">
       <Box sx={{ width: "100%" }}>
         <Box
           sx={{
             boxShadow: 3,
             display: "flex",
+            justifyContent: "space-between",
+            position: "fixed",
+            top: 0,
+            width: "100%",
+            zIndex: 3,
+            bgcolor: "#FFFFFF",
           }}
         >
           <Tabs

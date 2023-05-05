@@ -18,7 +18,7 @@ function Favourites() {
   return (
     <div className="mx-20 ">
       <HeaderChoose />
-      <div className="flex justify-between w-full mt-4 mb-10">
+      <div className="w-full mt-4 mb-10">
         <div className="w-1/5 font-bold text-2xl">
           <h2>Favourites</h2>
         </div>
