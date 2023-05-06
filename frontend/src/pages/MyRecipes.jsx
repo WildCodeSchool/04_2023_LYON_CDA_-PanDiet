@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Box, Fade, Modal } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +18,24 @@ function MyRecipes() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [dataMyRecipes, setDetaMyRecipes] = useState([]);
+  const [openRecipeCard, setOpenRecipeCard] = React.useState(false);
+  const handleOpenRecipeCard = () => setOpenRecipeCard(true);
+  const handleCloseRecipeCard = () => setOpenRecipeCard(false);
+  const [dataMyRecipes, setDataMyRecipes] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/my-recipes")
-      .then((response) => setDetaMyRecipes(response.data));
+      .then((response) => setDataMyRecipes(response.data));
   }, [reaload]);
+
+  const handleDelete = (id, name) => {
+    axios.delete(`http://localhost:5000/api/my-recipes/${id}`).then(() => {
+      toast.success(`Recipe ${name} deleted ✅`);
+      handleCloseRecipeCard(!openRecipeCard);
+      setReload(!reaload);
+    });
+  };
 
   return (
     <div className=" mx-10 md:mx-20 ">
@@ -41,9 +54,15 @@ function MyRecipes() {
               </button>
             </div>
             <div className=" flex flex-col  md:grid md:grid-cols-3 ">
-              {dataMyRecipes.reverse().map((recipe) => (
+              {dataMyRecipes.map((recipe) => (
                 <div className="mb-5 flex justify-center md:justify-between ">
-                  <CardMyRecipe recipe={recipe} />
+                  <CardMyRecipe
+                    openRecipeCard={openRecipeCard}
+                    handleCloseRecipeCard={handleCloseRecipeCard}
+                    handleOpenRecipeCard={handleOpenRecipeCard}
+                    recipe={recipe}
+                    handleDelete={handleDelete}
+                  />
                 </div>
               ))}
             </div>

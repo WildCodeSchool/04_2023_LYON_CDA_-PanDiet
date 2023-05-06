@@ -36,7 +36,7 @@ function LoginPage() {
         .then((result) => {
           setUser(result.user);
           setToken(result.token);
-          toast.success(`Bienvenue ${result.user.firstname}`);
+          toast.success(`Bienvenue ${result.user.firstname} 👋`);
         })
         .then(() => {
           setTimeout(() => {
@@ -48,8 +48,6 @@ function LoginPage() {
       setErrorMessage("Please specify email and password");
     }
   };
-
-  console.warn(email, password);
 
   return (
     <div style={{ padding: 30 }}>

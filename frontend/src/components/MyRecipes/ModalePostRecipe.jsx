@@ -9,9 +9,10 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
   const { user } = useCurrentUserContext();
   const [ingredients, setIngredients] = useState("");
   const [ingredientsList, setIngredientsList] = useState([]);
+  const [instructions, setInstructions] = useState("");
+  const [instructionsList, setInstructionsList] = useState([]);
   const [dataPostRecipe, setDataPostRecipe] = useState({
     name: "",
-    description: "",
     cuisineType: "",
     image: "",
     mealType: "",
@@ -41,12 +42,28 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
     setIngredientsList([...ingredientsList, ingredients]);
     setIngredients("");
   };
+  const handleInstructionsChange = (event) => {
+    setInstructions(event.target.value);
+  };
+  const handleAddInstructions = () => {
+    setInstructionsList([...instructionsList, instructions]);
+    setInstructions("");
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (dataPostRecipe.name) {
+    if (
+      dataPostRecipe.name &&
+      dataPostRecipe.cuisineType &&
+      dataPostRecipe.mealType &&
+      dataPostRecipe.cook_time &&
+      dataPostRecipe.image &&
+      ingredientsList &&
+      instructionsList
+    ) {
       const recipe = JSON.stringify({
         ...dataPostRecipe,
         ingredients: ingredientsList,
+        instructions: instructionsList,
       });
       const myHeaders = new Headers();
       const formData = new FormData();
@@ -108,18 +125,18 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
         <h2 className="text-center text-2xl font-bold underline mb-3">
           Create a new recipe
         </h2>
-        <form className=" max-w-[45vw]" onSubmit={handleSubmit}>
+        <form className=" max-w-[30vw]" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
             value={dataPostRecipe.name}
             onChange={onChange}
             placeholder="Name"
-            className="w-80  my-2 flex flex-col justify-center rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+            className="w-full  my-2 flex flex-col justify-center rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
           />
           <div className="flex items-center">
             <select
-              className="border h-[46px] border-black rounded-md"
+              className="w-1/3 border h-[46px] border-black rounded-md"
               value={dataPostRecipe.mealType}
               label="MealType"
               onChange={handleMealTypeChange}
@@ -136,7 +153,7 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
               value={dataPostRecipe.cuisineType}
               onChange={onChange}
               placeholder="🌎 Type"
-              className="w-[30%] m-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+              className="w-1/3 m-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
             />
             <input
               type="text"
@@ -144,46 +161,63 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
               value={dataPostRecipe.cook_time}
               onChange={onChange}
               placeholder="🕝 Time"
-              className="w-[30%] my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+              className="w-1/3 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
             />
           </div>
           <div className="flex my-2 h-10 justify-around items-center">
             <br />
             <input
-              className="w-1/3 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+              className="w-full my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
               type="text"
               placeholder="Ingrédients"
               value={ingredients}
               onChange={handleIngredientsChange}
             />
             <button
-              className="mx-5 border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 px-3 "
+              className=" border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 ml-1 px-3 "
               type="button"
               onClick={() => handleAddIngredient()}
             >
               Add
             </button>
           </div>
-          <ul className="flex flex-wrap w-4/5">
+          <ul className="flex flex-wrap overflow-auto max-h-24 mb-4">
             {ingredientsList.map((ingredient) => (
               <li className=" bg-gray-100 px-1 m-2 rounded-md" key={ingredient}>
                 {ingredient}
               </li>
             ))}
           </ul>
-          <input
-            aria-multiline
-            type="text"
-            name="instructions"
-            value={dataPostRecipe.instructions}
-            onChange={onChange}
-            placeholder="instructions"
-            className="w-80 my-2 rounded-md placeholder:text-gray-400 border border-black  py-2 pl-4 text-lg placeholder-black"
-          />
-          <br />
-          <div className="flex justify-center">
+          <div className="flex my-5 h-10 justify-around items-center">
+            <textarea
+              aria-multiline
+              type="text"
+              name="instructions"
+              value={instructions}
+              onChange={handleInstructionsChange}
+              placeholder="instructions"
+              className="w-80 my-2 rounded-md placeholder:text-gray-400 border border-black  py-2 pl-4 text-lg placeholder-black"
+            />
             <button
-              onClick={() => console.warn(dataPostRecipe.ingredients)}
+              className=" border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 ml-1 px-3 "
+              type="button"
+              onClick={() => handleAddInstructions()}
+            >
+              Add
+            </button>
+          </div>
+          <ul className="flex flex-wrap overflow-auto max-h-24">
+            {instructionsList.map((instruction) => (
+              <li
+                className=" bg-gray-100 px-1 m-1 rounded-md"
+                key={instruction}
+              >
+                {instruction}
+              </li>
+            ))}
+          </ul>
+          <div className=" mt-1 flex justify-center">
+            <button
               className="border border-black px-4 py-2 hover:bg-gray-100 rounded-md "
               type="submit"
             >

@@ -78,29 +78,31 @@ function DialogFilters({ onSelectedLabelsChange }) {
   ];
 
   return (
-    <div className="flex flex-col  ">
-      <div className="hidden w-1/5 font-bold text-2xl mb-10 md:block">
-        <h2>Filters</h2>
-      </div>
-      {buttons.map(({ label, dialogType, filterLabels }) => (
-        <div className="py-1 text-left " key={label}>
-          <button
-            type="button"
-            className="text-[#E58A2F] font-bold   "
-            onClick={handleClickOpen(dialogType)}
-          >
-            {label}
-            <hr className="w-full" />
-          </button>
-          <FilterDialog
-            open={open[dialogType]}
-            title={label}
-            filterLabels={filterLabels}
-            handleClose={handleClose(dialogType)}
-            handleToggle={handleToggle}
-          />
+    <div className="w-[15%] px-2 hidden md:block">
+      <div className="flex flex-col  ">
+        <div className="hidden w-1/5 font-bold text-2xl mb-10 md:block">
+          <h2>Filters</h2>
         </div>
-      ))}
+        {buttons.map(({ label, dialogType, filterLabels }) => (
+          <div className="py-1 text-left " key={label}>
+            <button
+              type="button"
+              className="text-[#E58A2F] font-bold   "
+              onClick={handleClickOpen(dialogType)}
+            >
+              {label}
+              <hr className="w-full" />
+            </button>
+            <FilterDialog
+              open={open[dialogType]}
+              title={label}
+              filterLabels={filterLabels}
+              handleClose={handleClose(dialogType)}
+              handleToggle={handleToggle}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

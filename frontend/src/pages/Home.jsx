@@ -112,15 +112,14 @@ function Home() {
     <div className=" mx-5 md:mx-20 ">
       <HeaderChoose />
       <div className="flex mt-5">
-        <div className="w-[15%] px-2 hidden md:block ">
-          <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
-          <ContainerFilterChoose
-            ingredientInput={ingredientInput}
-            addExcludedIngredient={addExcludedIngredient}
-            queryExclued={queryExclued}
-            removeExcludedIngredient={removeExcludedIngredient}
-          />
-        </div>
+        <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
+        <ContainerFilterChoose
+          ingredientInput={ingredientInput}
+          addExcludedIngredient={addExcludedIngredient}
+          queryExclued={queryExclued}
+          removeExcludedIngredient={removeExcludedIngredient}
+        />
+
         <ContainerRightHome
           setQueryText={setQueryText}
           fetchData={fetchData}

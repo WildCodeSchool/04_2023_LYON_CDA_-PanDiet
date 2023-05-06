@@ -41,9 +41,13 @@ function Nav() {
   const { toggleDarkMode, darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={`flex justify-center ${darkMode ? "dark" : "light"}`}>
-      <div className="w-full items-center fixed top-0 px-10  shadow-md md:shadow-none md:relative ">
-        <ul className="flex items-center px-10 justify-between rounded-md md:pr-20">
+    <div className="flex justify-center">
+      <div
+        className={`w-full items-center fixed top-0 px-3 md:px-10  shadow-md md:shadow-none md:relative ${
+          darkMode ? "dark" : "light"
+        }`}
+      >
+        <ul className="flex items-center md:px-10 justify-between rounded-md md:pr-20">
           <h2
             className={`text-3xl hidden font-bold text-[#E58A2F] md:block ${
               darkMode ? "first-letter:text-white" : "first-letter:text-black"
