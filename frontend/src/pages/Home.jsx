@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import Nav from "../components/Nav";
 import ContainerFilterChoose from "../components/Home/ContainerFilterChoose";
 import Buttons from "../components/Home/Buttons";
-import CardRecipe from "../components/Home/CardRecipe";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
 import HeaderChoose from "../components/Home/HeaderChoose";
-import BodyChoose from "../components/Home/BodyChoose";
+import ContainerRightHome from "../components/Home/ContainerRightHome";
 
 /* const appId = import.meta.env.VITE_APP_ID;
 const appKey = import.meta.env.VITE_APP_KEY;
@@ -26,7 +24,7 @@ function Home() {
       .get(
         `https://api.edamam.com/api/recipes/v2?type=public&app_id=f4034abb&app_key=44fe06272cb8fed56c9622f7031624c7&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
-      .then((response) => setDataRandom(response.data.hits.splice(0, 9)));
+      .then((response) => setDataRandom(response.data.hits.splice(0, 10)));
   }, []);
 
   const handleSelectedLabelsChange = (updatedSelectedLabels) => {
@@ -91,7 +89,7 @@ function Home() {
     }
   };
 
-  const [numberPerPage, setNumberPerPage] = useState(6);
+  const [numberPerPage, setNumberPerPage] = useState(15);
   const handleNumberPerPage = (e) => {
     setNumberPerPage(e);
   };
@@ -112,16 +110,9 @@ function Home() {
   };
   return (
     <div className=" mx-5 md:mx-20 ">
-      <Nav />
       <HeaderChoose />
-      <BodyChoose
-        recipes={recipes}
-        handleNumberPerPage={handleNumberPerPage}
-        setQueryText={setQueryText}
-        fetchData={fetchData}
-      />
-      <div className="flex">
-        <div className="w-1/5 hidden md:block ">
+      <div className="flex mt-5">
+        <div className="w-[15%] px-2 hidden md:block ">
           <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
           <ContainerFilterChoose
             ingredientInput={ingredientInput}
@@ -130,19 +121,14 @@ function Home() {
             removeExcludedIngredient={removeExcludedIngredient}
           />
         </div>
-        <div className="w-4/5 flex flex-row flex-wrap justify-between mx-auto md:grid md:grid-cols-3 ">
-          {recipes.length === 0
-            ? dataRandom.map((item) => (
-                <div key={item.uri}>
-                  <CardRecipe item={item} />
-                </div>
-              ))
-            : currentArticles.map((item) => (
-                <div key={item.uri}>
-                  <CardRecipe item={item} />
-                </div>
-              ))}
-        </div>
+        <ContainerRightHome
+          setQueryText={setQueryText}
+          fetchData={fetchData}
+          handleNumberPerPage={handleNumberPerPage}
+          recipes={recipes}
+          dataRandom={dataRandom}
+          currentArticles={currentArticles}
+        />
       </div>
       {currentArticles.length > 0 && (
         <Buttons

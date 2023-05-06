@@ -16,13 +16,13 @@ function ContainerFilterChoose({
           display: "none",
           alignItems: "center",
           justifyContent: "space-around",
-          margin: "5% 0",
         }}
       >
         <TextField
           sx={{
             backgroundColor: "white",
             borderRadius: "10px",
+            width: "10vw",
           }}
           variant="filled"
           size="small"
@@ -42,6 +42,12 @@ function ContainerFilterChoose({
           sx={{ width: "auto", margin: "0.5rem" }}
         />
       ))}
+      <button
+        className="bg-black text-white rounded-xl mt-2 px-8 py-1"
+        type="button"
+      >
+        Search
+      </button>
     </div>
   );
 }

@@ -46,6 +46,8 @@ function LoginPage() {
     }
   };
 
+  console.warn(email, password);
+
   return (
     <div style={{ padding: 30 }}>
       <Paper>

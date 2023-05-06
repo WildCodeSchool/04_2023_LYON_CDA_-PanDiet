@@ -14,7 +14,7 @@ function Nav() {
 
   const Links = [
     { name: "Home", link: "/" },
-    { name: "MyRecipes", link: "/my-Recipes" },
+    { name: "Recipes", link: "/my-recipes" },
     { name: "Favourites", link: "/favourites" },
     { name: "", link: "/login" },
   ];
@@ -41,14 +41,14 @@ function Nav() {
   const { toggleDarkMode, darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className="flex justify-center">
-      <div
-        className={`px-5 items-center mt-2 md:mt-none z-10 fixed top-0 
-        shadow-md  w-full 
-      md:shadow-none md:relative`}
-      >
-        <ul className="flex items-center justify-between rounded-md md:pr-20">
-          <h2 className="text-3xl hidden font-bold text-[#E58A2F] md:block">
+    <div className={`flex justify-center ${darkMode ? "dark" : "light"}`}>
+      <div className="w-full items-center fixed top-0 px-10  shadow-md md:shadow-none md:relative ">
+        <ul className="flex items-center px-10 justify-between rounded-md md:pr-20">
+          <h2
+            className={`text-3xl hidden font-bold text-[#E58A2F] md:block ${
+              darkMode ? "first-letter:text-white" : "first-letter:text-black"
+            }`}
+          >
             NUTRIDIET
           </h2>
           {Links.map((item) => (
@@ -67,7 +67,7 @@ function Nav() {
               <img
                 src="src/assets/photo-avatar-profil.png"
                 alt="My profile avatar"
-                className="rounded-full object-cover w-9 h-9  border-4 border-violet md:h-14 md:w-14 md:mr-0 md:mt-2 md:-mb-2"
+                className="rounded-full object-cover w-9 h-9  border-4 border-violet md:h-9 md:w-9 md:mr-0 md:mt-2 md:-mb-2"
               />
             </button>
 

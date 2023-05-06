@@ -4,7 +4,6 @@ import axios from "axios";
 import { Box, Fade, Modal } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../components/Nav";
 import ModalePostRecipe from "../components/MyRecipes/ModalePostRecipe";
 import CardMyRecipe from "../components/MyRecipes/CardMyRecipe";
 import HeaderChoose from "../components/Home/HeaderChoose";
@@ -27,7 +26,6 @@ function MyRecipes() {
 
   return (
     <div className=" mx-10 md:mx-20 ">
-      <NavBar />
       <HeaderChoose />
       <div className=" w-full mt-4 mb-10">
         {token ? (

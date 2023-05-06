@@ -25,10 +25,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flexGrow: 1,
   },
-  ingredients: {
-    display: "flex",
-    margin: "1 0",
-  },
   type: {
     display: "flex",
   },
@@ -54,6 +50,10 @@ const styles = StyleSheet.create({
     height: "20px",
     width: "20px",
     margin: "0 5 0 0",
+  },
+  ingredients: {
+    padding: "2px 50px",
+    fontSize: 12,
   },
 });
 
@@ -112,14 +112,15 @@ function RecipePDFGenerator({ recipe }) {
                     <Text style={styles.color}>{recipe.cook_time}</Text>
                   </View>
                 </View>
+                <Text style={styles.name}>Ingredients</Text>
+                <div className="py-10 flex justify-around flex-wrap">
+                  {recipe.ingredients.map((item) => (
+                    <Text style={styles.ingredients}>{item}</Text>
+                  ))}
+                </div>
+
                 <Text style={styles.name}>Instructions</Text>
                 <Text style={styles.instructions}>{recipe.instructions}</Text>
-                {/* {recipe.ingredients.map((item) => (
-                  <View style={styles.ingredients}>
-                    <Image src={item.image} />
-                    <Text>{item.text}</Text>
-                  </View>
-                ))} */}
               </View>
             </Page>
           </Document>
