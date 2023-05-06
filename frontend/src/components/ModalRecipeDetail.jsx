@@ -5,7 +5,7 @@ import Modal from "@mui/material/Modal";
 import { IconButton } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import useLocalStorage from "./useLocalStorage";
+import useLocalStorage from "./LocalStorage/UseLocalStorage";
 
 function ModalRecipeDetails({ item, open, handleClose }) {
   let enercKcal = item.totalNutrients.ENERC_KCAL.quantity.toString();
@@ -16,8 +16,6 @@ function ModalRecipeDetails({ item, open, handleClose }) {
   if (fat.length > 6) {
     fat = fat.substring(0, 6);
   }
-  // console.warn("coucou item Modal", item);
-  // console.warn("coucou itemIngredient", item.recipe.ingredients);
   const [isFilled, setIsFilled] = useState(false);
   const [favouriteRecipes, setFavouriteRecipes] = useLocalStorage(
     "favouriteRecipes",
@@ -45,15 +43,15 @@ function ModalRecipeDetails({ item, open, handleClose }) {
       >
         <Box
           class="absolute top-1/2 left-1/2 w-[90vw] transform -translate-x-1/2
-           -translate-y-1/2 md:w-[1200px] md:h-[600px]
-          bg-white border-2  shadow-md block md:flex"
+           -translate-y-1/2 md:w-[1000px] md:h-[600px]
+           border-2  shadow-md block md:flex bg-white"
         >
           <img
-            className=" my-auto mx-auto md:h-3/5 md:w-[300px] "
+            className=" w-full md:w-[496px] md:h-[596px]"
             src={item.image}
             alt=""
           />
-          <div className=" p-7 md:flex mx-auto md:p-10 flex-col min-w-[500px]">
+          <div className=" p-7 md:flex mx-auto md:p-10 flex-col md:min-w-[500px]">
             <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
               {item.label}
             </h3>
@@ -93,16 +91,18 @@ function ModalRecipeDetails({ item, open, handleClose }) {
               ))}
             </ul>
             <hr className="w-1/2 pb-2 mx-auto" />
-            <IconButton
-              onClick={handleClick}
-              color={isFilled ? "error" : "inherit"}
-              disableRipple
-            >
-              {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            </IconButton>
-            <button type="button" onClick={() => console.warn("coucou")}>
-              Supprimer
-            </button>
+            <div className="flex justify-between md:justify-around">
+              <IconButton
+                onClick={handleClick}
+                color={isFilled ? "error" : "inherit"}
+                disableRipple
+              >
+                {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              </IconButton>
+              <button type="button" onClick={handleClose}>
+                Close
+              </button>
+            </div>
           </div>
         </Box>
       </Modal>

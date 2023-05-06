@@ -7,7 +7,7 @@ CREATE TABLE user (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   firstname varchar(255) NOT NULL,
   lastname varchar(255) NOT NULL,
-  city varchar(255) NULL,
+  avatar varchar(255)  NULL,
   password varchar(255) NOT NULL,
   email varchar(255) UNIQUE NOT NULL
   

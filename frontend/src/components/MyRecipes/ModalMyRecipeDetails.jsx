@@ -2,11 +2,11 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import logoRecette from "../../assets/logoRecette.png";
+import RecipePDFGenerator from "./RecipePDFGenerator";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function ModalMyRecipeDetails({ recipe, open, handleClose }) {
-  console.warn(recipe);
   return (
     <div>
       <Modal
@@ -26,7 +26,11 @@ function ModalMyRecipeDetails({ recipe, open, handleClose }) {
             alt=""
           />
           <div className="md:flex mx-auto flex-col">
-            <img className="h-40 w-40" src={logoRecette} alt="" />
+            <div className="flex justify-between">
+              <img className="h-40 w-40" src={logoRecette} alt="" />
+              <RecipePDFGenerator recipe={recipe} />
+            </div>
+
             <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
               {recipe.name}
             </h3>
@@ -56,6 +60,9 @@ function ModalMyRecipeDetails({ recipe, open, handleClose }) {
             <div className="px-10 overflow-auto">
               <p>{recipe.instructions}</p>
             </div>
+            <button type="button" onClick={() => console.warn("coucou")}>
+              Supprimer
+            </button>
           </div>
         </Box>
       </Modal>

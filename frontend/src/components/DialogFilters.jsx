@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import FilterDialog from "./ChooseDiet/FiltersDialog";
+import FilterDialog from "./Home/FiltersDialog";
 import { FilterContext } from "../Context/FilterContext";
 
 function DialogFilters({ onSelectedLabelsChange }) {

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
-import useLocalStorage from "../components/useLocalStorage";
+import useLocalStorage from "../components/LocalStorage/UseLocalStorage";
 
 const CurrentUserContext = createContext();
 

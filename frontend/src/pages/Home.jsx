@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import ContainerFilterChoose from "../components/ChooseDiet/ContainerFilterChoose";
-import Buttons from "../components/ChooseDiet/Buttons";
-import CardRecipe from "../components/ChooseDiet/CardRecipe";
+import Nav from "../components/Nav";
+import ContainerFilterChoose from "../components/Home/ContainerFilterChoose";
+import Buttons from "../components/Home/Buttons";
+import CardRecipe from "../components/Home/CardRecipe";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
-import HeaderChoose from "../components/ChooseDiet/HeaderChoose";
-import NutriDiet from "../components/NutriDiet";
-import BodyChoose from "../components/ChooseDiet/BodyChoose";
+import HeaderChoose from "../components/Home/HeaderChoose";
+import BodyChoose from "../components/Home/BodyChoose";
 
-const appId = import.meta.env.VITE_APP_ID;
+/* const appId = import.meta.env.VITE_APP_ID;
 const appKey = import.meta.env.VITE_APP_KEY;
-
+ */
 function Home() {
-  const navigate = useNavigate();
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
   const [queryExclued, setQueryExclued] = useState([]);
@@ -26,9 +24,9 @@ function Home() {
   useEffect(() => {
     axios
       .get(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${appId}&app_key=${appKey}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=f4034abb&app_key=44fe06272cb8fed56c9622f7031624c7&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
-      .then((response) => setDataRandom(response.data.hits));
+      .then((response) => setDataRandom(response.data.hits.splice(0, 9)));
   }, []);
 
   const handleSelectedLabelsChange = (updatedSelectedLabels) => {
@@ -55,8 +53,8 @@ function Home() {
       const url = new URL("https://api.edamam.com/api/recipes/v2");
       const params = {
         q: queryText,
-        app_id: `5f89fe95`,
-        app_key: `6ad057a2b3ba66c9cd5aae24f720dcf1`,
+        app_id: "f4034abb",
+        app_key: "44fe06272cb8fed56c9622f7031624c7",
         type: "public",
       };
       Object.keys(params).forEach(
@@ -83,11 +81,9 @@ function Home() {
             break;
         }
       });
-
       queryExclued.forEach((ingredient) => {
         url.searchParams.append("excluded", ingredient);
       });
-
       const response = await axios.get(url.toString());
       setRecipes(response.data.hits);
     } catch (error) {
@@ -115,13 +111,12 @@ function Home() {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
   return (
-    <div>
-      <NutriDiet />
+    <div className=" mx-5 md:mx-20 ">
+      <Nav />
       <HeaderChoose />
       <BodyChoose
         recipes={recipes}
         handleNumberPerPage={handleNumberPerPage}
-        queryText={queryText}
         setQueryText={setQueryText}
         fetchData={fetchData}
       />
@@ -134,19 +129,16 @@ function Home() {
             queryExclued={queryExclued}
             removeExcludedIngredient={removeExcludedIngredient}
           />
-          <button type="button" onClick={() => navigate("/my-Recipes")}>
-            NAVIGUE MOI{" "}
-          </button>
         </div>
-        <div className="w-4/5 flex flex-col mx-auto md:grid md:grid-cols-3 ">
+        <div className="w-4/5 flex flex-row flex-wrap justify-between mx-auto md:grid md:grid-cols-3 ">
           {recipes.length === 0
-            ? dataRandom.splice(0, 9).map((item, index) => (
-                <div key={index.id}>
+            ? dataRandom.map((item) => (
+                <div key={item.uri}>
                   <CardRecipe item={item} />
                 </div>
               ))
-            : currentArticles.map((item, index) => (
-                <div key={index.id}>
+            : currentArticles.map((item) => (
+                <div key={item.uri}>
                   <CardRecipe item={item} />
                 </div>
               ))}

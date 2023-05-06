@@ -9,7 +9,7 @@ function Buttons({
   articlesPerPage,
 }) {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className="flex justify-center mb-16">
       <Button
         onClick={prevPage}
         disabled={currentPage === 1}

@@ -1,6 +1,6 @@
 import React from "react";
-import HeartFilled from "../assets/Favourite/heart-1.png";
-import ModalRecipeDetails from "./ModalRecipeDetail";
+import HeartFilled from "../../assets/Favourite/heart-1.png";
+import ModalRecipeDetails from "../ModalRecipeDetail";
 
 function FavouriteCard({ itemFavourites, handleClick }) {
   const [open, setOpen] = React.useState(false);
