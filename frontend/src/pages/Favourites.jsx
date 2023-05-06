@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Nav";
 import FavouriteCard from "../components/Favourites/FavouriteCard";
 import useLocalStorage from "../components/LocalStorage/UseLocalStorage";
 import HeaderChoose from "../components/Home/HeaderChoose";

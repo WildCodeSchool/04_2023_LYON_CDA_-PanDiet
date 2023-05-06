@@ -2,18 +2,16 @@ const AbstractManager = require("./AbstractManager");
 
 class PersonnalRecipeManager extends AbstractManager {
   constructor() {
-    super({ table: "personnal_recipe" });
+    super({ table: "recipe" });
   }
 
   insert(recipe) {
     return this.connection.query(
-      `insert into ${this.table} (name, mealType, description, cuisineType, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) values (?, ?, ?, ?, JSON_ARRAY(?), ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (name, description, ingredients, instructions, image, cook_time, colories, recipe_link, labels, user_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         recipe.name,
-        recipe.mealType,
         recipe.description,
-        recipe.cuisineType,
-        JSON.stringify(recipe.ingredients),
+        recipe.ingredients,
         recipe.instructions,
         recipe.image,
         recipe.cook_time,
@@ -27,12 +25,10 @@ class PersonnalRecipeManager extends AbstractManager {
 
   update(recipe) {
     return this.connection.query(
-      `update ${this.table} set name = ?, mealType = ?, description = ?, cuisineType = ?, ingredients = ?, instructions = ?, image = ?, cook_time = ?, colories = ?, recipe_link = ?, labels = ? where id = ?`,
+      `update ${this.table} set name = ?, description = ?, ingredients = ?, instructions = ?, image = ?, cook_time = ?, colories = ?, recipe_link = ?, labels = ? where id = ?`,
       [
         recipe.name,
-        recipe.mealType,
         recipe.description,
-        recipe.cuisineType,
         recipe.ingredients,
         recipe.instructions,
         recipe.image,
