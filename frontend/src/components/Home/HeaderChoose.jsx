@@ -5,7 +5,7 @@ import NutriDiet from "../NutriDiet";
 
 function HeaderChoose() {
   return (
-    <div className="mt-4">
+    <div>
       <NutriDiet />
       <div className="relative">
         <img

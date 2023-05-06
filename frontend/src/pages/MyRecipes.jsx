@@ -3,11 +3,15 @@ import "../App.css";
 import axios from "axios";
 import { Box, Fade, Modal } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
+import { useNavigate } from "react-router-dom";
 import ModalePostRecipe from "../components/MyRecipes/ModalePostRecipe";
 import CardMyRecipe from "../components/MyRecipes/CardMyRecipe";
 import HeaderChoose from "../components/Home/HeaderChoose";
+import { useCurrentUserContext } from "../Context/userContext";
 
 function MyRecipes() {
+  const { token } = useCurrentUserContext();
+  const navigate = useNavigate();
   const [reaload, setReload] = useState(true);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -24,23 +28,40 @@ function MyRecipes() {
     <div className=" mx-10 md:mx-20 ">
       <HeaderChoose />
       <div className=" w-full mt-4 mb-10">
-        <div className=" flex justify-between  w-full mb-3">
-          <h2 className="font-bold text-2xl">My Recipes</h2>
-          <button
-            className="border border-black p-1 md:ml-3 rounded-md "
-            onClick={handleOpen}
-            type="button"
-          >
-            <p className="text-[#FF9A62]">Add a new Recipe</p>
-          </button>
-        </div>
-        <div className=" flex flex-col  md:grid md:grid-cols-3 ">
-          {dataMyRecipes.reverse().map((recipe) => (
-            <div className="mb-5 flex justify-center md:justify-between ">
-              <CardMyRecipe recipe={recipe} />
+        {token ? (
+          <>
+            <div className=" flex justify-between  w-full mb-3">
+              <h2 className="font-bold text-2xl">My Recipes</h2>
+              <button
+                className="border border-black p-1 md:ml-3 rounded-md "
+                onClick={handleOpen}
+                type="button"
+              >
+                <p className="text-[#FF9A62]">Add a new Recipe</p>
+              </button>
             </div>
-          ))}
-        </div>
+            <div className=" flex flex-col  md:grid md:grid-cols-3 ">
+              {dataMyRecipes.reverse().map((recipe) => (
+                <div className="mb-5 flex justify-center md:justify-between ">
+                  <CardMyRecipe recipe={recipe} />
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="text-center">
+            <p className="text-xl">
+              You must be logged in to view your recipes.
+            </p>
+            <button
+              type="button"
+              className="bg-[#FF9A62] text-white px-4 py-2 rounded-md mt-4"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          </div>
+        )}
       </div>
       <Modal
         aria-labelledby="transition-modal-title"

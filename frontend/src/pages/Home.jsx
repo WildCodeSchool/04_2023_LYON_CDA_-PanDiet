@@ -7,9 +7,9 @@ import { FilterContext } from "../Context/FilterContext";
 import HeaderChoose from "../components/Home/HeaderChoose";
 import ContainerRightHome from "../components/Home/ContainerRightHome";
 
-const appId = import.meta.env.VITE_APP_ID;
+/* const appId = import.meta.env.VITE_APP_ID;
 const appKey = import.meta.env.VITE_APP_KEY;
-
+ */
 function Home() {
   const [selectedLabels, setSelectedLabels] = useState(new Set());
   const [queryText, setQueryText] = useState("");
@@ -22,7 +22,7 @@ function Home() {
   useEffect(() => {
     axios
       .get(
-        `https://api.edamam.com/api/recipes/v2?type=public&app_id=${appId}&app_key=${appKey}&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=f4034abb&app_key=44fe06272cb8fed56c9622f7031624c7&mealType=snack&mealType=teaTime&mealType=dinner&mealType=breakfast&random=true`
       )
       .then((response) => setDataRandom(response.data.hits.splice(0, 10)));
   }, []);
@@ -51,8 +51,8 @@ function Home() {
       const url = new URL("https://api.edamam.com/api/recipes/v2");
       const params = {
         q: queryText,
-        app_id: `5f89fe95`,
-        app_key: `6ad057a2b3ba66c9cd5aae24f720dcf1`,
+        app_id: "f4034abb",
+        app_key: "44fe06272cb8fed56c9622f7031624c7",
         type: "public",
       };
       Object.keys(params).forEach(

@@ -3,8 +3,10 @@ import { IconButton } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState, useRef } from "react";
+import { useCurrentUserContext } from "../../Context/userContext";
 
 export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
+  const { user } = useCurrentUserContext();
   const [ingredients, setIngredients] = useState("");
   const [ingredientsList, setIngredientsList] = useState([]);
   const [dataPostRecipe, setDataPostRecipe] = useState({
@@ -14,7 +16,7 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
     image: "",
     mealType: "",
     cook_time: "",
-    user_id: "",
+    user_id: user.id,
   });
 
   const inputRef = useRef(null);
@@ -146,14 +148,6 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
             />
           </div>
           <div className="flex my-2 h-10 justify-around items-center">
-            <input
-              type="text"
-              name="user_id"
-              value={dataPostRecipe.user_id}
-              onChange={onChange}
-              placeholder="userId"
-              className="w-1/4 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
-            />
             <br />
             <input
               className="w-1/3 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
