@@ -14,7 +14,7 @@ function Nav() {
 
   const Links = [
     { name: "Home", link: "/" },
-    { name: "Recipes", link: "/my-recipes" },
+    { name: "My recipes", link: "/my-recipes" },
     { name: "Favourites", link: "/favourites" },
     { name: "", link: "/login" },
   ];

@@ -89,7 +89,7 @@ function Home() {
     }
   };
 
-  const [numberPerPage, setNumberPerPage] = useState(15);
+  const [numberPerPage, setNumberPerPage] = useState(10);
   const handleNumberPerPage = (e) => {
     setNumberPerPage(e);
   };
