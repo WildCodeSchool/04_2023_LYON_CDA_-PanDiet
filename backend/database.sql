@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS  recipe, personnal_recipe;
+DROP TABLE IF EXISTS  user, recipe, personnal_recipe;
 SET FOREIGN_KEY_CHECKS=1;
 
 
@@ -7,13 +7,12 @@ CREATE TABLE user (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   firstname varchar(255) NOT NULL,
   lastname varchar(255) NOT NULL,
-  city varchar(255) NOT NULL,
   avatar varchar(255)  NULL,
   password varchar(255) NOT NULL,
   email varchar(255) UNIQUE NOT NULL
   
 );
- INSERT INTO user (firstname, lastname, city,  password, email) VALUES ("Sahrane", "Guassemi", "Lyon", "password", "sahrane@cp.com");
+ INSERT INTO user (firstname, lastname, avatar, password, email) VALUES ("Sahrane", "Guassemi","https://zupimages.net/viewer.php?id=23/18/ep2i.jpg", "password", "sahrane@cp.com");
 
 CREATE TABLE recipe (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,

@@ -59,6 +59,23 @@ const edit = (req, res) => {
     });
 };
 
+const editUserAvatar = (req, res) => {
+  const user = {};
+  user.id = req.params.userid;
+  user.avatar = req.renamedFile;
+
+  models.user_detail
+    .updateUserAvatar(user)
+    .then((result) => {
+      if (result.affectedRows === 0) res.sendStatus(404);
+      else res.json({ avatar: user.avatar });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 const destroy = (req, res) => {
   const { id } = req.params;
   models.user
@@ -78,5 +95,6 @@ module.exports = {
   read,
   add,
   edit,
+  editUserAvatar,
   destroy,
 };

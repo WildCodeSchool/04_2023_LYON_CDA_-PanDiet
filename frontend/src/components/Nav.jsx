@@ -3,14 +3,16 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Avatar from "../assets/photo-avatar-profil.png";
 import { useCurrentUserContext } from "../Context/userContext";
 import { DarkModeContext } from "../Context/DarkModeContext";
+import LogOut from "../assets/deconnexion.png";
 
 function Nav() {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const { setUser, token } = useCurrentUserContext();
+  const { user, setUser, token } = useCurrentUserContext();
 
   const Links = [
     { name: "Home", link: "/" },
@@ -66,18 +68,25 @@ function Nav() {
             </li>
           ))}
 
-          <div className="rounded-full md:mr-5">
+          <div className=" flex items-center rounded-full md:mr-5">
             <button type="button" onClick={handleProfileClick}>
               <img
-                src="src/assets/photo-avatar-profil.png"
+                src={token === "" ? Avatar : user.avatar}
                 alt="My profile avatar"
-                className="rounded-full object-cover w-9 h-9  border-4 border-violet md:h-9 md:w-9 md:mr-0 md:mt-2 md:-mb-2"
+                className="rounded-full object-cover w-9 h-9 border-4 border-violet md:h-9 md:w-9 md:mr-0 md:-mb-2"
               />
             </button>
-
-            <button type="button" onClick={logOut}>
-              LOGOUT
-            </button>
+            {token === "" ? (
+              ""
+            ) : (
+              <button type="button" onClick={logOut}>
+                <img
+                  src={LogOut}
+                  alt="Log out"
+                  className="h-[25px] md:mt-2 w-[25px]"
+                />
+              </button>
+            )}
           </div>
 
           <IconButton
