@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     display: "flex",
   },
   name: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#0349",
     margin: " 0 auto 10 auto",
@@ -52,8 +52,14 @@ const styles = StyleSheet.create({
     margin: "0 5 0 0",
   },
   ingredients: {
-    padding: "2px 50px",
     fontSize: 12,
+    margin: "5",
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: "10px 0 ",
   },
 });
 
@@ -66,61 +72,66 @@ function RecipePDFGenerator({ recipe }) {
             <Page size="A4" style={styles.page}>
               <View style={styles.section}>
                 <Text style={styles.name}>{recipe.name}</Text>
-                <Image
-                  style={{ width: "400px", height: "300px", margin: "0 auto" }}
-                  src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
-                  alt=""
-                />
-                <Text style={styles.description}>{recipe.description}</Text>
+                <hr />
                 <View
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    justifyContent: "space-around",
-                    margin: "0 auto 20 auto",
-                    width: "100%",
+                    marginBottom: "10px",
                   }}
                 >
                   <View
                     style={{
                       display: "flex",
                       flexDirection: "row",
-                      alignItems: "center",
+                      margin: "auto ",
                     }}
                   >
-                    <Image style={styles.icon} src={mealType} />
-                    <Text style={styles.color}>{recipe.mealType}</Text>
-                  </View>
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Image style={styles.icon} src={earth} />
-                    <Text style={styles.color}>{recipe.cuisineType}</Text>
-                  </View>
-                  <View
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Image style={styles.icon} src={cookTime} />
-                    <Text style={styles.color}>{recipe.cook_time}</Text>
+                    <View style={styles.row}>
+                      <Image style={styles.icon} src={mealType} />
+                      <Text style={styles.color}>{recipe.mealType}</Text>
+                    </View>
+                    <View style={styles.row}>
+                      <Image style={styles.icon} src={earth} />
+                      <Text style={styles.color}>{recipe.cuisineType}</Text>
+                    </View>
+                    <View style={styles.row}>
+                      <Image style={styles.icon} src={cookTime} />
+                      <Text style={styles.color}>{recipe.cook_time}min</Text>
+                    </View>
                   </View>
                 </View>
+                <Image
+                  style={{
+                    width: "300px",
+                    height: "200px",
+                    borderRadius: "10px",
+                    margin: "0 auto",
+                  }}
+                  src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
+                  alt=""
+                />
+                <hr />
                 <Text style={styles.name}>Ingredients</Text>
-                <div className="py-10 flex justify-around flex-wrap">
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    padding: "10px",
+                    flexWrap: "wrap",
+                  }}
+                >
                   {recipe.ingredients.map((item) => (
                     <Text style={styles.ingredients}>{item}</Text>
                   ))}
-                </div>
-
+                </View>
+                <hr />
                 <Text style={styles.name}>Instructions</Text>
-                <Text style={styles.instructions}>{recipe.instructions}</Text>
+                <div className="py-10 flex justify-around flex-wrap">
+                  {recipe.instructions.map((item) => (
+                    <Text style={styles.ingredients}>{item}</Text>
+                  ))}
+                </div>
               </View>
             </Page>
           </Document>

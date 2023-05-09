@@ -89,7 +89,7 @@ function Home() {
     }
   };
 
-  const [numberPerPage, setNumberPerPage] = useState(15);
+  const [numberPerPage, setNumberPerPage] = useState(10);
   const handleNumberPerPage = (e) => {
     setNumberPerPage(e);
   };
@@ -112,15 +112,17 @@ function Home() {
     <div className=" mx-5 md:mx-20 ">
       <HeaderChoose />
       <div className="flex mt-5">
-        <div className="w-[15%] px-2 hidden md:block ">
-          <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
-          <ContainerFilterChoose
-            ingredientInput={ingredientInput}
-            addExcludedIngredient={addExcludedIngredient}
-            queryExclued={queryExclued}
-            removeExcludedIngredient={removeExcludedIngredient}
-          />
-        </div>
+        <DialogFilters
+          fetchData={fetchData}
+          onSelectedLabelsChange={handleSelectedLabelsChange}
+        />
+        <ContainerFilterChoose
+          ingredientInput={ingredientInput}
+          addExcludedIngredient={addExcludedIngredient}
+          queryExclued={queryExclued}
+          removeExcludedIngredient={removeExcludedIngredient}
+        />
+
         <ContainerRightHome
           setQueryText={setQueryText}
           fetchData={fetchData}

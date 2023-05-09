@@ -42,12 +42,6 @@ function ContainerFilterChoose({
           sx={{ width: "auto", margin: "0.5rem" }}
         />
       ))}
-      <button
-        className="bg-black text-white rounded-xl mt-2 px-8 py-1"
-        type="button"
-      >
-        Search
-      </button>
     </div>
   );
 }

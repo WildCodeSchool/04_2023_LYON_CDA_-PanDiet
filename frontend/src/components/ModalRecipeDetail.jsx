@@ -69,6 +69,7 @@ function ModalRecipeDetails({ item, open, handleClose }) {
       );
     }
   };
+
   return (
     <div>
       <Modal
@@ -79,160 +80,169 @@ function ModalRecipeDetails({ item, open, handleClose }) {
       >
         <Box
           className="absolute top-1/2 left-1/2 w-[90vw] transform -translate-x-1/2
-           -translate-y-1/2 md:w-[1000px] md:h-[600px]
+           -translate-y-1/2 h-[90vh] md:w-[80vw] md:h-[94vh]
            border-2  shadow-md block md:flex bg-white"
         >
           <img
-            className=" w-full md:w-[496px] md:h-[596px]"
+            className=" w-full h-[30vh] md:w-[100vw] md:mx-5 md:h-[60vh] my-auto rounded-lg shadow-md"
             src={item.image}
             alt=""
           />
-          <div className=" p-7 md:flex mx-auto md:p-10 flex-col md:min-w-[500px]">
-            <h3 className="text-xl w-full text-bold md:text-3xl pb-4 text-center">
+          <div className=" w-full md:border-l border-black  md:flex flex-col md:mx-auto md:min-w-[30vw]">
+            <h3 className="text-xl w-full text-bold md:text-3xl py-4 text-center">
               {item.label}
             </h3>
             <hr />
-            <div className="flex py-2 justify-around md:py-5">
-              <p>{item.mealType}</p>
-              <p>{item.cuisineType}</p>
-              <p>{item.dishType}</p>
+            <div className="flex md:px-1 justify-center py-3 md:py-5 border-y border-black">
+              <p className="md:border-r md:border-black px-1 md:px-0  md:pr-6 md:uppercase">
+                🍴 {item.mealType}
+              </p>
+              <p className="md:border-r md:border-black px-1 md:px-0 md:pr-6 md:uppercase">
+                🌎 {item.cuisineType}
+              </p>
+              <p>🕝 {item.totalTime}min</p>
             </div>
             <hr />
-            <Box sx={{ width: "100%" }}>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
+            <div className="min-h-[30vh] md:min-h-[55vh] border-b border-black ">
+              <Box>
+                <Box
+                  sx={{
+                    borderBottom: 1,
+                    borderColor: "divider",
+                    display: "flex",
+                    width: "100%",
+                  }}
                 >
-                  <Tab label="Ingredients" {...a11yProps(0)} />
-                  <Tab label="Total Nutrients" {...a11yProps(1)} />
-                  <Tab label="Links" {...a11yProps(2)} />
-                </Tabs>
+                  <Tabs
+                    sx={{ margin: "0 auto" }}
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                  >
+                    <Tab
+                      sx={{
+                        fontSize: "0.8rem",
+                        fontWeight: 700,
+                      }}
+                      label="Ingredients"
+                      {...a11yProps(0)}
+                    />
+                    <Tab
+                      sx={{
+                        fontSize: "0.8rem",
+                        fontWeight: 700,
+                      }}
+                      label="Total Nutrients"
+                      {...a11yProps(1)}
+                    />
+                  </Tabs>
+                </Box>
+                <TabPanel component="div" value={value} index={0}>
+                  <ul className="max-h-[19vh] md:max-h-[40vh] overflow-auto">
+                    {item.ingredients.map((itemIngredient) => (
+                      <li className="flex my-1 ">
+                        <img
+                          className="h-6 rounded-md mr-2 "
+                          src={itemIngredient.image}
+                          alt=""
+                        />
+                        <li>{itemIngredient.text}</li>
+                      </li>
+                    ))}
+                  </ul>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <div className="max-h-[19vh] md:max-h-[40vh] overflow-auto ">
+                    <h2 className="text-orange-500 text-xl">
+                      {item.totalNutrients.FAT.label}
+                    </h2>
+                    <div className="pl-4">
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.FAPU.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.FAPU.quantity * 100).toFixed(0) /
+                          100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.FAPU.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.FASAT.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.FASAT.quantity * 100).toFixed(
+                            0
+                          ) / 100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.FASAT.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.FAMS.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.FAMS.quantity * 100).toFixed(0) /
+                          100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.FAMS.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.FATRN.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.FATRN.quantity * 100).toFixed(
+                            0
+                          ) / 100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.FATRN.unit}</p>
+                      </div>
+                    </div>
+                    <h2 className="text-orange-500 text-xl">
+                      {item.totalNutrients.PROCNT.label}
+                    </h2>
+                    <div className="pl-4">
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.CHOLE.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.CHOLE.quantity * 100).toFixed(
+                            0
+                          ) / 100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.CHOLE.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.NA.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.NA.quantity * 100).toFixed(0) /
+                          100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.NA.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.CA.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.CA.quantity * 100).toFixed(0) /
+                          100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.CA.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.MG.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.MG.quantity * 100).toFixed(0) /
+                          100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.MG.unit}</p>
+                      </div>
+                      <div className="flex">
+                        <p className="p-1">{item.totalNutrients.K.label}</p>
+                        <p className="p-1">{`${
+                          (item.totalNutrients.K.quantity * 100).toFixed(0) /
+                          100
+                        }`}</p>
+                        <p className="p-1">{item.totalNutrients.K.unit}</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabPanel>
               </Box>
-              <TabPanel
-                component="div"
-                sx={{ overflow: "auto", height: "100px" }}
-                value={value}
-                index={0}
-              >
-                <ul className="h-32 md:h-60 overflow-auto ">
-                  {item.ingredients.map((itemIngredient) => (
-                    <li className="flex my-1 ">
-                      <img
-                        className="h-6 rounded-md mr-2 "
-                        src={itemIngredient.image}
-                        alt=""
-                      />
-                      <li>{itemIngredient.text}</li>
-                    </li>
-                  ))}
-                </ul>
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <div className="h-32 md:h-56 overflow-auto ">
-                  <h2 className="text-orange-500 text-xl">
-                    {item.totalNutrients.FAT.label}
-                  </h2>
-                  <div className="pl-4">
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.FAPU.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.FAPU.quantity * 100).toFixed(0) /
-                        100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.FAPU.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.FASAT.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.FASAT.quantity * 100).toFixed(0) /
-                        100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.FASAT.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.FAMS.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.FAMS.quantity * 100).toFixed(0) /
-                        100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.FAMS.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.FATRN.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.FATRN.quantity * 100).toFixed(0) /
-                        100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.FATRN.unit}</p>
-                    </div>
-                  </div>
-                  <h2 className="text-orange-500 text-xl">
-                    {item.totalNutrients.PROCNT.label}
-                  </h2>
-                  <div className="pl-4">
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.CHOLE.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.CHOLE.quantity * 100).toFixed(0) /
-                        100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.CHOLE.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.NA.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.NA.quantity * 100).toFixed(0) / 100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.NA.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.CA.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.CA.quantity * 100).toFixed(0) / 100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.CA.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.MG.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.MG.quantity * 100).toFixed(0) / 100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.MG.unit}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="p-1">{item.totalNutrients.K.label}</p>
-                      <p className="p-1">{`${
-                        (item.totalNutrients.K.quantity * 100).toFixed(0) / 100
-                      }`}</p>
-                      <p className="p-1">{item.totalNutrients.K.unit}</p>
-                    </div>
-                  </div>
-                </div>
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <div className="flex flex-col">
-                  <a
-                    className="text-blue-500 underline"
-                    href={item.shareAs}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Link to recipe on Edamam
-                  </a>
-                  <a
-                    className="text-blue-500 underline"
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Link to recipe on original website
-                  </a>
-                </div>
-              </TabPanel>
-            </Box>
-            <div className="flex justify-between md:justify-around">
+            </div>
+            <div className="flex pt-5 md:pt-0 justify-center my-auto">
               <IconButton
                 onClick={handleClick}
                 color={isFilled ? "error" : "inherit"}
@@ -240,7 +250,11 @@ function ModalRecipeDetails({ item, open, handleClose }) {
               >
                 {isFilled ? <FavoriteIcon /> : <FavoriteBorderIcon />}
               </IconButton>
-              <button type="button" onClick={handleClose}>
+              <button
+                className="bg-red-500  hover:bg-red-700 text-white font-bold mx-5 px-5 rounded"
+                type="button"
+                onClick={handleClose}
+              >
                 Close
               </button>
             </div>

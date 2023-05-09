@@ -65,18 +65,17 @@ const ImageMarked = styled("span")(({ theme }) => ({
   },
 }));
 
-function CardMyRecipe({ recipe }) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+function CardMyRecipe({
+  recipe,
+  handleDelete,
+  handleCloseRecipeCard,
+  handleOpenRecipeCard,
+  openRecipeCard,
+}) {
   return (
     <div>
-      <button
-        onClick={() => console.warn(recipe.image)}
-        type="button"
-        key={recipe.title}
-      >
-        <ImageButton onClick={handleOpen} focusRipple>
+      <button type="button" key={recipe.title}>
+        <ImageButton onClick={handleOpenRecipeCard} focusRipple>
           <img
             className="max-h-[200px] min-h-[200px] max-w-[250px] min-w-[260px] rounded-xl "
             src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
@@ -101,10 +100,11 @@ function CardMyRecipe({ recipe }) {
           </Image>
         </ImageButton>
         <ModalMyRecipeDetails
-          handleOpen={handleOpen}
+          handleOpenRecipeCard={handleOpenRecipeCard}
           recipe={recipe}
-          open={open}
-          handleClose={handleClose}
+          openRecipeCard={openRecipeCard}
+          handleCloseRecipeCard={handleCloseRecipeCard}
+          handleDelete={handleDelete}
         />
       </button>
     </div>

@@ -8,8 +8,8 @@ function FavouriteCard({ itemFavourites, handleClick }) {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="border-2 border-solid border-green-500 rounded-md m-4">
-      <div className="flex items-center">
+    <div className=" border-2 border-solid w-[30vw] border-orange-200 rounded-md m-4">
+      <div className="flex  items-center ">
         <div className="relative">
           <div className="cursor-pointer">
             <button type="button" onClick={() => handleOpen()}>
@@ -28,7 +28,7 @@ function FavouriteCard({ itemFavourites, handleClick }) {
         </div>
         <div className=" ml-[5rem]">
           <button type="button" onClick={handleClick}>
-            <img src={HeartFilled} alt="" className="" />
+            <img src={HeartFilled} alt="" />
           </button>
         </div>
       </div>

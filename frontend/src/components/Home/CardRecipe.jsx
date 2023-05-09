@@ -13,7 +13,7 @@ function CardRecipe({ item }) {
           src={item.recipe.image}
           alt=""
         />
-        <h4 className="pt-2 text-center ">{item.recipe.label}</h4>
+        <h4 className="pt-2 text-center max-w-[70vw] ">{item.recipe.label}</h4>
       </button>
       <ModalRecipeDetails
         handleOpen={handleOpen}

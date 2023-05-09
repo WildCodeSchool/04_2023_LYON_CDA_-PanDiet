@@ -1,79 +1,24 @@
 import { PhotoCamera } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import React, { useState, useRef } from "react";
-import { useCurrentUserContext } from "../../Context/userContext";
+import React from "react";
 
-export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
-  const { user } = useCurrentUserContext();
-  const [ingredients, setIngredients] = useState("");
-  const [ingredientsList, setIngredientsList] = useState([]);
-  const [dataPostRecipe, setDataPostRecipe] = useState({
-    name: "",
-    description: "",
-    cuisineType: "",
-    image: "",
-    mealType: "",
-    cook_time: "",
-    user_id: user.id,
-  });
-
-  const inputRef = useRef(null);
-  // met à jour une partie de l'objet (DataPostRecipe)
-  // avec les données saisies par l'utilisateur dans un champ de saisie.
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setDataPostRecipe((prevData) => ({ ...prevData, [name]: value }));
-  };
-  //  met à jour l'état de l'application avec une nouvelle valeur pour la propriété "mealType".
-  const handleMealTypeChange = (e) => {
-    setDataPostRecipe((newDataPostRecipe) => ({
-      ...newDataPostRecipe,
-      mealType: e.target.value,
-    }));
-  };
-  const handleIngredientsChange = (event) => {
-    setIngredients(event.target.value);
-  };
-
-  const handleAddIngredient = () => {
-    setIngredientsList([...ingredientsList, ingredients]);
-    setIngredients("");
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (dataPostRecipe.name) {
-      const recipe = JSON.stringify({
-        ...dataPostRecipe,
-        ingredients: ingredientsList,
-      });
-      const myHeaders = new Headers();
-      const formData = new FormData();
-      formData.append("recipe", recipe);
-      formData.append("image", inputRef.current.files[0]);
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: formData,
-      };
-      // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
-      fetch(`http://localhost:5000/api/my-recipes`, requestOptions).then(
-        (response) => {
-          if (response.ok) {
-            toast.success(`Recette ${dataPostRecipe.name} a bien été créée`);
-          } else {
-            toast.error(
-              "Une erreur est survenue lors de la création de votre recette."
-            );
-          }
-          return response.text();
-        }
-      );
-      handleClose(false);
-      setReload(!reaload).catch(console.error);
-    }
-  };
+export default function ModalePostRecipe({
+  inputRef,
+  dataPostRecipe,
+  handleInstructionsChange,
+  onChange,
+  handleAddIngredient,
+  handleAddInstructions,
+  ingredients,
+  ingredientsList,
+  instructions,
+  instructionsList,
+  handleIngredientsChange,
+  handleSubmit,
+  handleMealTypeChange,
+  handleEnterInstructions,
+  handleEnterIngredients,
+}) {
   return (
     <div
       className="absolute top-1/2 left-1/2 w-[90vw] transform -translate-x-1/2
@@ -108,18 +53,18 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
         <h2 className="text-center text-2xl font-bold underline mb-3">
           Create a new recipe
         </h2>
-        <form className=" max-w-[45vw]" onSubmit={handleSubmit}>
+        <form className=" max-w-[30vw]" onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
             value={dataPostRecipe.name}
             onChange={onChange}
             placeholder="Name"
-            className="w-80  my-2 flex flex-col justify-center rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+            className=" w-[67vw] md:w-full  my-2 flex flex-col justify-center rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
           />
-          <div className="flex items-center">
+          <div className="flex items-center w-[67vw] md:w-full">
             <select
-              className="border h-[46px] border-black rounded-md"
+              className="w-1/3 border h-[46px] border-black rounded-md"
               value={dataPostRecipe.mealType}
               label="MealType"
               onChange={handleMealTypeChange}
@@ -136,7 +81,7 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
               value={dataPostRecipe.cuisineType}
               onChange={onChange}
               placeholder="🌎 Type"
-              className="w-[30%] m-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+              className="w-1/3 m-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
             />
             <input
               type="text"
@@ -144,46 +89,65 @@ export default function ModalePostRecipe({ handleClose, setReload, reaload }) {
               value={dataPostRecipe.cook_time}
               onChange={onChange}
               placeholder="🕝 Time"
-              className="w-[30%] my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+              className="w-1/3 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
             />
           </div>
-          <div className="flex my-2 h-10 justify-around items-center">
+          <div className="w-[80vw] md:w-[30vw] flex my-2 h-10 md:justify-around items-center">
             <br />
             <input
-              className="w-1/3 my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+              className="w-full my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
               type="text"
               placeholder="Ingrédients"
               value={ingredients}
+              onKeyDown={(e) => handleEnterIngredients(e)}
               onChange={handleIngredientsChange}
             />
             <button
-              className="mx-5 border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 px-3 "
+              className=" border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 ml-1 px-3 "
               type="button"
               onClick={() => handleAddIngredient()}
             >
               Add
             </button>
           </div>
-          <ul className="flex flex-wrap w-4/5">
-            {ingredientsList.map((ingredient) => (
+          <ul className="flex flex-wrap overflow-auto max-h-24 mb-4">
+            {ingredientsList.reverse().map((ingredient) => (
               <li className=" bg-gray-100 px-1 m-2 rounded-md" key={ingredient}>
                 {ingredient}
               </li>
             ))}
           </ul>
-          <input
-            aria-multiline
-            type="text"
-            name="instructions"
-            value={dataPostRecipe.instructions}
-            onChange={onChange}
-            placeholder="instructions"
-            className="w-80 my-2 rounded-md placeholder:text-gray-400 border border-black  py-2 pl-4 text-lg placeholder-black"
-          />
-          <br />
-          <div className="flex justify-center">
+          <div className="w-[80vw] md:w-[30vw] flex my-6 h-10 md:justify-around items-center">
+            <textarea
+              aria-multiline
+              type="text"
+              name="instructions"
+              value={instructions}
+              onKeyDown={(e) => handleEnterInstructions(e)}
+              onChange={handleInstructionsChange}
+              placeholder="instructions"
+              className="w-full my-2 rounded-md placeholder:text-gray-400 border border-black py-2 pl-4 text-lg placeholder-black"
+            />
             <button
-              onClick={() => console.warn(dataPostRecipe.ingredients)}
+              className=" border rounded-md bg-red-200 hover:bg-red-400 border-black py-2 ml-1 px-3 "
+              type="button"
+              onClick={() => handleAddInstructions()}
+            >
+              Add
+            </button>
+          </div>
+          <ul className="flex flex-wrap overflow-auto max-h-24">
+            {instructionsList.reverse().map((instruction) => (
+              <li
+                className=" bg-gray-100 px-1 m-1 rounded-md"
+                key={instruction}
+              >
+                {instruction}
+              </li>
+            ))}
+          </ul>
+          <div className=" mt-1 flex justify-center">
+            <button
               className="border border-black px-4 py-2 hover:bg-gray-100 rounded-md "
               type="submit"
             >

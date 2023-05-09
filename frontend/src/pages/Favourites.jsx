@@ -22,13 +22,15 @@ function Favourites() {
         <div className="w-1/5 font-bold text-2xl">
           <h2>Favourites</h2>
         </div>
-        {favouriteRecipes.map((itemFavourites) => (
-          <FavouriteCard
-            key={itemFavourites.uri}
-            itemFavourites={itemFavourites}
-            handleClick={() => handleClick(itemFavourites)}
-          />
-        ))}
+        <div className="flex ">
+          {favouriteRecipes.map((itemFavourites) => (
+            <FavouriteCard
+              key={itemFavourites.uri}
+              itemFavourites={itemFavourites}
+              handleClick={() => handleClick(itemFavourites)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

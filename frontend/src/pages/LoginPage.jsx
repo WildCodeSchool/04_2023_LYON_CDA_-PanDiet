@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Button, Grid, Paper, TextField } from "@mui/material";
 import { useCurrentUserContext } from "../Context/userContext";
 
@@ -34,19 +36,18 @@ function LoginPage() {
         .then((result) => {
           setUser(result.user);
           setToken(result.token);
+          toast.success(`Bienvenue ${result.user.firstname} 👋`);
         })
         .then(() => {
           setTimeout(() => {
-            navigate("/");
-          }, 1500);
+            navigate("/my-recipes");
+          }, 1000);
         })
         .catch(console.error);
     } else {
       setErrorMessage("Please specify email and password");
     }
   };
-
-  console.warn(email, password);
 
   return (
     <div style={{ padding: 30 }}>
