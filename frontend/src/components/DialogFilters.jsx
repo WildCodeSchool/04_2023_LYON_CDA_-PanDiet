@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import FilterDialog from "./Home/FiltersDialog";
 import { FilterContext } from "../Context/FilterContext";
 
-function DialogFilters({ onSelectedLabelsChange }) {
+function DialogFilters({ onSelectedLabelsChange, fetchData }) {
   const [open, setOpen] = useState({
     allergies: false,
     mealTypes: false,
@@ -102,6 +102,13 @@ function DialogFilters({ onSelectedLabelsChange }) {
             />
           </div>
         ))}
+        <button
+          onClick={fetchData}
+          className="bg-black text-white w-3/4  rounded-xl mt-2 py-1"
+          type="button"
+        >
+          Search
+        </button>
       </div>
     </div>
   );

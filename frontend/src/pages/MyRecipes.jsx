@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../App.css";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -14,7 +14,7 @@ import { useCurrentUserContext } from "../Context/userContext";
 function MyRecipes() {
   const { token } = useCurrentUserContext();
   const navigate = useNavigate();
-  const [reaload, setReload] = useState(true);
+  const [reload, setReload] = useState(true);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,20 +27,108 @@ function MyRecipes() {
     axios
       .get("http://localhost:5000/api/my-recipes")
       .then((response) => setDataMyRecipes(response.data));
-  }, [reaload]);
+  }, [reload]);
 
   const handleDelete = (id, name) => {
     axios.delete(`http://localhost:5000/api/my-recipes/${id}`).then(() => {
       toast.success(`Recipe ${name} deleted ✅`);
       handleCloseRecipeCard(!openRecipeCard);
-      setReload(!reaload);
+      setReload(!reload);
     });
   };
 
+  const { user } = useCurrentUserContext();
+  const [ingredients, setIngredients] = useState("");
+  const [ingredientsList, setIngredientsList] = useState([]);
+  const [instructions, setInstructions] = useState("");
+  const [instructionsList, setInstructionsList] = useState([]);
+  const [dataPostRecipe, setDataPostRecipe] = useState({
+    name: "",
+    cuisineType: "",
+    image: "",
+    mealType: "",
+    cook_time: "",
+    user_id: user.id,
+  });
+
+  const inputRef = useRef(null);
+  // met à jour une partie de l'objet (DataPostRecipe)
+  // avec les données saisies par l'utilisateur dans un champ de saisie.
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setDataPostRecipe((prevData) => ({ ...prevData, [name]: value }));
+  };
+  //  met à jour l'état de l'application avec une nouvelle valeur pour la propriété "mealType".
+  const handleMealTypeChange = (e) => {
+    setDataPostRecipe((newDataPostRecipe) => ({
+      ...newDataPostRecipe,
+      mealType: e.target.value,
+    }));
+  };
+  const handleIngredientsChange = (event) => {
+    setIngredients(event.target.value);
+  };
+
+  const handleAddIngredient = () => {
+    setIngredientsList([...ingredientsList, ingredients]);
+    setIngredients("");
+  };
+  const handleInstructionsChange = (event) => {
+    setInstructions(event.target.value);
+  };
+  const handleAddInstructions = () => {
+    setInstructionsList([...instructionsList, instructions]);
+    setInstructions("");
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if ((dataPostRecipe.name, dataPostRecipe.image)) {
+      const recipe = JSON.stringify({
+        ...dataPostRecipe,
+        ingredients: ingredientsList,
+        instructions: instructionsList,
+      });
+      const myHeaders = new Headers();
+      const formData = new FormData();
+      formData.append("recipe", recipe);
+      formData.append("image", inputRef.current.files[0]);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+      };
+      // On appelle le back. Si tous les middleware placé sur la route ci-dessous, je pourrais être renvoyé à la route login
+      fetch(`http://localhost:5000/api/my-recipes`, requestOptions).then(
+        (response) => {
+          if (response.ok) {
+            toast.success(`Recette ${dataPostRecipe.name} a bien été créée`);
+          } else {
+            toast.error(
+              "Une erreur est survenue lors de la création de votre recette."
+            );
+          }
+          return response.text();
+        }
+      );
+      handleClose(false);
+      setReload(!reload);
+    }
+  };
+
+  const handleEnterIngredients = (e) => {
+    if (e.key === "Enter") {
+      handleAddIngredient();
+    }
+  };
+  const handleEnterInstructions = (e) => {
+    if (e.key === "Enter") {
+      handleAddInstructions();
+    }
+  };
   return (
-    <div className=" mx-10 md:mx-20 ">
+    <div className="mx-10 md:mx-20 ">
       <HeaderChoose />
-      <div className=" w-full mt-4 mb-10">
+      <div className="w-full mt-4 mb-10">
         {token ? (
           <>
             <div className=" flex justify-between  w-full mb-3">
@@ -98,9 +186,24 @@ function MyRecipes() {
         <Fade in={open}>
           <Box>
             <ModalePostRecipe
-              reaload={reaload}
+              inputRef={inputRef}
+              dataPostRecipe={dataPostRecipe}
+              handleInstructionsChange={handleInstructionsChange}
+              onChange={onChange}
+              handleAddIngredient={handleAddIngredient}
+              handleAddInstructions={handleAddInstructions}
+              ingredients={ingredients}
+              ingredientsList={ingredientsList}
+              instructions={instructions}
+              instructionsList={instructionsList}
+              handleIngredientsChange={handleIngredientsChange}
+              handleSubmit={handleSubmit}
+              handleMealTypeChange={handleMealTypeChange}
+              reload={reload}
               handleClose={handleClose}
               setReload={setReload}
+              handleEnterInstructions={handleEnterInstructions}
+              handleEnterIngredients={handleEnterIngredients}
             />
           </Box>
         </Fade>

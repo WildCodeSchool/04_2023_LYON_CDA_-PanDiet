@@ -16,7 +16,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -174,6 +173,7 @@ function ModalMyRecipeDetails({
               >
                 <Box sx={style}>
                   <Typography
+                    sx={{ textAlign: "center", marginBottom: "1rem" }}
                     id="modal-modal-title"
                     variant="h6"
                     component="h2"

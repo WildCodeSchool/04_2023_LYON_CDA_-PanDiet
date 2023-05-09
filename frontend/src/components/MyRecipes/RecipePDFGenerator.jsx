@@ -101,6 +101,16 @@ function RecipePDFGenerator({ recipe }) {
                     </View>
                   </View>
                 </View>
+                <Image
+                  style={{
+                    width: "300px",
+                    height: "200px",
+                    borderRadius: "10px",
+                    margin: "0 auto",
+                  }}
+                  src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
+                  alt=""
+                />
                 <hr />
                 <Text style={styles.name}>Ingredients</Text>
                 <View
@@ -122,16 +132,6 @@ function RecipePDFGenerator({ recipe }) {
                     <Text style={styles.ingredients}>{item}</Text>
                   ))}
                 </div>
-                <Image
-                  style={{
-                    width: "300px",
-                    height: "200px",
-                    borderRadius: "10px",
-                    margin: "0 auto",
-                  }}
-                  src={`${VITE_BACKEND_URL}/uploads/${recipe.image}`}
-                  alt=""
-                />
               </View>
             </Page>
           </Document>

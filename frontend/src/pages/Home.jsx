@@ -112,7 +112,10 @@ function Home() {
     <div className=" mx-5 md:mx-20 ">
       <HeaderChoose />
       <div className="flex mt-5">
-        <DialogFilters onSelectedLabelsChange={handleSelectedLabelsChange} />
+        <DialogFilters
+          fetchData={fetchData}
+          onSelectedLabelsChange={handleSelectedLabelsChange}
+        />
         <ContainerFilterChoose
           ingredientInput={ingredientInput}
           addExcludedIngredient={addExcludedIngredient}

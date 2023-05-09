@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS user, recipe, personnal_recipe;
+DROP TABLE IF EXISTS  recipe, personnal_recipe;
 SET FOREIGN_KEY_CHECKS=1;
 
 
@@ -21,7 +21,7 @@ CREATE TABLE recipe (
   description varchar(255) NOT NULL,
   ingredients JSON NOT NULL,
   image varchar(255) NOT NULL,
-  mealType varchar(255)
+  mealType varchar(255),
   cook_time varchar(255) NOT NULL,
   colories int(11) NOT NULL,
   recipe_link varchar(255)  NULL,
@@ -30,7 +30,6 @@ CREATE TABLE recipe (
   FOREIGN KEY (user_id) REFERENCES user(id)
 
 );
-
 
 CREATE TABLE personnal_recipe (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
