@@ -33,6 +33,12 @@ router.delete("/items/:id", itemControllers.destroy);
 router.get("/api/users", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.put("/api/users/:id", userControllers.edit);
+router.put(
+  "/api/avatars/:userid",
+  upload.single("picture"),
+  fileControllers.fileRename,
+  userControllers.editUserAvatar
+);
 router.post("/api/users", hashPassword, userControllers.add);
 router.delete("/api/users/:id", userControllers.destroy);
 
