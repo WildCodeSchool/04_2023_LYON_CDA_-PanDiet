@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Button, Grid, Paper, TextField } from "@mui/material";
 import { useCurrentUserContext } from "../Context/userContext";
 
 function LoginPage() {
@@ -50,40 +49,69 @@ function LoginPage() {
   };
 
   return (
-    <div style={{ padding: 30 }}>
-      <Paper>
-        <Grid
-          container
-          spacing={3}
-          direction="column"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item xs={12}>
-            <TextField
-              label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-          </Grid>
-          <Grid item xs={12}>
-            <Button fullWidth onClick={handleSubmit}>
-              Login
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
+    <div className="flex  justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
+      <div className="w-full max-w-lg">
+        <div>
+          <h2 className="mt-6 text-4xl font-extrabold text-center text-gray-900">
+            Log in
+          </h2>
+        </div>
+        <div className="mt-8 bg-white shadow sm:rounded-lg">
+          <div className="px-4 py-5 bg-white sm:p-6">
+            <div className="grid grid-cols-6 gap-6">
+              <div className="col-span-6">
+                <label
+                  htmlFor="email"
+                  className="block text-base font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  className="mt-1 p-3 block w-full shadow-sm sm:text-base border border-gray-300 rounded-md"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-6">
+                <label
+                  htmlFor="password"
+                  className="block text-base font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="mt-1 p-3 block w-full shadow-sm sm:text-base border border-gray-300 rounded-md"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+
+              {errorMessage && (
+                <div className="col-span-6">
+                  <p className="text-base text-red-600">{errorMessage}</p>
+                </div>
+              )}
+
+              <div className="col-span-6">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#E58A2F] hover:bg-orange-500"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

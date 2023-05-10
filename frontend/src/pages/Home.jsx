@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import ContainerFilterChoose from "../components/Home/ContainerFilterChoose";
 import Buttons from "../components/Home/Buttons";
 import DialogFilters from "../components/DialogFilters";
 import { FilterContext } from "../Context/FilterContext";
@@ -115,8 +114,6 @@ function Home() {
         <DialogFilters
           fetchData={fetchData}
           onSelectedLabelsChange={handleSelectedLabelsChange}
-        />
-        <ContainerFilterChoose
           ingredientInput={ingredientInput}
           addExcludedIngredient={addExcludedIngredient}
           queryExclued={queryExclued}
