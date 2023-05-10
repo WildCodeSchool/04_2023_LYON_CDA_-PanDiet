@@ -1,8 +1,16 @@
 import React, { useState, useContext } from "react";
 import FilterDialog from "./Home/FiltersDialog";
 import { FilterContext } from "../Context/FilterContext";
+import ContainerFilterChoose from "./Home/ContainerFilterChoose";
 
-function DialogFilters({ onSelectedLabelsChange, fetchData }) {
+function DialogFilters({
+  onSelectedLabelsChange,
+  fetchData,
+  ingredientInput,
+  addExcludedIngredient,
+  queryExclued,
+  removeExcludedIngredient,
+}) {
   const [open, setOpen] = useState({
     allergies: false,
     mealTypes: false,
@@ -78,21 +86,21 @@ function DialogFilters({ onSelectedLabelsChange, fetchData }) {
   ];
 
   return (
-    <div className="w-[15%] px-2 hidden md:block">
-      <div className="flex flex-col  ">
-        <div className="hidden w-1/5 font-bold text-2xl mb-10 md:block">
+    <div className="w-full md:w-1/5 px-2">
+      <div className="flex flex-col space-y-5">
+        <div className="hidden font-bold text-2xl mb-10 md:block">
           <h2>Filters</h2>
         </div>
         {buttons.map(({ label, dialogType, filterLabels }) => (
-          <div className="py-1 text-left " key={label}>
+          <div key={label}>
             <button
               type="button"
-              className="text-[#E58A2F] font-bold   "
+              className="text-[#E58A2F] font-bold w-full text-left"
               onClick={handleClickOpen(dialogType)}
             >
               {label}
-              <hr className="w-full" />
             </button>
+            <hr className="w-full" />
             <FilterDialog
               open={open[dialogType]}
               title={label}
@@ -104,11 +112,17 @@ function DialogFilters({ onSelectedLabelsChange, fetchData }) {
         ))}
         <button
           onClick={fetchData}
-          className="bg-black text-white w-3/4  rounded-xl mt-2 py-1"
+          className="bg-black text-white w-full rounded-xl py-1"
           type="button"
         >
           Search
         </button>
+        <ContainerFilterChoose
+          ingredientInput={ingredientInput}
+          addExcludedIngredient={addExcludedIngredient}
+          queryExclued={queryExclued}
+          removeExcludedIngredient={removeExcludedIngredient}
+        />
       </div>
     </div>
   );

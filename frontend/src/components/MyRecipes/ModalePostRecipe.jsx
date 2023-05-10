@@ -140,7 +140,7 @@ export default function ModalePostRecipe({
             {instructionsList.reverse().map((instruction) => (
               <li
                 className=" bg-gray-100 px-1 m-1 rounded-md"
-                key={instruction}
+                key={instruction.id}
               >
                 {instruction}
               </li>
