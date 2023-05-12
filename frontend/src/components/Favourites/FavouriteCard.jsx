@@ -1,5 +1,10 @@
 import React from "react";
-import HeartFilled from "../../assets/Favourite/heart-1.png";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import HeartFilled from "../../assets/Favourite/coeurs.png";
 import ModalRecipeDetails from "../ModalRecipeDetail";
 
 function FavouriteCard({ itemFavourites, handleClick }) {
@@ -8,30 +13,30 @@ function FavouriteCard({ itemFavourites, handleClick }) {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className=" border-2 border-solid w-[30vw] border-orange-200 rounded-md m-4">
-      <div className="flex  items-center ">
-        <div className="relative">
-          <div className="cursor-pointer">
-            <button type="button" onClick={() => handleOpen()}>
-              <img
-                src={itemFavourites.image}
-                alt={itemFavourites.label}
-                className="h-[10rem] w-[12rem] rounded-md"
-              />
-            </button>
-          </div>
-          <div className="absolute bottom-0 w-full bg-gray-700 bg-opacity-50 h-[3rem]">
-            <h2 className="text-center py-2 text-white font-bold text-[1.1rem]">
-              {itemFavourites.label}
-            </h2>
-          </div>
-        </div>
-        <div className=" ml-[5rem]">
-          <button type="button" onClick={handleClick}>
-            <img src={HeartFilled} alt="" />
-          </button>
-        </div>
-      </div>
+    <div className="mx-auto mb-3">
+      <Card sx={{ maxWidth: 200, minWidth: 250, maxHeight: 350 }}>
+        <CardActionArea onClick={() => handleOpen()}>
+          <CardMedia
+            component="img"
+            className="h-40"
+            image={itemFavourites.image}
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography
+              class="flex items-center justify-around"
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
+              {itemFavourites.label.substring(0, 20)}
+              <button type="button" onClick={handleClick}>
+                <img className="h-10" src={HeartFilled} alt="" />
+              </button>
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
       <ModalRecipeDetails
         handleOpen={handleOpen}
         open={open}

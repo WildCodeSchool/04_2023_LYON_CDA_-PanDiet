@@ -86,13 +86,13 @@ function DialogFilters({
   ];
 
   return (
-    <div className="w-full md:w-1/5 px-2">
+    <div className="hidden md:block w-full md:w-1/5 px-2">
       <div className="flex flex-col space-y-5">
         <div className="hidden font-bold text-2xl mb-10 md:block">
           <h2>Filters</h2>
         </div>
         {buttons.map(({ label, dialogType, filterLabels }) => (
-          <div key={label}>
+          <div className="hidden md:block" key={label}>
             <button
               type="button"
               className="text-[#E58A2F] font-bold w-full text-left"
@@ -110,19 +110,20 @@ function DialogFilters({
             />
           </div>
         ))}
-        <button
-          onClick={fetchData}
-          className="bg-black text-white w-full rounded-xl py-1"
-          type="button"
-        >
-          Search
-        </button>
+
         <ContainerFilterChoose
           ingredientInput={ingredientInput}
           addExcludedIngredient={addExcludedIngredient}
           queryExclued={queryExclued}
           removeExcludedIngredient={removeExcludedIngredient}
         />
+        <button
+          onClick={fetchData}
+          className="hidden md:block bg-black text-white w-full rounded-xl py-1"
+          type="button"
+        >
+          Search
+        </button>
       </div>
     </div>
   );
