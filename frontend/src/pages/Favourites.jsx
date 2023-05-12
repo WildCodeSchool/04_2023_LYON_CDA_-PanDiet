@@ -16,13 +16,13 @@ function Favourites() {
   };
 
   return (
-    <div className="mx-20 ">
+    <div className="mx-5 md:mx-20 ">
       <HeaderChoose />
-      <div className="w-full mt-4 mb-10">
-        <div className="w-1/5 font-bold text-2xl">
+      <div className="w-full mt-4">
+        <div className="w-1/5 font-bold text-2xl mb-2">
           <h2>Favourites</h2>
         </div>
-        <div className="flex ">
+        <div className="flex flex-col md:grid md:grid-cols-4 md:gap-10 pb-10 ">
           {favouriteRecipes.map((itemFavourites) => (
             <FavouriteCard
               key={itemFavourites.uri}

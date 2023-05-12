@@ -18,7 +18,6 @@ function Nav() {
     { name: "Home", link: "/" },
     { name: "My recipes", link: "/my-recipes" },
     { name: "Favourites", link: "/favourites" },
-    { name: "", link: "/login" },
   ];
 
   const handleProfileClick = () => {
@@ -45,7 +44,7 @@ function Nav() {
   return (
     <div className="flex justify-center">
       <div
-        className={`w-full items-center fixed top-0 px-3 md:px-10  shadow-md md:shadow-none md:relative ${
+        className={`w-full items-center  md:pb-4 top-0 px-3 md:px-10  shadow-md md:shadow-none relative ${
           darkMode ? "dark" : "light"
         }`}
       >
@@ -67,8 +66,10 @@ function Nav() {
               </NavLink>
             </li>
           ))}
-
-          <div className=" flex items-center rounded-full md:mr-5">
+          <IconButton onClick={() => toggleDarkMode()} color="inherit">
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
+          <div className=" flex items-center rounded-full ">
             <button type="button" onClick={handleProfileClick}>
               <img
                 src={token === "" ? Avatar : user.avatar}
@@ -83,19 +84,11 @@ function Nav() {
                 <img
                   src={LogOut}
                   alt="Log out"
-                  className="h-[25px] md:mt-2 w-[25px]"
+                  className="h-[25px] md:mt-2 ml-4 w-[25px]"
                 />
               </button>
             )}
           </div>
-
-          <IconButton
-            sx={{ ml: 1 }}
-            onClick={() => toggleDarkMode()}
-            color="inherit"
-          >
-            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
         </ul>
       </div>
     </div>

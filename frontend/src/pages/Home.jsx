@@ -119,7 +119,6 @@ function Home() {
           queryExclued={queryExclued}
           removeExcludedIngredient={removeExcludedIngredient}
         />
-
         <ContainerRightHome
           setQueryText={setQueryText}
           fetchData={fetchData}

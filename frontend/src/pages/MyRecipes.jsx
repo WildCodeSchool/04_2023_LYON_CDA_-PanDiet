@@ -51,6 +51,8 @@ function MyRecipes() {
     user_id: user.id,
   });
 
+  console.warn(user.id);
+
   const inputRef = useRef(null);
   // met à jour une partie de l'objet (DataPostRecipe)
   // avec les données saisies par l'utilisateur dans un champ de saisie.
@@ -82,7 +84,7 @@ function MyRecipes() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ((dataPostRecipe.name, dataPostRecipe.image)) {
+    if (dataPostRecipe.name) {
       const recipe = JSON.stringify({
         ...dataPostRecipe,
         ingredients: ingredientsList,
@@ -102,6 +104,7 @@ function MyRecipes() {
         (response) => {
           if (response.ok) {
             toast.success(`Recette ${dataPostRecipe.name} a bien été créée`);
+            setReload(!reload);
           } else {
             toast.error(
               "Une erreur est survenue lors de la création de votre recette."
@@ -111,7 +114,6 @@ function MyRecipes() {
         }
       );
       handleClose(false);
-      setReload(!reload);
     }
   };
 
@@ -126,12 +128,12 @@ function MyRecipes() {
     }
   };
   return (
-    <div className="mx-10 md:mx-20 ">
+    <div className="mx-5 md:mx-20 h-screen md:overflow-hidden ">
       <HeaderChoose />
-      <div className="w-full mt-4 mb-10">
+      <div className="w-full mt-4">
         {token ? (
           <>
-            <div className=" flex justify-between  w-full mb-3">
+            <div className=" flex justify-between mb-2  w-full">
               <h2 className="font-bold text-2xl">My Recipes</h2>
               <button
                 className="border border-black p-1 md:ml-3 rounded-md "
@@ -141,9 +143,9 @@ function MyRecipes() {
                 <p className="text-[#FF9A62]">Add a new Recipe</p>
               </button>
             </div>
-            <div className=" flex flex-col  md:grid md:grid-cols-3 ">
+            <div className="flex flex-col  md:grid md:grid-cols-3 ">
               {dataMyRecipes.map((recipe) => (
-                <div className="mb-5 flex justify-center md:justify-between ">
+                <div className="flex justify-center md:justify-between ">
                   <CardMyRecipe
                     openRecipeCard={openRecipeCard}
                     handleCloseRecipeCard={handleCloseRecipeCard}

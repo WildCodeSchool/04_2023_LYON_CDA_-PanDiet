@@ -9,8 +9,6 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const { setUser, setToken } = useCurrentUserContext();
 
-  const [errorMessage, setErrorMessage] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -38,13 +36,13 @@ function LoginPage() {
           toast.success(`Bienvenue ${result.user.firstname} 👋`);
         })
         .then(() => {
-          setTimeout(() => {
-            navigate("/my-recipes");
-          }, 1000);
+          navigate("/my-recipes");
         })
-        .catch(console.error);
+        .catch(() => {
+          toast.error("Email or password incorrect");
+        });
     } else {
-      setErrorMessage("Please specify email and password");
+      toast.error("Please completed email and password");
     }
   };
 
@@ -92,13 +90,6 @@ function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-
-              {errorMessage && (
-                <div className="col-span-6">
-                  <p className="text-base text-red-600">{errorMessage}</p>
-                </div>
-              )}
-
               <div className="col-span-6">
                 <button
                   type="button"

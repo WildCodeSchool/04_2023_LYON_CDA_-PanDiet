@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import PlusButton from "../../assets/home/plus-3.png";
+import { DarkModeContext } from "../../Context/DarkModeContext";
 
 function ContainerFilterChoose({
   ingredientInput,
@@ -6,21 +8,22 @@ function ContainerFilterChoose({
   queryExclued,
   removeExcludedIngredient,
 }) {
+  const { darkMode } = useContext(DarkModeContext);
   return (
-    <div className="flex flex-col bg-white rounded-lg p-5 shadow-sm max-w-md mx-auto">
-      <div className="flex flex-col mb-4">
+    <div className="hidden md:flex flex-col bg-white rounded-lg  max-w-md mx-auto">
+      <div
+        className={`${
+          darkMode ? "flex items-center dark" : "flex items-center light"
+        }`}
+      >
         <input
           ref={ingredientInput}
           type="text"
-          placeholder="Enter excluded ingredients"
-          className="flex-grow mr-4 p-2 border rounded-md"
+          placeholder="Excluded"
+          className="w-1/2 py-1 px-2 mr-1 border rounded-md"
         />
-        <button
-          type="button"
-          onClick={addExcludedIngredient}
-          className="bg-blue-500 text-white p-2 rounded-md"
-        >
-          Add
+        <button type="button" onClick={addExcludedIngredient}>
+          <img className="h-9 hover:color-orange-500" src={PlusButton} alt="" />
         </button>
       </div>
       <div className="flex flex-wrap">
